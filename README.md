@@ -13,5 +13,6 @@
 - JavaScript
 - HTML
 - CSS
+- Bootstrap
 - Git and GitHub
 - Netlify
