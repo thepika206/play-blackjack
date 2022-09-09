@@ -7,21 +7,18 @@
 
 
 //* examples of player hands for testing getHandValue
+
 let playerHand21 = [
-  {suit:'spade', rank:1, value:1}, 
-  {suit:'spade', rank:13, value:10},
+  {id:'sA', value:1}, 
+  {id:'dK', value:10},
 ]
+
 let playerHand12 = [
-  {suit:'spade', rank:1, value:1}, 
-  {suit:'spade', rank:1, value:1}, 
-  {suit:'spade', rank:13, value:10},
+  {id:'sA', value:1},
+  {id:'cA', value:1}, 
+  {id:'dK', value:10},
 ]
-let playerHand25 = [
-  {suit:'spade', rank:3, value:3}, 
-  {suit:'diamond', rank:2, value:2}, 
-  {suit:'club', rank:10, value:10},
-  {suit:'heart', rank:11, value:10},
-]
+
 
 
 function getHandValue(handArr){
@@ -31,11 +28,11 @@ function getHandValue(handArr){
     total += handArr[i].value
     hasAce = handArr[i].value === 1 ? true : hasAce
   } 
-  return hasAce && total < 12 ? total + 10 : total //if the hand has an ace and the hard total is under 12, then the bonus 10 value is applicable to the total
+  return hasAce && total < 12 ? total + 10 : total 
 }
 console.log('playerHand 21', getHandValue(playerHand21))
 console.log('playerHand 12', getHandValue(playerHand12))
-console.log('playerHand 25', getHandValue(playerHand25))
+// console.log('playerHand 25', getHandValue(playerHand25))
 
 
 
