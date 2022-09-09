@@ -71,16 +71,13 @@ drawBtn.addEventListener('click', function(){
 
 // ----------------------------Functions----------------------------------------------
 
-function drawCard(hand) {
+function drawCard(handArr) {
   if (deck.length > 0) {
-    // Randomly select number from total cards remaining
     let randIdx = Math.floor(Math.random() * deck.length)
-    // Assign card with the random index to a variable
     let cardPicked = deck.splice(randIdx, 1)[0]
-    // Add card picked to the target hand 
-    hand.push(cardPicked)
-    // Pass card picked to render function to display
-    // render(cardPicked)
+    handArr.push(cardPicked)
+    console.log(`drew card ${cardPicked.id} deck has cards ${deck.length} left`)
+    getHandValue(handArr)
   }
 }
 
