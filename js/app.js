@@ -58,7 +58,7 @@ const deck = [
   {id:'s02', value:2},
 ]
 
-let playerHand, dealerHand, turn, winner, message
+let playerHand, dealerHand, turn, winner, message, isNatural
 // ----------------------------Cached Element references------------------------------
 let messageEl = document.querySelector('#game-message')
 let drawBtn = document.querySelector('#draw-btn')
@@ -75,18 +75,29 @@ function initialDeal() {
   playerHand = []
   dealerHand = []
   winner = null
+  turn = 'deal'
+  cardDraw(playerHand, 'player')
+  cardDraw(playerHand, 'player')
+  cardDraw(dealerHand, 'dealer')
+  cardDraw(dealerHand, 'dealer')
+  message = `Your Cards Total: ${getHandValue(playerHand)}, Dealer has: ${getHandValue(dealerHand)}`//! for testing will need to return here to hide dealer down card
+  isNatural = checkIsNatural()
+  console.log('natural=',isNatural)
   turn = 'player'
-  cardDraw(playerHand, 'player')
-  cardDraw(playerHand, 'player')
-  cardDraw(dealerHand, 'dealer')
-  cardDraw(dealerHand, 'dealer')
-  message = `Your Cards Total: ${getHandValue(playerHand)}, Dealer has: ${dealerHand[1].value} showing`
   render ()
 }
 
+function checkIsNatural(){
+  if (turn !== 'deal') return
+  result = getHandValue(dealerHand) === 21 || getHandValue(playerHand) === 21 ? true : false
+  return result
+}
+
+
 function handleClickHit(handArr, seat) {
   const drawCard = cardDraw(handArr, seat)
-  message = `You drew ${drawCard}`
+  message = `Your Cards Total: ${getHandValue(playerHand)}, Dealer has: ${getHandValue(dealerHand)}`//! for testing will need 
+  // message = `You drew ${drawCard}`
   render ()
 }
 
