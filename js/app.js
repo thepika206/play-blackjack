@@ -58,29 +58,51 @@ const deck = [
   {id:'s02', value:2},
 ]
 
-let playerHand = []
-let dealerHand = []
+let playerHand, dealerHand, turn, winner, message
 // ----------------------------Cached Element references------------------------------
 let messageEl = document.querySelector('#game-message')
 let drawBtn = document.querySelector('#draw-btn')
 // ----------------------------Event Listeners----------------------------------------
 drawBtn.addEventListener('click', function(){
-  drawCard(playerHand)
+  handleClickHit(playerHand, 'player')
 })
 
 
 // ----------------------------Functions----------------------------------------------
+initialDeal()
 
-function drawCard(handArr) {
+function initialDeal() {
+  playerHand = []
+  dealerHand = []
+  winner = null
+  turn = 'player'
+  cardDraw(playerHand, 'player')
+  cardDraw(playerHand, 'player')
+  cardDraw(dealerHand, 'dealer')
+  cardDraw(dealerHand, 'dealer')
+  message = `Your Cards Total: ${getHandValue(playerHand)}, Dealer has: ${dealerHand[1].value} showing`
+  render ()
+}
+
+function handleClickHit(handArr, seat) {
+  const drawCard = cardDraw(handArr, seat)
+  message = `You drew ${drawCard}`
+  render ()
+}
+
+function cardDraw(handArr, seat) {
   if (deck.length > 0) {
     let randIdx = Math.floor(Math.random() * deck.length)
     let cardPicked = deck.splice(randIdx, 1)[0]
     handArr.push(cardPicked)
-    console.log(`drew card ${cardPicked.id} deck has cards ${deck.length} left`)
-    getHandValue(handArr)
+    console.log(`${seat} drew ${cardPicked.id}`)
   }
+  // return cardPicked
 }
 
+function render() {
+  messageEl.textContent = message
+}
 
 
 
@@ -92,7 +114,6 @@ function getHandValue(handArr){
     baseTotal += handArr[i].value
     hasAce = handArr[i].value === 1 ? true : hasAce //check if the hand contains an ace
   } 
-  
   total = hasAce && baseTotal < 12 ? baseTotal + 10 : baseTotal 
   console.log(`hand total is ${total}`)
   return total
