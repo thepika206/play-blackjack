@@ -3,7 +3,7 @@
 
 // ----------------------------Variables (state)--------------------------------------
 //? once testing is good we can shrink this into one line.
-const blackJackDeck = [
+const deck = [
   {id:'dA', value:1},
   {id:'dK', value:10},
   {id:'dQ', value:10},
@@ -65,13 +65,24 @@ let messageEl = document.querySelector('#game-message')
 let drawBtn = document.querySelector('#draw-btn')
 // ----------------------------Event Listeners----------------------------------------
 drawBtn.addEventListener('click', function(){
-  console.log('click draw')
+  drawCard(playerHand)
 })
 
 
 // ----------------------------Functions----------------------------------------------
 
-
+function drawCard(hand) {
+  if (deck.length > 0) {
+    // Randomly select number from total cards remaining
+    let randIdx = Math.floor(Math.random() * deck.length)
+    // Assign card with the random index to a variable
+    let cardPicked = deck.splice(randIdx, 1)[0]
+    // Add card picked to the target hand 
+    hand.push(cardPicked)
+    // Pass card picked to render function to display
+    // render(cardPicked)
+  }
+}
 
 
 
