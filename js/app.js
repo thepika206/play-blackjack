@@ -87,16 +87,18 @@ function drawCard(handArr) {
 
 function getHandValue(handArr){
   let hasAce = false
-  let total = 0 
+  let baseTotal = 0 
   for (let i=0;i<handArr.length; i++){
-    total += handArr[i].value
-    hasAce = handArr[i].value === 1 ? true : hasAce
+    baseTotal += handArr[i].value
+    hasAce = handArr[i].value === 1 ? true : hasAce //check if the hand contains an ace
   } 
-  return hasAce && total < 12 ? total + 10 : total 
+  
+  total = hasAce && baseTotal < 12 ? baseTotal + 10 : baseTotal 
+  console.log(`hand total is ${total}`)
+  return total
 }
 
-//* tests commented out unless needed
-
+//? sample hands
 // let playerHand21 = [
 //   {id:'sA', value:1}, 
 //   {id:'dK', value:10},
@@ -107,10 +109,18 @@ function getHandValue(handArr){
 //   {id:'cA', value:1}, 
 //   {id:'dK', value:10},
 // ]
+// let playerHand23 = [
+//   {id:'sA', value:1},
+//   {id:'cA', value:1}, 
+//   {id:'h04', value:4}, 
+//   {id:'h07', value:7}, 
+//   {id:'d10', value:10},
+// ]
 
+//? tests commented out unless needed
 // console.log('playerHand 21', getHandValue(playerHand21))
 // console.log('playerHand 12', getHandValue(playerHand12))
-// console.log('playerHand 25', getHandValue(playerHand25))
+// console.log('playerHand 23', getHandValue(playerHand23))
 
 
 
