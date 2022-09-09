@@ -2,7 +2,14 @@
 // ----------------------------Constants----------------------------------------------
 // ----------------------------Variables (state)--------------------------------------
 // ----------------------------Cached Element references------------------------------
+let messageEl = document.querySelector('#game-message')
+let drawBtn = document.querySelector('#draw-btn')
 // ----------------------------Event Listeners----------------------------------------
+drawBtn.addEventListener('click', function(){
+  console.log('click draw')
+})
+
+
 // ----------------------------Functions----------------------------------------------
 
 
