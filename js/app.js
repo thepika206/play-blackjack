@@ -64,7 +64,7 @@ let messageEl = document.querySelector('#game-message')
 let drawBtn = document.querySelector('#draw-btn')
 // ----------------------------Event Listeners----------------------------------------
 drawBtn.addEventListener('click', function(){
-  handleClickHit(playerHand, 'player')
+  handleClickHit(playerHand)
 })
 
 
@@ -76,20 +76,20 @@ function initialDeal() {
   dealerHand = []
   winner = null
   isNatural = null
-  turn = 'deal'
+  turn = 'initial-deal'
   cardDraw(playerHand, 'player')
   cardDraw(playerHand, 'player')
   cardDraw(dealerHand, 'dealer')
   cardDraw(dealerHand, 'dealer')
   winner = checkNaturalWinner()
-  console.log('winner', winner)
+  // console.log('winner', winner)
   isNatural = winner ? true : null
   render()
 }
 
 
 function checkNaturalWinner(){
-  if (turn !== 'deal') return null
+  if (turn !== 'initial-deal') return null
   let dealerNatural = getHandValue(dealerHand) === 21 ? true : false
   let playerNatural = getHandValue(playerHand) === 21 ? true : false
   if (!playerNatural && !dealerNatural){
@@ -103,20 +103,24 @@ function checkNaturalWinner(){
   }
 }
 
-
-function handleClickHit(handArr, seat) {
-  const drawCard = cardDraw(handArr, seat)
-  message = `Your Cards Total: ${getHandValue(playerHand)}, Dealer has: ${getHandValue(dealerHand)}`//! for testing will need 
-  // message = `You drew ${drawCard}`
+function handleClickHit(handArr) {
+  cardDraw(handArr)
+  console.log('hit', playerHand[playerHand.length-1])
+  let total = getHandValue(playerHand)
+  if (total === 21) {
+    turn = 'dealer-turn'
+  } else if (total > 21){
+    winner = 'dealer'
+  }
   render()
 }
 
-function cardDraw(handArr, seat) {
+//this function is used dealing cards to the player and dealer
+function cardDraw(handArr) {
   if (deck.length > 0) {
     let randIdx = Math.floor(Math.random() * deck.length)
     let cardPicked = deck.splice(randIdx, 1)[0]
     handArr.push(cardPicked)
-    console.log(`${seat} drew ${cardPicked.id}`)
   }
   // return cardPicked
 }
@@ -125,10 +129,10 @@ function render() {
   if (winner) {
     message = getWinnerMessages()
   } else {
-    message = (`Your Cards Total: ${getHandValue(playerHand)}, Dealer up card: ${dealerHand[0].value}`)  
-    console.log(`Your Cards Total: ${getHandValue(playerHand)}, Dealer has: ${getHandValue(dealerHand)}`)  
+    message = (`Hit or Stand? Your Cards Total: ${getHandValue(playerHand)}, Dealer up card: ${dealerHand[0].value}`)  
     turn = 'player'
   }
+  console.log('Player:', playerHand, 'Dealer:', dealerHand )  
   messageEl.textContent = message  
 }
 
