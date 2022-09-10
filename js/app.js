@@ -64,6 +64,7 @@ let messageEl = document.querySelector('#game-message')
 let drawBtn = document.querySelector('#hit-btn')
 let standBtn = document.querySelector('#stand-btn')
 let playerHandDiv = document.querySelector('#player-hand')
+let dealerHandDiv = document.querySelector('#dealer-hand')
 // ----------------------------Event Listeners----------------------------------------
 drawBtn.addEventListener('click', function(){
   if (turn === 'player-turn'){handleClickHit(playerHand)}
@@ -151,7 +152,28 @@ function render() {
   }
   console.log('Player:', playerHand, 'Dealer:', dealerHand )  
   messageEl.textContent = message  
+  renderDealerHand()
   renderPlayerHand()
+}
+
+function renderDealerHand(){
+  //for each card in the playerHandArr, create dynamic html structure and append into the player hand el
+  //classList.add the card.id value
+  dealerHandDiv.innerHTML = ''
+  if (turn === 'player-turn'){
+    let card = document.createElement('div')
+    card.classList.add('card', 'medium', `${dealerHand[0].id}`)
+    dealerHandDiv.appendChild(card)
+    let downCard = document.createElement('div')
+    downCard.classList.add('card', 'medium', 'back-red')
+    dealerHandDiv.appendChild(downCard)
+    } else {
+    for (let i=0; i<dealerHand.length;i++){
+      let card = document.createElement('div')
+      card.classList.add('card', 'medium', `${dealerHand[i].id}`)
+      dealerHandDiv.appendChild(card)
+    }
+  }
 }
 
 function renderPlayerHand(){
@@ -160,11 +182,9 @@ function renderPlayerHand(){
   playerHandDiv.innerHTML = ''
   for (let i=0; i<playerHand.length;i++){
     let card = document.createElement('div')
-    card.classList.add('card', 'medium', 'back-red')
+    card.classList.add('card', 'medium', `${playerHand[i].id}`)
     playerHandDiv.appendChild(card)
   }
-
-  //playerHandDiv.append //
 }
 
 
@@ -189,6 +209,7 @@ function getHandValue(handArr){
   return total
 }
 
+//! continue here for dealer turn
 function dealerDraw(){
   console.log('dealer turn!!')
 }
