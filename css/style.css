@@ -22,7 +22,7 @@ body {
   justify-content: center;
   align-items: center;
   /* height: 50vmax; */
-  background-color: lightpink;
+  background-color: royalblue;
 }
 
 main.container{
@@ -55,7 +55,7 @@ section{
 
 }
 section#message--section{
-  background-color: beige;
+  background-color: white;
   grid-area: message;
   flex-direction: column;
   padding: 20px;
@@ -80,10 +80,11 @@ section#play-lower--section{
 }
 
 section#card-btns--section{
+  background-color: darkgreen;
   grid-area: card-btn;
 }
 section#bet-btns--section{
-  background-color: beige;
+  background-color: lightgray;
   grid-area: bet-btn;
 }
 
