@@ -58,6 +58,7 @@ section#message--section{
   background-color: beige;
   grid-area: message;
   flex-direction: column;
+  padding: 20px;
 }
 
 section#play-deck--section{
@@ -79,6 +80,14 @@ section#card-btns--section{
 section#bet-btns--section{
   background-color: beige;
   grid-area: bet-btn;
+}
+
+h2{
+  font-size: 1.5rem;
+}
+
+h3{
+  font-size: 1.25rem;
 }
 
 .card-container {
