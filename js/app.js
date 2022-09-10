@@ -75,22 +75,32 @@ function initialDeal() {
   playerHand = []
   dealerHand = []
   winner = null
+  isNatural = null
   turn = 'deal'
   cardDraw(playerHand, 'player')
   cardDraw(playerHand, 'player')
   cardDraw(dealerHand, 'dealer')
   cardDraw(dealerHand, 'dealer')
-  message = `Your Cards Total: ${getHandValue(playerHand)}, Dealer has: ${getHandValue(dealerHand)}`//! for testing will need to return here to hide dealer down card
-  isNatural = checkIsNatural()
-  console.log('natural=',isNatural)
-  turn = 'player'
-  render ()
+  winner = checkNaturalWinner()
+  console.log('winner', winner)
+  isNatural = winner ? true : null
+  render()
 }
 
-function checkIsNatural(){
-  if (turn !== 'deal') return
-  result = getHandValue(dealerHand) === 21 || getHandValue(playerHand) === 21 ? true : false
-  return result
+
+function checkNaturalWinner(){
+  if (turn !== 'deal') return null
+  let dealerNatural = getHandValue(dealerHand) === 21 ? true : false
+  let playerNatural = getHandValue(playerHand) === 21 ? true : false
+  if (!playerNatural && !dealerNatural){
+    return null
+  } else if (playerNatural && dealerNatural) {
+    return 'T'
+  } else if (playerNatural) {
+    return 'player'
+  } else {
+    return 'dealer'
+  }
 }
 
 
@@ -98,7 +108,7 @@ function handleClickHit(handArr, seat) {
   const drawCard = cardDraw(handArr, seat)
   message = `Your Cards Total: ${getHandValue(playerHand)}, Dealer has: ${getHandValue(dealerHand)}`//! for testing will need 
   // message = `You drew ${drawCard}`
-  render ()
+  render()
 }
 
 function cardDraw(handArr, seat) {
@@ -112,8 +122,25 @@ function cardDraw(handArr, seat) {
 }
 
 function render() {
-  messageEl.textContent = message
+  if (winner) {
+    message = getWinnerMessages()
+  } else {
+    message = (`Your Cards Total: ${getHandValue(playerHand)}, Dealer up card: ${dealerHand[0].value}`)  
+    console.log(`Your Cards Total: ${getHandValue(playerHand)}, Dealer has: ${getHandValue(dealerHand)}`)  
+    turn = 'player'
+  }
+  messageEl.textContent = message  
 }
+
+
+function getWinnerMessages(){
+  if (isNatural && winner === 'player') return `You Won - Natural Blackjack`
+  if (isNatural && winner === 'dealer') return `Dealer Won - Natural Blackjack`
+  if (winner === 'player') return `You Won`
+  if (winner === 'dealer') return `Dealer Won`
+  if (winner === 'T') return `Tie Game`
+  }
+
 
 
 
@@ -126,7 +153,7 @@ function getHandValue(handArr){
     hasAce = handArr[i].value === 1 ? true : hasAce //check if the hand contains an ace
   } 
   total = hasAce && baseTotal < 12 ? baseTotal + 10 : baseTotal 
-  console.log(`hand total is ${total}`)
+  // console.log(`hand total is ${total}`)
   return total
 }
 
