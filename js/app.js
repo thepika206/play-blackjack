@@ -63,6 +63,7 @@ let playerHand, dealerHand, turn, winner, message, isNatural
 let messageEl = document.querySelector('#game-message')
 let drawBtn = document.querySelector('#hit-btn')
 let standBtn = document.querySelector('#stand-btn')
+let playerHandDiv = document.querySelector('#player-hand')
 // ----------------------------Event Listeners----------------------------------------
 drawBtn.addEventListener('click', function(){
   if (turn === 'player-turn'){handleClickHit(playerHand)}
@@ -150,7 +151,22 @@ function render() {
   }
   console.log('Player:', playerHand, 'Dealer:', dealerHand )  
   messageEl.textContent = message  
+  renderPlayerHand()
 }
+
+function renderPlayerHand(){
+  //for each card in the playerHandArr, create dynamic html structure and append into the player hand el
+  //classList.add the card.id value
+  playerHandDiv.innerHTML = ''
+  for (let i=0; i<playerHand.length;i++){
+    let card = document.createElement('div')
+    card.classList.add('card', 'medium', 'back-red')
+    playerHandDiv.appendChild(card)
+  }
+
+  //playerHandDiv.append //
+}
+
 
 
 function getWinnerMessages(){

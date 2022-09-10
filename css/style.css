@@ -32,7 +32,7 @@ main.container{
   /* height: 600px; */
   background-color: lightgrey;
   grid-template-rows: 2fr 2fr 2fr 1fr 1fr;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 15% auto;
   grid-template-areas:
     /* "message message"
     "deck play-upper"
@@ -65,6 +65,11 @@ section#play-deck--section{
   background-color: yellowgreen;
   grid-area: side;
 }
+
+div#deck{
+  margin:0
+}
+
 section#play-upper--section{
   grid-area: upper;
   background-color: olivedrab;
@@ -98,7 +103,7 @@ h3{
 }
 
 .card {
-  margin: 3vh;
+  margin: 1vh;
 }
 
 .card.outline {
