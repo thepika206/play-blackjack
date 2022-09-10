@@ -61,10 +61,16 @@ const deck = [
 let playerHand, dealerHand, turn, winner, message, isNatural
 // ----------------------------Cached Element references------------------------------
 let messageEl = document.querySelector('#game-message')
-let drawBtn = document.querySelector('#draw-btn')
+let drawBtn = document.querySelector('#hit-btn')
+let standBtn = document.querySelector('#stand-btn')
 // ----------------------------Event Listeners----------------------------------------
 drawBtn.addEventListener('click', function(){
-  handleClickHit(playerHand)
+  if (turn === 'player-turn')  {handleClickHit(playerHand)}
+})
+
+standBtn.addEventListener('click', function(){
+  turn = 'dealer-turn'
+  dealerDraw()
 })
 
 
@@ -72,11 +78,11 @@ drawBtn.addEventListener('click', function(){
 initialDeal()
 
 function initialDeal() {
+  turn = 'initial-deal'
   playerHand = []
   dealerHand = []
   winner = null
   isNatural = null
-  turn = 'initial-deal'
   cardDraw(playerHand, 'player')
   cardDraw(playerHand, 'player')
   cardDraw(dealerHand, 'dealer')
@@ -84,6 +90,7 @@ function initialDeal() {
   winner = checkNaturalWinner()
   // console.log('winner', winner)
   isNatural = winner ? true : null
+  if (!winner) turn = 'player-turn'
   render()
 }
 
@@ -145,10 +152,6 @@ function getWinnerMessages(){
   if (winner === 'T') return `Tie Game`
   }
 
-
-
-
-
 function getHandValue(handArr){
   let hasAce = false
   let baseTotal = 0 
@@ -160,6 +163,11 @@ function getHandValue(handArr){
   // console.log(`hand total is ${total}`)
   return total
 }
+
+function dealerDraw(){
+  console.log('dealer turn!!')
+}
+
 
 //? sample hands
 // let playerHand21 = [
