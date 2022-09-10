@@ -65,12 +65,15 @@ let drawBtn = document.querySelector('#hit-btn')
 let standBtn = document.querySelector('#stand-btn')
 // ----------------------------Event Listeners----------------------------------------
 drawBtn.addEventListener('click', function(){
-  if (turn === 'player-turn')  {handleClickHit(playerHand)}
+  if (turn === 'player-turn'){handleClickHit(playerHand)}
 })
 
 standBtn.addEventListener('click', function(){
-  turn = 'dealer-turn'
-  dealerDraw()
+  if (turn === 'player-turn') {
+    turn = 'dealer-turn'
+    dealerDraw()
+    render()
+  }
 })
 
 
@@ -78,11 +81,12 @@ standBtn.addEventListener('click', function(){
 initialDeal()
 
 function initialDeal() {
-  turn = 'initial-deal'
+  turn = null
   playerHand = []
   dealerHand = []
   winner = null
   isNatural = null
+  turn = 'initial-deal'
   cardDraw(playerHand, 'player')
   cardDraw(playerHand, 'player')
   cardDraw(dealerHand, 'dealer')
@@ -116,8 +120,10 @@ function handleClickHit(handArr) {
   let total = getHandValue(playerHand)
   if (total === 21) {
     turn = 'dealer-turn'
+    console.log('drew to 21', turn)
   } else if (total > 21){
     winner = 'dealer'
+    turn = 'dealer-turn'
   }
   render()
 }
@@ -135,9 +141,10 @@ function cardDraw(handArr) {
 function render() {
   if (winner) {
     message = getWinnerMessages()
+  } else if (turn === 'dealer-turn') {
+    message = `Your Cards Total: ${getHandValue(playerHand)}, Dealer's Turn Now`
   } else {
     message = (`Hit or Stand? Your Cards Total: ${getHandValue(playerHand)}, Dealer up card: ${dealerHand[0].value}`)  
-    turn = 'player'
   }
   console.log('Player:', playerHand, 'Dealer:', dealerHand )  
   messageEl.textContent = message  
