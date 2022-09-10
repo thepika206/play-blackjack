@@ -12,19 +12,76 @@ html {
 }
 
 body {
-  background-color: olivedrab;
   /* Use a system font, if none are available use an available sans-sarif font */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   margin: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  /* flex-direction: column; */
+  min-height: 100vh;
   justify-content: center;
-  height: 50vmax;
+  align-items: center;
+  /* height: 50vmax; */
+  background-color: lightpink;
 }
 
-.container {
+main.container{
+  padding: 0;
+  display: grid;
+  width: 80%;
+  /* height: 600px; */
+  background-color: lightgrey;
+  grid-template-rows: 2fr 2fr 2fr 1fr 1fr;
+  grid-template-columns: 20% 80%;
+  grid-template-areas:
+    /* "message message"
+    "deck play-upper"
+    "play-lower play-lower"
+    "card-btn card-btn"
+    "bet-btn bet-btn"; */
+    "message message"
+    "side upper"
+    "side lower"
+    "card-btn card-btn"
+    "bet-btn bet-btn";
+}
+section{
+  border: 1px dashed red;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 5px 0;
+
+}
+section#message--section{
+  background-color: beige;
+  grid-area: message;
+  flex-direction: column;
+}
+
+section#play-deck--section{
+  background-color: yellowgreen;
+  grid-area: side;
+}
+section#play-upper--section{
+  grid-area: upper;
+  background-color: olivedrab;
+}
+section#play-lower--section{
+  grid-area: lower;
+  background-color: olive;
+}
+
+section#card-btns--section{
+  grid-area: card-btn;
+}
+section#bet-btns--section{
+  background-color: beige;
+  grid-area: bet-btn;
+}
+
+.card-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -43,10 +100,11 @@ body {
   box-shadow: 7px 7px 7px 0 rgba(41, 41, 41, 0.95) !important;
 }
 
-.btn {
+/* .btn {
   margin-top: 2vh;
   color: white;
   background-color: #202d7a;
   font-weight: bold;
   border: 2px solid #202d7a;
-}
+} */
+

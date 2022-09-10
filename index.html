@@ -13,23 +13,41 @@
   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-  <h1>Play Blackjack</h1>
-  <h2 id="game-message">Message</h2>
-  <div id="dealer-hand" class="container">
-		<div id="dealer-card-1" class="card medium outline"></div>
-		<div id="dealer-card-2" class="card medium outline"></div>
-		<div id="dealer-card-3" class="card medium outline"></div>
-		<div id="dealer-card-4" class="card medium outline"></div>
-		<div id="dealer-card-5" class="card medium outline"></div>
-	</div>
-  <div id="player-hand" class="container">
-		<div id="player-card-1" class="card medium outline"></div>
-		<div id="player-card-2" class="card medium outline"></div>
-		<div id="player-card-3" class="card medium outline"></div>
-		<div id="player-card-4" class="card medium outline"></div>
-		<div id="player-card-5" class="card medium outline"></div>
-	</div>
-	<button type="button" id="hit-btn" class="btn btn-primary">Hit</button>
-	<button type="button" id="stand-btn" class="btn btn-primary">Stand</button>
+  <main class="container">
+    <section id="message--section">
+      <h1>Play Blackjack</h1>
+      <h2 id="game-message">Message</h2>
+    </section>
+    <section id="play-deck--section">
+      <div id="deck" class="card medium outline">
+      </div>
+    </section>
+    <section id="play-upper--section">
+      <div id="dealer-hand" class=card-container">
+        <div id="dealer-card-1" class="card medium outline">
+        </div>
+      </div>
+    </section>
+    <section id="play-lower--section">
+      <div id="player-hand" class="card-container">
+        <div id="player-card-5" class="card medium outline"></div>
+        <div id="player-card-5" class="card medium outline"></div>
+      </div>
+    </section>
+    <section id="card-btns--section">
+      <button type="button" id="hit-btn" class="btn btn-danger">Hit</button>
+      <button type="button" id="stand-btn" class="btn btn-primary">Stand</button>
+    </section>
+    <section id="bet-btns--section">
+        <p>Bet:
+          <span id="bet-amount"></span>
+        </p>
+        <button type="button" id="bet-small-btn" class="btn btn-secondary">Bet 50</button>
+        <button type="button" id="bet-confirm-btn" class="btn btn-success">Confirm Bet</button>
+        <p>Bank:
+          <span id="bank-amount"></span>
+        </p>
+    </section>
+  </main>
 </body>
 </html>
