@@ -128,8 +128,11 @@ function handleClickHit(handArr) {
 
 function handleClickStand(){
   turn = 'dealer-turn'
-  dealerDraw()
   render()
+  setTimeout(() => {
+    console.log("Delayed for 1 second.");
+    dealerDraw()
+  }, 2000)
 }
 
 //this function is used dealing cards to the player and dealer
@@ -146,9 +149,9 @@ function render() {
   if (winner) {
     message = getWinnerMessages()
   } else if (turn === 'dealer-turn') {
-    message = `Your Cards Total: ${getHandValue(playerHand)}, Dealer's Turn Now`
+    message = `Your have: ${getHandValue(playerHand)} | Dealer has: ${getHandValue(dealerHand)}`
   } else {
-    message = (`Hit or Stand? Your Cards Total: ${getHandValue(playerHand)}, Dealer up card: ${dealerHand[0].value}`)  
+    message = `Your have: ${getHandValue(playerHand)} | Dealer Up Card: ${dealerHand[0].value}`  
   }
   console.log('Player:', playerHand, 'Dealer:', dealerHand )  
   messageEl.textContent = message  
@@ -197,22 +200,41 @@ function getWinnerMessages(){
   if (winner === 'T') return `Tie Game`
   }
 
+/* hand containing any Aces with a basic value of less than 12 should count an extra 10 to the total.  Otherwise only use the basic value */  
 function getHandValue(handArr){
   let hasAce = false
   let baseTotal = 0 
   for (let i=0;i<handArr.length; i++){
     baseTotal += handArr[i].value
-    hasAce = handArr[i].value === 1 ? true : hasAce //check if the hand contains an ace
+    hasAce = handArr[i].value === 1 ? true : hasAce
   } 
   total = hasAce && baseTotal < 12 ? baseTotal + 10 : baseTotal 
-  // console.log(`hand total is ${total}`)
   return total
 }
 
-//! continue here for dealer turn
 function dealerDraw(){
-  console.log('dealer turn!!')
+  if (turn !== 'dealer-turn') return
+  while (getHandValue(dealerHand) < 17){
+    cardDraw(dealerHand)
+    render()
+  }
+  if (getHandValue(dealerHand)>21) {
+    winner = 'player' //dealer bust
+  } else {   
+    winner = closestTo21()
+    console.log(winner)
+  }
+  render()
 }
+
+function closestTo21(){
+  let player = getHandValue(playerHand)
+  let dealer = getHandValue(dealerHand)
+  if (player > dealer) return 'player'
+  if (player < dealer) return 'dealer'
+  return 'T'
+}
+
 
 
 //? sample hands
