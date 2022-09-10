@@ -69,11 +69,7 @@ drawBtn.addEventListener('click', function(){
 })
 
 standBtn.addEventListener('click', function(){
-  if (turn === 'player-turn') {
-    turn = 'dealer-turn'
-    dealerDraw()
-    render()
-  }
+  if (turn === 'player-turn'){handleClickStand()}
 })
 
 
@@ -125,6 +121,12 @@ function handleClickHit(handArr) {
     winner = 'dealer'
     turn = 'dealer-turn'
   }
+  render()
+}
+
+function handleClickStand(){
+  turn = 'dealer-turn'
+  dealerDraw()
   render()
 }
 
