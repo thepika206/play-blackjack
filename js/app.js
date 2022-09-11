@@ -58,8 +58,9 @@ const deck = [
   {id:'s02', value:2},
 ]
 
-let playerHand, dealerHand, turn, winner, message, isNatural
+let playerHand, dealerHand, turn, winner, isNatural
 // ----------------------------Cached Element references------------------------------
+let headlineEl = document.querySelector('#headline-message')
 let messageEl = document.querySelector('#game-message')
 let drawBtn = document.querySelector('#hit-btn')
 let standBtn = document.querySelector('#stand-btn')
@@ -143,19 +144,41 @@ function drawCard(handArr) {
 }
 
 function render() {
-  if (winner) {
-    message = getWinnerMessages()
-  } else if (turn === 'dealer-turn') {
-    message = `Your have: ${getHandValue(playerHand)} | Dealer has: ${getHandValue(dealerHand)}`
-  } else {
-    message = `Your have: ${getHandValue(playerHand)} | Dealer Up Card: ${dealerHand[0].value}`  
-  }
-  console.log('Player:', playerHand, 'Dealer:', dealerHand )  
-  messageEl.textContent = message  
+  renderMessage()
   renderDealerHand()
   renderPlayerHand()
 }
 
+function renderMessage(){
+  let message, headline
+  if (winner) {
+    headline = winner === 'player' ? 'You Won' : 'Dealer Won'
+    headline = winner === 'T' ? 'Tie Game' : headline
+    message = getWinnerMessages()
+  } else if (turn === 'dealer-turn') {
+    headline = 'Dealer Turn'
+    message = `Your have: ${getHandValue(playerHand)} | Dealer hits on 16 or lower`
+  } else {
+    headline = 'Your Turn'
+    message = `You have: ${getHandValue(playerHand)} | Dealer Up Card: ${dealerHand[0].value}`  
+  }
+  messageEl.textContent = message  
+  headlineEl.textContent = headline
+}
+
+function getWinnerMessages(){
+  let player = getHandValue(playerHand)
+  let dealer = getHandValue(dealerHand)
+  if (player > 21 ) return `You busted with ${player}`
+  if (dealer > 21 ) return `Dealer busted with ${dealer}`
+  // if (isNatural && winner) return `Natural Blackjack`
+  if (isNatural && winner === 'player') return `You drew a Blackjack - Bonus Payout!!`
+  if (isNatural && winner === 'dealer') return `Dealer drew a Blackjack`
+  if (isNatural && winner === 'T') return 'You and the Dealer drew a Blackjack'
+  if (winner === 'player') return `Your ${player} beat Dealer's ${dealer}`
+  if (winner === 'dealer') return `Your ${player} lost to Dealer's ${dealer}`
+  if (winner === 'T') return `Your ${player} equals Dealer's ${dealer}`
+}
 function renderDealerHand(){
   //for each card in the playerHandArr, create dynamic html structure and append into the player hand el
   //classList.add the card.id value
@@ -189,13 +212,6 @@ function renderPlayerHand(){
 
 
 
-function getWinnerMessages(){
-  if (isNatural && winner === 'player') return `You Won - Natural Blackjack`
-  if (isNatural && winner === 'dealer') return `Dealer Won - Natural Blackjack`
-  if (winner === 'player') return `You Won`
-  if (winner === 'dealer') return `Dealer Won`
-  if (winner === 'T') return `Tie Game`
-}
 
 /* hand containing any Aces with a basic value of less than 12 should count an extra 10 to the total.  Otherwise only use the basic value */  
 function getHandValue(handArr){
