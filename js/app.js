@@ -66,7 +66,7 @@ let drawBtn = document.querySelector('#hit-btn')
 let standBtn = document.querySelector('#stand-btn')
 let playerHandDiv = document.querySelector('#player-hand')
 let dealerHandDiv = document.querySelector('#dealer-hand')
-let newGameBtn = document.querySelector('#new-game-btn')
+let freePlayBtn = document.querySelector('#free-play-btn')
 // ----------------------------Event Listeners----------------------------------------
 drawBtn.addEventListener('click', function(){
   if (turn === 'player-turn'){handleClickHit(playerHand)}
@@ -76,8 +76,9 @@ standBtn.addEventListener('click', function(){
   if (turn === 'player-turn'){handleClickStand()}
 })
 
-newGameBtn.addEventListener('click', function(){
-  console.log('click')
+freePlayBtn.addEventListener('click', function(){
+  console.log('new free game')
+  initialDeal()
 })
 
 // ----------------------------Functions----------------------------------------------
