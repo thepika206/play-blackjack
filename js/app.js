@@ -85,41 +85,38 @@ function initialDeal() {
   winner = null
   isNatural = null
   turn = 'initial-deal'
-  cardDraw(playerHand, 'player')
-  cardDraw(playerHand, 'player')
-  cardDraw(dealerHand, 'dealer')
-  cardDraw(dealerHand, 'dealer')
-  winner = checkNaturalWinner()
+  drawCard(playerHand, 'player')
+  drawCard(playerHand, 'player')
+  drawCard(dealerHand, 'dealer')
+  drawCard(dealerHand, 'dealer')
+  winner = getNaturalWinner()
   // console.log('winner', winner)
   isNatural = winner ? true : null
   if (!winner) turn = 'player-turn'
   render()
 }
 
-
-function checkNaturalWinner(){
-  if (turn !== 'initial-deal') return null
-  let dealerNatural = getHandValue(dealerHand) === 21 ? true : false
-  let playerNatural = getHandValue(playerHand) === 21 ? true : false
-  if (!playerNatural && !dealerNatural){
-    return null
-  } else if (playerNatural && dealerNatural) {
-    return 'T'
-  } else if (playerNatural) {
-    return 'player'
-  } else {
-    return 'dealer'
+function dealerTurn(){
+  if (turn !== 'dealer-turn') return
+  while (getHandValue(dealerHand) < 17){
+    drawCard(dealerHand)
+    render()
   }
+  if (getHandValue(dealerHand)>21) {
+    winner = 'player' //dealer bust
+  } else {   
+    winner = getClosest21()
+    console.log(winner)
+  }
+  render()
 }
 
+
 function handleClickHit(handArr) {
-  cardDraw(handArr)
+  drawCard(handArr)
   console.log('hit', playerHand[playerHand.length-1])
   let total = getHandValue(playerHand)
-  if (total === 21) {
-    turn = 'dealer-turn'
-    console.log('drew to 21', turn)
-  } else if (total > 21){
+  if (total > 21){
     winner = 'dealer'
     turn = 'dealer-turn'
   }
@@ -131,12 +128,12 @@ function handleClickStand(){
   render()
   setTimeout(() => {
     console.log("Delayed for 1 second.");
-    dealerDraw()
+    dealerTurn()
   }, 2000)
 }
 
 //this function is used dealing cards to the player and dealer
-function cardDraw(handArr) {
+function drawCard(handArr) {
   if (deck.length > 0) {
     let randIdx = Math.floor(Math.random() * deck.length)
     let cardPicked = deck.splice(randIdx, 1)[0]
@@ -170,7 +167,7 @@ function renderDealerHand(){
     let downCard = document.createElement('div')
     downCard.classList.add('card', 'medium', 'back-red')
     dealerHandDiv.appendChild(downCard)
-    } else {
+  } else {
     for (let i=0; i<dealerHand.length;i++){
       let card = document.createElement('div')
       card.classList.add('card', 'medium', `${dealerHand[i].id}`)
@@ -198,7 +195,7 @@ function getWinnerMessages(){
   if (winner === 'player') return `You Won`
   if (winner === 'dealer') return `Dealer Won`
   if (winner === 'T') return `Tie Game`
-  }
+}
 
 /* hand containing any Aces with a basic value of less than 12 should count an extra 10 to the total.  Otherwise only use the basic value */  
 function getHandValue(handArr){
@@ -212,22 +209,8 @@ function getHandValue(handArr){
   return total
 }
 
-function dealerDraw(){
-  if (turn !== 'dealer-turn') return
-  while (getHandValue(dealerHand) < 17){
-    cardDraw(dealerHand)
-    render()
-  }
-  if (getHandValue(dealerHand)>21) {
-    winner = 'player' //dealer bust
-  } else {   
-    winner = closestTo21()
-    console.log(winner)
-  }
-  render()
-}
 
-function closestTo21(){
+function getClosest21(){
   let player = getHandValue(playerHand)
   let dealer = getHandValue(dealerHand)
   if (player > dealer) return 'player'
@@ -235,28 +218,42 @@ function closestTo21(){
   return 'T'
 }
 
+function getNaturalWinner(){
+  if (turn !== 'initial-deal') return null
+  let dealerNatural = getHandValue(dealerHand) === 21 ? true : false
+  let playerNatural = getHandValue(playerHand) === 21 ? true : false
+  if (!playerNatural && !dealerNatural){
+    return null
+  } else if (playerNatural && dealerNatural) {
+    return 'T'
+  } else if (playerNatural) {
+    return 'player'
+  } else {
+    return 'dealer'
+  }
+}
 
 
 //? sample hands
 // let playerHand21 = [
-//   {id:'sA', value:1}, 
-//   {id:'dK', value:10},
-// ]
-
-// let playerHand12 = [
-//   {id:'sA', value:1},
-//   {id:'cA', value:1}, 
-//   {id:'dK', value:10},
-// ]
-// let playerHand23 = [
-//   {id:'sA', value:1},
-//   {id:'cA', value:1}, 
-//   {id:'h04', value:4}, 
-//   {id:'h07', value:7}, 
-//   {id:'d10', value:10},
-// ]
-
-//? tests commented out unless needed
+  //   {id:'sA', value:1}, 
+  //   {id:'dK', value:10},
+  // ]
+  
+  // let playerHand12 = [
+    //   {id:'sA', value:1},
+    //   {id:'cA', value:1}, 
+    //   {id:'dK', value:10},
+    // ]
+    // let playerHand23 = [
+      //   {id:'sA', value:1},
+      //   {id:'cA', value:1}, 
+      //   {id:'h04', value:4}, 
+      //   {id:'h07', value:7}, 
+      //   {id:'d10', value:10},
+      // ]
+      
+      //? tests commented out unless needed
 // console.log('playerHand 21', getHandValue(playerHand21))
 // console.log('playerHand 12', getHandValue(playerHand12))
 // console.log('playerHand 23', getHandValue(playerHand23))
