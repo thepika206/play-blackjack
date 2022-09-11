@@ -156,16 +156,18 @@ function render() {
 
 function renderMessage(){
   let message, headline
+  let player = getHandValue(playerHand)
+  //let dealer = getHandValue(dealerHand) //commented until needed in this function
   if (winner) {
     headline = winner === 'player' ? 'You Won' : 'Dealer Won'
     headline = winner === 'T' ? 'Tie Game' : headline
     message = getWinnerMessages()
   } else if (turn === 'dealer-turn') {
     headline = 'Dealer Turn'
-    message = `Your have: ${getHandValue(playerHand)} | Dealer hits on 16 or lower`
+    message = `Your have: ${player} | Dealer hits on 16 or lower`
   } else {
     headline = 'Your Turn'
-    message = `You have: ${getHandValue(playerHand)} | Dealer Up Card: ${dealerHand[0].value}`  
+    message = `You have: ${player} | Dealer Up Card: ${dealerHand[0].value}`  
   }
   messageEl.textContent = message  
   headlineEl.textContent = headline
@@ -185,13 +187,13 @@ function getWinnerMessages(){
   if (winner === 'T') return `Your ${player} equals Dealer's ${dealer}`
 }
 function renderDealerHand(){
-  //for each card in the playerHandArr, create dynamic html structure and append into the player hand el
-  //classList.add the card.id value
   dealerHandDiv.innerHTML = ''
   if (turn === 'player-turn'){
+    //dealer's up card during player turn
     let card = document.createElement('div')
     card.classList.add('card', 'medium', `${dealerHand[0].id}`)
     dealerHandDiv.appendChild(card)
+    //dealer's second card is face down during player turn
     let downCard = document.createElement('div')
     downCard.classList.add('card', 'medium', 'back-red')
     dealerHandDiv.appendChild(downCard)
