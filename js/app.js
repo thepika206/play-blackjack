@@ -3,7 +3,7 @@
 
 // ----------------------------Variables (state)--------------------------------------
 //? need to initial deck back to this for each game
-const deck = [
+let deck = [
   {id:'dA', value:1},
   {id:'dK', value:10},
   {id:'dQ', value:10},
@@ -58,7 +58,7 @@ const deck = [
   {id:'s02', value:2},
 ]
 
-let playerHand, dealerHand, turn, winner, isNatural
+let playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount
 // ----------------------------Cached Element references------------------------------
 let headlineEl = document.querySelector('#headline-message')
 let messageEl = document.querySelector('#game-message')
@@ -78,14 +78,83 @@ standBtn.addEventListener('click', function(){
 
 freePlayBtn.addEventListener('click', function(){
   console.log('new free game')
+  initHand()
   initialDeal()
 })
 
 // ----------------------------Functions----------------------------------------------
-initialDeal()
+initHand()
+function initHand (){
+  console.log('initHand, deck length', deck.length)
+  betAmount = 0
+  turn = null
+  playerHand = []
+  dealerHand = []
+  winner = null
+  isNatural = null
+  if (deck.length < 25) initDeck()
+  render()
+}
+function initDeck (){
+  deck = [
+    {id:'dA', value:1},
+    {id:'dK', value:10},
+    {id:'dQ', value:10},
+    {id:'dJ', value:10},
+    {id:'d10', value:10},
+    {id:'d09', value:9},
+    {id:'d08', value:8},
+    {id:'d07', value:7},
+    {id:'d06', value:6},
+    {id:'d05', value:5},
+    {id:'d04', value:4},
+    {id:'d03', value:3},
+    {id:'d02', value:2},
+    {id:'hA', value:1},
+    {id:'hK', value:10},
+    {id:'hQ', value:10},
+    {id:'hJ', value:10},
+    {id:'h10', value:10},
+    {id:'h09', value:9},
+    {id:'h08', value:8},
+    {id:'h07', value:7},
+    {id:'h06', value:6},
+    {id:'h05', value:5},
+    {id:'h04', value:4},
+    {id:'h03', value:3},
+    {id:'h02', value:2},
+    {id:'cA', value:1},
+    {id:'cK', value:10},
+    {id:'cQ', value:10},
+    {id:'cJ', value:10},
+    {id:'c10', value:10},
+    {id:'c09', value:9},
+    {id:'c08', value:8},
+    {id:'c07', value:7},
+    {id:'c06', value:6},
+    {id:'c05', value:5},
+    {id:'c04', value:4},
+    {id:'c03', value:3},
+    {id:'c02', value:2},
+    {id:'sA', value:1},
+    {id:'sK', value:10},
+    {id:'sQ', value:10},
+    {id:'sJ', value:10},
+    {id:'s10', value:10},
+    {id:'s09', value:9},
+    {id:'s08', value:8},
+    {id:'s07', value:7},
+    {id:'s06', value:6},
+    {id:'s05', value:5},
+    {id:'s04', value:4},
+    {id:'s03', value:3},
+    {id:'s02', value:2},
+  ]
+  console.log('initDeck, deck length now:', deck.length)
+}
 
 function initialDeal() {
-  turn = null
+  console.log('initialDeal')
   playerHand = []
   dealerHand = []
   winner = null
@@ -96,13 +165,13 @@ function initialDeal() {
   drawCard(dealerHand, 'dealer')
   drawCard(dealerHand, 'dealer')
   winner = getNaturalWinner()
-  // console.log('winner', winner)
   isNatural = winner ? true : null
   if (!winner) turn = 'player-turn'
   render()
 }
 
 function dealerTurn(){
+  console.log('dealerTurn')
   if (turn !== 'dealer-turn') return
   while (getHandValue(dealerHand) < 17){
     drawCard(dealerHand)
@@ -119,6 +188,7 @@ function dealerTurn(){
 
 
 function handleClickHit(handArr) {
+  console.log('handleClickHit')
   drawCard(handArr)
   console.log('hit', playerHand[playerHand.length-1])
   let total = getHandValue(playerHand)
@@ -130,6 +200,7 @@ function handleClickHit(handArr) {
 }
 
 function handleClickStand(){
+  console.log('handleClickStand')
   turn = 'dealer-turn'
   render()
   setTimeout(() => {
@@ -162,6 +233,9 @@ function renderMessage(){
     headline = winner === 'player' ? 'You Won' : 'Dealer Won'
     headline = winner === 'T' ? 'Tie Game' : headline
     message = getWinnerMessages()
+  } else if (turn === null){
+    headline = 'Play Blackjack'
+    message = 'Choose a game option below to start'
   } else if (turn === 'dealer-turn') {
     headline = 'Dealer Turn'
     message = `Your have: ${player} | Dealer hits on 16 or lower`
