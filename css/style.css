@@ -64,7 +64,7 @@ section#message--section{
 }
 
 section#play-deck--section{
-  background-color: yellowgreen;
+  background-color: olivedrab;
   grid-area: side;
 }
 
@@ -75,10 +75,12 @@ div#deck{
 section#play-upper--section{
   grid-area: upper;
   background-color: olivedrab;
+  flex-direction: column;
 }
 section#play-lower--section{
   grid-area: lower;
-  background-color: olive;
+  background-color: olivedrab;
+  flex-direction: column;
 }
 
 section#card-btns--section{
@@ -96,6 +98,11 @@ h2{
 
 h3{
   font-size: 1.25rem;
+  margin: 0;
+}
+
+.table-text {
+  color: yellow;
 }
 
 .card-container {
