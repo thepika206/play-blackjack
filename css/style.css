@@ -60,7 +60,7 @@ section#play-deck--section{
   background-color: olivedrab;
   grid-area: side;
   flex-direction:  column;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 div#deck{
@@ -98,7 +98,7 @@ h3{
 
 section#play-deck--section > p{
   align-self: flex-end;
-  margin: 10px 10px 0 5px;
+  margin: 3px;
 }
 
 .table-text {
