@@ -2,7 +2,7 @@
 // ----------------------------Constants----------------------------------------------
 
 // ----------------------------Variables (state)--------------------------------------
-//? once testing is good we can shrink this into one line.
+//? need to initial deck back to this for each game
 const deck = [
   {id:'dA', value:1},
   {id:'dK', value:10},
