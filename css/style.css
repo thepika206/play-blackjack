@@ -17,11 +17,9 @@ body {
   Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   margin: 0;
   display: flex;
-  /* flex-direction: column; */
   min-height: 100vh;
   justify-content: center;
   align-items: center;
-  /* height: 50vmax; */
   background-color: royalblue;
 }
 
@@ -36,11 +34,6 @@ main.container{
   grid-template-rows: 1fr 2fr 2fr 1fr 1fr;
   grid-template-columns: 15% auto;
   grid-template-areas:
-    /* "message message"
-    "deck play-upper"
-    "play-lower play-lower"
-    "card-btn card-btn"
-    "bet-btn bet-btn"; */
     "message message"
     "side upper"
     "side lower"
@@ -124,11 +117,4 @@ h3{
   box-shadow: 7px 7px 7px 0 rgba(41, 41, 41, 0.95) !important;
 }
 
-/* .btn {
-  margin-top: 2vh;
-  color: white;
-  background-color: #202d7a;
-  font-weight: bold;
-  border: 2px solid #202d7a;
-} */
 
