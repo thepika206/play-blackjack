@@ -95,10 +95,6 @@ function init(){
   initHand()
 }
 
-function handleClickReset(){
-  console.log('reset game')
-  init()
-}
 
 function initHand (){
   console.log('initHand, deck length', deck.length)
@@ -202,6 +198,10 @@ function dealerTurn(){
   render()
 }
 
+function handleClickReset(){
+  console.log('reset game')
+  init()
+}
 
 function handleClickHit(handArr) {
   console.log('handleClickHit')
