@@ -69,6 +69,7 @@ let dealerHandDiv = document.querySelector('#dealer-hand')
 let freePlayBtn = document.querySelector('#free-play-btn')
 let deckCount = document.querySelector('#deck-count')
 let tenCardCount = document.querySelector('#ten-card-count')
+let resetGameBtn = document.querySelector('#reset-game-btn')
 // ----------------------------Event Listeners----------------------------------------
 drawBtn.addEventListener('click', function(){
   if (turn === 'player-turn'){handleClickHit(playerHand)}
@@ -84,8 +85,21 @@ freePlayBtn.addEventListener('click', function(){
   initialDeal()
 })
 
+resetGameBtn.addEventListener('click', handleClickReset)
+
 // ----------------------------Functions----------------------------------------------
-initHand()
+init()
+
+function init(){
+  bankAmount = 2000
+  initHand()
+}
+
+function handleClickReset(){
+  console.log('reset game')
+  init()
+}
+
 function initHand (){
   console.log('initHand, deck length', deck.length)
   betAmount = 0
