@@ -256,3 +256,17 @@ function getNaturalWinner(){
   }
 }
 
+//! call this test in console to test a larger hand
+function testFillPlayerHand(){
+initialDeal()
+playerHand = [
+    {id:'d06', value:6},
+    {id:'d05', value:5},
+    {id:'d04', value:4},
+    {id:'d03', value:3},
+    {id:'d02', value:2},
+    {id:'hA', value:1},
+  ]
+render()
+console.log('end of testFillPlayerHand')
+}    
