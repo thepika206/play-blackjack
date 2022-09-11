@@ -67,6 +67,8 @@ let standBtn = document.querySelector('#stand-btn')
 let playerHandDiv = document.querySelector('#player-hand')
 let dealerHandDiv = document.querySelector('#dealer-hand')
 let freePlayBtn = document.querySelector('#free-play-btn')
+let deckCount = document.querySelector('#deck-count')
+let tenCardCount = document.querySelector('#ten-card-count')
 // ----------------------------Event Listeners----------------------------------------
 drawBtn.addEventListener('click', function(){
   if (turn === 'player-turn'){handleClickHit(playerHand)}
@@ -223,6 +225,12 @@ function render() {
   renderMessage()
   renderDealerHand()
   renderPlayerHand()
+  renderStats()
+}
+
+function renderStats() {
+  deckCount.textContent = deck.length
+  tenCardCount.textContent = getTenCardCount()
 }
 
 function renderMessage(){
@@ -328,6 +336,14 @@ function getNaturalWinner(){
   } else {
     return 'dealer'
   }
+}
+
+//returns the amount of cards in the deck that have a game value of 10, since this changes player's odds
+function getTenCardCount(){
+  return deck.reduce(function(acc, el){
+    if (el.value === 10) acc += 1
+    return acc
+  },0)
 }
 
 //! call this test in console to test a larger hand

@@ -32,7 +32,7 @@ main.container{
   max-height: 600px;
   background-color: lightgrey;
   grid-template-rows: 1fr 2fr 2fr 1fr 1fr;
-  grid-template-columns: 15% auto;
+  grid-template-columns: 18% auto;
   grid-template-areas:
     "message message"
     "side upper"
@@ -59,6 +59,8 @@ section#message--section{
 section#play-deck--section{
   background-color: olivedrab;
   grid-area: side;
+  flex-direction:  column;
+  justify-content: center;
 }
 
 div#deck{
@@ -92,6 +94,11 @@ h2{
 h3{
   font-size: 1.25rem;
   margin: 0;
+}
+
+section#play-deck--section > p{
+  align-self: flex-end;
+  margin: 10px 10px 0 5px;
 }
 
 .table-text {
