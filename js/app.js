@@ -93,6 +93,7 @@ init()
 
 function init(){
   bankAmount = 2000
+  initDeck()
   initHand()
 }
 
