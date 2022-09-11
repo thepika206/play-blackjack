@@ -67,9 +67,10 @@ let standBtn = document.querySelector('#stand-btn')
 let playerHandDiv = document.querySelector('#player-hand')
 let dealerHandDiv = document.querySelector('#dealer-hand')
 let freePlayBtn = document.querySelector('#free-play-btn')
-let deckCount = document.querySelector('#deck-count')
-let tenCardCount = document.querySelector('#ten-card-count')
+let deckCountEl = document.querySelector('#deck-count')
+let tenCardCountEl = document.querySelector('#ten-card-count')
 let resetGameBtn = document.querySelector('#reset-game-btn')
+let bankAmountEl = document.querySelector('#bank-amount')
 // ----------------------------Event Listeners----------------------------------------
 drawBtn.addEventListener('click', function(){
   if (turn === 'player-turn'){handleClickHit(playerHand)}
@@ -243,8 +244,9 @@ function render() {
 }
 
 function renderStats() {
-  deckCount.textContent = deck.length
-  tenCardCount.textContent = getTenCardCount()
+  deckCountEl.textContent = deck.length
+  tenCardCountEl.textContent = getTenCardCount()
+  bankAmountEl.textContent = bankAmount
 }
 
 function renderMessage(){
