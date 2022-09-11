@@ -28,10 +28,12 @@ body {
 main.container{
   padding: 0;
   display: grid;
-  width: 80%;
-  /* height: 600px; */
+  width: 90%;
+  max-width: 900px;
+  height: 90vh;
+  max-height: 600px;
   background-color: lightgrey;
-  grid-template-rows: 2fr 2fr 2fr 1fr 1fr;
+  grid-template-rows: 1fr 2fr 2fr 1fr 1fr;
   grid-template-columns: 15% auto;
   grid-template-areas:
     /* "message message"
