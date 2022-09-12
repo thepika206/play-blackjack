@@ -67,10 +67,12 @@ let standBtn = document.querySelector('#stand-btn')
 let playerHandDiv = document.querySelector('#player-hand')
 let dealerHandDiv = document.querySelector('#dealer-hand')
 let freePlayBtn = document.querySelector('#free-play-btn')
+let minBetPlayBtn = document.querySelector('#min-bet-play-btn')
 let deckCountEl = document.querySelector('#deck-count')
 let tenCardCountEl = document.querySelector('#ten-card-count')
 let resetGameBtn = document.querySelector('#reset-game-btn')
 let bankAmountEl = document.querySelector('#bank-amount')
+let betAmountEl = document.querySelector('#bet-amount')
 // ----------------------------Event Listeners----------------------------------------
 drawBtn.addEventListener('click', function(){
   if (turn === 'player-turn'){handleClickHit(playerHand)}
@@ -83,7 +85,16 @@ standBtn.addEventListener('click', function(){
 freePlayBtn.addEventListener('click', function(){
   console.log('new free game')
   initHand()
-  initialDeal()
+  initialDeal(0)
+})
+minBetPlayBtn.addEventListener('click', function(){
+  if (bankAmount>=100){
+    console.log('min bet game')
+    initHand()
+    initialDeal(100)
+  } else {
+    initHand()
+  }
 })
 
 resetGameBtn.addEventListener('click', handleClickReset)
@@ -94,13 +105,12 @@ init()
 function init(){
   bankAmount = 2000
   initDeck()
-  initHand()
+  initHand(0)
 }
 
 
 function initHand (){
   console.log('initHand, deck length', deck.length)
-  betAmount = 0
   turn = null
   playerHand = []
   dealerHand = []
@@ -167,20 +177,22 @@ function initDeck (){
   console.log('initDeck, deck length now:', deck.length)
 }
 
-function initialDeal() {
-  console.log('initialDeal')
-  playerHand = []
-  dealerHand = []
-  winner = null
-  isNatural = null
+function initialDeal(bet) {
+  console.log('initialDeal, bet is', bet)
   turn = 'initial-deal'
+  betAmount = bet
+  bankAmount -= bet
   drawCard(playerHand, 'player')
   drawCard(playerHand, 'player')
   drawCard(dealerHand, 'dealer')
   drawCard(dealerHand, 'dealer')
   winner = getNaturalWinner()
-  isNatural = winner ? true : null
-  if (!winner) turn = 'player-turn'
+  if (winner) {
+    isNatural = true
+    turn = 'game-over' 
+  } else {
+    turn = 'player-turn'
+  }
   render()
 }
 
@@ -197,6 +209,7 @@ function dealerTurn(){
     winner = getClosest21()
     console.log(winner)
   }
+  turn = 'game-over'
   render()
 }
 
@@ -212,7 +225,7 @@ function handleClickHit(handArr) {
   let total = getHandValue(playerHand)
   if (total > 21){
     winner = 'dealer'
-    turn = 'dealer-turn'
+    turn = 'game-over'
   }
   render()
 }
@@ -248,26 +261,29 @@ function renderStats() {
   deckCountEl.textContent = deck.length
   tenCardCountEl.textContent = getTenCardCount()
   bankAmountEl.textContent = bankAmount
+  betAmountEl.textContent = betAmount
 }
 
 function renderMessage(){
   let message, headline
   let player = getHandValue(playerHand)
   //let dealer = getHandValue(dealerHand) //commented until needed in this function
-  if (winner) {
-    headline = winner === 'player' ? 'You Won' : 'Dealer Won'
-    headline = winner === 'T' ? 'Tie Game' : headline
-    message = getWinnerMessages()
-  } else if (turn === null){
+
+  if (turn === null){
     headline = 'Play Blackjack'
     message = 'To Start, select a Play option'
   } else if (turn === 'dealer-turn') {
     headline = 'Dealer Turn'
     message = `Your have: ${player} | Dealer hits on 16 or lower`
-  } else {
+  } else if (turn === 'player-turn') {
     headline = 'Your Turn'
     message = `You have: ${player} | Dealer Up Card: ${dealerHand[0].value}`  
+  } else if (turn === 'game-over') {
+    headline = winner === 'player' ? 'You Won' : 'Dealer Won'
+    headline = winner === 'T' ? 'Tie Game' : headline
+    message = getWinnerMessages()
   }
+
   messageEl.textContent = message  
   headlineEl.textContent = headline
 }
@@ -361,6 +377,16 @@ function getTenCardCount(){
     if (el.value === 10) acc += 1
     return acc
   },0)
+}
+
+function payWinnings(){
+  if (isNatural) {
+    playerBank += betAmount * 2.5 
+  } else {
+    playerBank += betAmount * 2
+  }
+  betAmount = 0
+  render()
 }
 
 //! call this test in console to test a larger hand
