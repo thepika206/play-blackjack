@@ -3,8 +3,19 @@
 # Blackjack
 - By Patrick Cheung 2022
 - Deployed with Netlify  https://thepika206-play-blackjack.netlify.app/
-- based on the classic card game.  The player whose total is the closest to 21 without going over is the winner.
-- split and double down not part of MVP
+  
+## Game Summary
+- A game for one player based on the classic card game of 21
+- The object for the player to be closer to 21 without going over than the dealer (controlled by the CPU)
+- Includes Ace logic for 1 or 11
+- Includes deck stats for counting 10 cards
+- Includes betting mechanism
+
+### Not in scope
+- split hand
+- double down
+- variable bet
+- insurance
 
 ## Background
 - Individual Project created during General Assembly bootcamp to create web games.  Other choices included connect four, battleship, digital pet, choose your own adventure, snake, tetris, war and others... 
@@ -14,8 +25,7 @@
 ## Planning
 - planning this build was done in Whimsical.com  
   - https://whimsical.com/blackjack-planning-HpVFNvKGdZD6gHu6N8P7yz
-- fixed bet sizes to big and small to streamline play
-- counting cards stats
+
 
 
 ## Technologies
