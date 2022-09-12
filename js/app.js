@@ -260,7 +260,7 @@ function renderMessage(){
     message = getWinnerMessages()
   } else if (turn === null){
     headline = 'Play Blackjack'
-    message = 'Choose a game option below to start'
+    message = 'To Start, select a Play option'
   } else if (turn === 'dealer-turn') {
     headline = 'Dealer Turn'
     message = `Your have: ${player} | Dealer hits on 16 or lower`
