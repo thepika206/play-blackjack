@@ -73,6 +73,7 @@ let tenCardCountEl = document.querySelector('#ten-card-count')
 let resetGameBtn = document.querySelector('#reset-game-btn')
 let bankAmountEl = document.querySelector('#bank-amount')
 let betAmountEl = document.querySelector('#bet-amount')
+let playerTotalEl = document.querySelector('#player-text')
 // ----------------------------Event Listeners----------------------------------------
 drawBtn.addEventListener('click', function(){
   if (turn === 'player-turn'){handleClickHit(playerHand)}
@@ -245,7 +246,7 @@ function renderMessage(){
 
   messageEl.textContent = message  
   headlineEl.textContent = headline
-  
+  playerTotalEl.textContent = `Player Hand: ${getHandValue(playerHand)}`
   headlineEl.removeAttribute('class')
   headlineEl.classList.add(`${winner}`)
 }
