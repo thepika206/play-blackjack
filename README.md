@@ -6,10 +6,11 @@
   
 ## Game Summary
 - A game for one player based on the classic card game of 21
-- The object for the player to be closer to 21 without going over than the dealer (controlled by the CPU)
+- The object is to be closer to 21 than the dealer (controlled by the CPU) without going over
 - Includes Ace logic for 1 or 11
 - Includes deck stats for counting 10 cards
 - Includes betting mechanism
+- Includes a bonus payout for drawing natural 21
 
 ### Not in scope
 - split hand
@@ -18,15 +19,10 @@
 - insurance
 
 ## Background
-- Individual Project created during General Assembly bootcamp to create web games.  Other choices included connect four, battleship, digital pet, choose your own adventure, snake, tetris, war and others... 
-- I chose Blackjack as my game project because I've always enjoyed playing it in other video games, and it can be played with a little or a lot of free time.   I hoped to get creative with the game bonuses to make it more fun regardless of the player skill.
-
-
-## Planning
+- This is an Individual Project created during General Assembly bootcamp. 
+- I chose Blackjack as my game project because I've always enjoyed playing it as a minigame within other video games such as Red Dead Redemption. It can be played with a little or a lot of free time.   
 - planning this build was done in Whimsical.com  
   - https://whimsical.com/blackjack-planning-HpVFNvKGdZD6gHu6N8P7yz
-
-
 
 ## Technologies
 - JavaScript
