@@ -116,7 +116,6 @@ function init(){
   initHand(0)
 }
 
-
 function initHand (){
   turn = null
   playerHand = []
@@ -132,21 +131,10 @@ function initDeck (){
   deck = JSON.parse(JSON.stringify(standardDeck)) //? need a deep copy of the standard deck, standard deck should not change ever.
 }
 
-function initialDeal() {
-  turn = 'initial-deal'
-  drawCard(playerHand, 'player')
-  drawCard(playerHand, 'player')
-  drawCard(dealerHand, 'dealer')
-  drawCard(dealerHand, 'dealer')
-  winner = getNaturalWinner() 
-  if (winner) {
-    isNatural = true
-    turn = 'game-over' 
-    bankAmount += getPayout()  
-  } else {
-    turn = 'player-turn'
-  }
-  render()
+//* click handling functions =================================//
+
+function handleClickReset(){
+  init()
 }
 
 function handleClickAnyPlay(bet){
@@ -155,26 +143,6 @@ function handleClickAnyPlay(bet){
   bankAmount -= bet
   render()
   setTimeout(()=>{initialDeal(bet)},1000)  //give user a change to see a loading message
-}
-
-function dealerTurn(){
-  if (turn !== 'dealer-turn') return
-  while (getHandValue(dealerHand) < 17){
-    drawCard(dealerHand)
-    render()
-  }
-  if (getHandValue(dealerHand)>21) {
-    winner = 'player' 
-  } else {   
-    winner = getClosest21()
-  }
-  turn = 'game-over'
-  bankAmount += getPayout()
-  render()
-}
-
-function handleClickReset(){
-  init()
 }
 
 function handleClickHit(handArr) {
@@ -195,6 +163,7 @@ function handleClickStand(){
   }, 1500)
 }
 
+//* main game flow functions =================================//
 //this function is used dealing cards to the player and dealer
 function drawCard(handArr) {
   if (deck.length > 0) {
@@ -203,7 +172,41 @@ function drawCard(handArr) {
     handArr.push(cardPicked)
   }
 }
+function initialDeal() {
+  turn = 'initial-deal'
+  drawCard(playerHand, 'player')
+  drawCard(playerHand, 'player')
+  drawCard(dealerHand, 'dealer')
+  drawCard(dealerHand, 'dealer')
+  winner = getNaturalWinner() 
+  if (winner) {
+    isNatural = true
+    turn = 'game-over' 
+    bankAmount += getPayout()  
+  } else {
+    turn = 'player-turn'
+  }
+  render()
+}
 
+
+function dealerTurn(){
+  if (turn !== 'dealer-turn') return
+  while (getHandValue(dealerHand) < 17){
+    drawCard(dealerHand)
+    render()
+  }
+  if (getHandValue(dealerHand)>21) {
+    winner = 'player' 
+  } else {   
+    winner = getClosest21()
+  }
+  turn = 'game-over'
+  bankAmount += getPayout()
+  render()
+}
+
+//* rendering functions =================================//
 function render() {
   renderMessage()
   renderDealerHand()
@@ -225,7 +228,7 @@ function renderStartPlayButtons(){
   }
 }
 
-function renderInGameButtons(){//! new function under construction
+function renderInGameButtons(){
   if (turn === 'player-turn'){
     standBtn.classList.remove('hidden')
     drawBtn.classList.remove('hidden')
@@ -275,19 +278,6 @@ function renderMessage(){
   headlineEl.classList.add(`${winner}`)
 }
 
-function getWinnerMessages(){
-  let player = getHandValue(playerHand)
-  let dealer = getHandValue(dealerHand)
-  if (player > 21 ) return `You busted with ${player}`
-  if (dealer > 21 ) return `Dealer busted with ${dealer}`
-  // if (isNatural && winner) return `Natural Blackjack`
-  if (isNatural && winner === 'player') return `You drew a Blackjack - Double Payout!!`
-  if (isNatural && winner === 'dealer') return `Dealer drew a Blackjack`
-  if (isNatural && winner === 'T') return 'You and the Dealer drew a Blackjack'
-  if (winner === 'player') return `Your ${player} beat Dealer's ${dealer}`
-  if (winner === 'dealer') return `Your ${player} lost to Dealer's ${dealer}`
-  if (winner === 'T') return `Your ${player} equals Dealer's ${dealer}`
-}
 function renderDealerHand(){
   dealerHandDiv.innerHTML = ''
   if (turn === 'player-turn'){
@@ -319,8 +309,7 @@ function renderPlayerHand(){
   }
 }
 
-
-
+//* utility functions =================================//
 
 /* hand containing any Aces with a basic value of less than 12 should count an extra 10 to the total.  Otherwise only use the basic value */  
 function getHandValue(handArr){
@@ -382,18 +371,31 @@ function getPayout(){
   } else {
     payout = 0
   }
-  // console.log(payout, 'payout') //!leave this commented for troubleshooting payout issues
+  // console.log(payout, 'payout') //?leave this commented for troubleshooting payout issues
   return payout
 }
 
+function getWinnerMessages(){
+  let player = getHandValue(playerHand)
+  let dealer = getHandValue(dealerHand)
+  if (player > 21 ) return `You busted with ${player}`
+  if (dealer > 21 ) return `Dealer busted with ${dealer}`
+  // if (isNatural && winner) return `Natural Blackjack`
+  if (isNatural && winner === 'player') return `You drew a Blackjack - Double Payout!!`
+  if (isNatural && winner === 'dealer') return `Dealer drew a Blackjack`
+  if (isNatural && winner === 'T') return 'You and the Dealer drew a Blackjack'
+  if (winner === 'player') return `Your ${player} beat Dealer's ${dealer}`
+  if (winner === 'dealer') return `Your ${player} lost to Dealer's ${dealer}`
+  if (winner === 'T') return `Your ${player} equals Dealer's ${dealer}`
+}
 
 //? test function
 // function testFillPlayerHand(){
-// initialDeal()
-// playerHand = [
-//     {id:'d06', value:6},
-//     {id:'d05', value:5},
-//     {id:'d04', value:4},
+  // initialDeal()
+  // playerHand = [
+    //     {id:'d06', value:6},
+    //     {id:'d05', value:5},
+    //     {id:'d04', value:4},
 //     {id:'d03', value:3},
 //     {id:'d02', value:2},
 //     {id:'hA', value:1},

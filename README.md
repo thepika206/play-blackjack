@@ -1,3 +1,5 @@
+![Alt text](./game-image-1.png?raw=true "description")
+
 # Blackjack
 - By Patrick Cheung 2022
 - Deployed with Netlify  https://thepika206-play-blackjack.netlify.app/
@@ -27,3 +29,4 @@
 ## Credits
 - Credit to Ben Manley for card design images and cardstarter.css.   github @ManliestBen
 - Favicon created with favicon.io
+
