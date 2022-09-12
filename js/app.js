@@ -55,10 +55,12 @@ const standardDeck = [
   {id:'s03', value:3},
   {id:'s02', value:2},
 ]
+const minBet = 100
+const maxBet = 500
 // ----------------------------Variables (state)--------------------------------------
 
 
-let deck, playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount
+let deck, playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount, payout
 // ----------------------------Cached Element references------------------------------
 let headlineEl = document.querySelector('#headline-message')
 let messageEl = document.querySelector('#game-message')
@@ -68,6 +70,7 @@ let playerHandDiv = document.querySelector('#player-hand')
 let dealerHandDiv = document.querySelector('#dealer-hand')
 let freePlayBtn = document.querySelector('#free-play-btn')
 let minBetPlayBtn = document.querySelector('#min-bet-play-btn')
+let maxBetPlayBtn = document.querySelector('#max-bet-play-btn')
 let deckCountEl = document.querySelector('#deck-count')
 let tenCardCountEl = document.querySelector('#ten-card-count')
 let resetGameBtn = document.querySelector('#reset-game-btn')
@@ -90,9 +93,15 @@ freePlayBtn.addEventListener('click', function(){
   } 
 })
 minBetPlayBtn.addEventListener('click', function(){
-  if (bankAmount>=100 && (turn === null || turn === 'game-over')){
+  if (bankAmount>=minBet && (turn === null || turn === 'game-over')){
     initHand()
-    handleClickAnyPlay(100)
+    handleClickAnyPlay(minBet)
+  } 
+})
+maxBetPlayBtn.addEventListener('click', function(){
+  if (bankAmount>=maxBet && (turn === null || turn === 'game-over')){
+    initHand()
+    handleClickAnyPlay(maxBet)
   } 
 })
 
@@ -109,23 +118,21 @@ function init(){
 
 
 function initHand (){
-  console.log('initHand, deck length', deck.length)
   turn = null
   playerHand = []
   dealerHand = []
   winner = null
   isNatural = null
   betAmount = 0
+  payout = 0
   if (deck.length < 25) initDeck()
   render()
 }
 function initDeck (){
   deck = JSON.parse(JSON.stringify(standardDeck)) //? need a deep copy of the standard deck, standard deck should not change ever.
-  console.log('initDeck, deck length now:', deck.length)
 }
 
-function initialDeal(bet) {
-  console.log('initialDeal, bet is', bet)
+function initialDeal() {
   turn = 'initial-deal'
   drawCard(playerHand, 'player')
   drawCard(playerHand, 'player')
@@ -151,7 +158,6 @@ function handleClickAnyPlay(bet){
 }
 
 function dealerTurn(){
-  console.log('dealerTurn')
   if (turn !== 'dealer-turn') return
   while (getHandValue(dealerHand) < 17){
     drawCard(dealerHand)
@@ -161,7 +167,6 @@ function dealerTurn(){
     winner = 'player' 
   } else {   
     winner = getClosest21()
-    console.log(winner)
   }
   turn = 'game-over'
   bankAmount += getPayout()
@@ -169,14 +174,11 @@ function dealerTurn(){
 }
 
 function handleClickReset(){
-  console.log('reset game')
   init()
 }
 
 function handleClickHit(handArr) {
-  console.log('handleClickHit')
   drawCard(handArr)
-  console.log('hit', playerHand[playerHand.length-1])
   let total = getHandValue(playerHand)
   if (total > 21){
     winner = 'dealer' 
@@ -186,13 +188,11 @@ function handleClickHit(handArr) {
 }
 
 function handleClickStand(){
-  console.log('handleClickStand')
   turn = 'dealer-turn'
   render()
   setTimeout(() => {
-    console.log("Delayed for 1 second.");
     dealerTurn()
-  }, 2000)
+  }, 1500)
 }
 
 //this function is used dealing cards to the player and dealer
@@ -202,7 +202,6 @@ function drawCard(handArr) {
     let cardPicked = deck.splice(randIdx, 1)[0]
     handArr.push(cardPicked)
   }
-  // return cardPicked
 }
 
 function render() {
@@ -222,11 +221,15 @@ function renderStats() {
 function renderMessage(){
   let message, headline
   let player = getHandValue(playerHand)
-  //let dealer = getHandValue(dealerHand) //commented until needed in this function
-
   if (turn === null){
     headline = 'Play Blackjack'
-    message = bankAmount <=0 ? 'Oops! No Money - select Free Play' : 'To Start, select a Play option'
+    if (bankAmount >= maxBet){
+      message = 'To Start, select a Play option'
+    } else if (bankAmount >= minBet) {
+      message = 'Select Bet 100 Play or Free Play'
+    } else {
+      message = 'Select Free Play only'
+    }
   } else if (turn === 'setup'){
     headline = 'New Game Starting'
     message = 'please wait'
@@ -237,11 +240,10 @@ function renderMessage(){
     headline = 'Your Turn'
     message = `You have: ${player} | Dealer Up Card: ${dealerHand[0].value}`  
   } else if (turn === 'game-over') {
-    headline = winner === 'player' ? 'You Won' : 'Dealer Won'
-    headline = winner === 'T' ? 'Tie Game' : headline
+    headline = winner === 'player' ? `You Won!! Bet was ${betAmount}` : 'Dealer Won'
+    headline = winner === 'T' ? 'Tie Game - bet returned' : headline
     message = getWinnerMessages()
   }
-
   messageEl.textContent = message  
   headlineEl.textContent = headline
   playerTotalEl.textContent = `Player Hand: ${getHandValue(playerHand)}`
@@ -347,7 +349,6 @@ function getTenCardCount(){
 }
 
 function getPayout(){
-  let payout = 0
   if (winner === 'T') {
     payout = betAmount
   } else if (winner === 'player' && isNatural) {
@@ -357,21 +358,22 @@ function getPayout(){
   } else {
     payout = 0
   }
-  console.log(payout, 'payout')
+  // console.log(payout, 'payout') //!leave this commented for troubleshooting payout issues
   return payout
 }
 
 
-function testFillPlayerHand(){
-initialDeal()
-playerHand = [
-    {id:'d06', value:6},
-    {id:'d05', value:5},
-    {id:'d04', value:4},
-    {id:'d03', value:3},
-    {id:'d02', value:2},
-    {id:'hA', value:1},
-  ]
-render()
-console.log('end of testFillPlayerHand')
-}    
+//? test function
+// function testFillPlayerHand(){
+// initialDeal()
+// playerHand = [
+//     {id:'d06', value:6},
+//     {id:'d05', value:5},
+//     {id:'d04', value:4},
+//     {id:'d03', value:3},
+//     {id:'d02', value:2},
+//     {id:'hA', value:1},
+//   ]
+// render()
+// console.log('end of testFillPlayerHand')
+// }    
