@@ -127,8 +127,6 @@ function initDeck (){
 function initialDeal(bet) {
   console.log('initialDeal, bet is', bet)
   turn = 'initial-deal'
-  // betAmount = bet
-  // bankAmount -= bet
   drawCard(playerHand, 'player')
   drawCard(playerHand, 'player')
   drawCard(dealerHand, 'dealer')
@@ -137,7 +135,7 @@ function initialDeal(bet) {
   if (winner) {
     isNatural = true
     turn = 'game-over' 
-    bankAmount += getPayout()  //!pay player if win
+    bankAmount += getPayout()  
   } else {
     turn = 'player-turn'
   }
@@ -166,7 +164,7 @@ function dealerTurn(){
     console.log(winner)
   }
   turn = 'game-over'
-  bankAmount += getPayout()  //! pay player if win
+  bankAmount += getPayout()
   render()
 }
 
@@ -348,7 +346,6 @@ function getTenCardCount(){
   },0)
 }
 
-//! not done here
 function getPayout(){
   let payout = 0
   if (winner === 'T') {
