@@ -88,13 +88,11 @@ freePlayBtn.addEventListener('click', function(){
   initialDeal(0)
 })
 minBetPlayBtn.addEventListener('click', function(){
+  initHand()
   if (bankAmount>=100){
     console.log('min bet game')
-    initHand()
     initialDeal(100)
-  } else {
-    initHand()
-  }
+  } 
 })
 
 resetGameBtn.addEventListener('click', handleClickReset)
@@ -220,7 +218,7 @@ function renderMessage(){
 
   if (turn === null){
     headline = 'Play Blackjack'
-    message = 'To Start, select a Play option'
+    message = bankAmount <=0 ? 'Oops! No Money - select Free Play' : 'To Start, select a Play option'
   } else if (turn === 'dealer-turn') {
     headline = 'Dealer Turn'
     message = `Your have: ${player} | Dealer hits on 16 or lower`
