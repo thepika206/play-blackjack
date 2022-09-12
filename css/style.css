@@ -20,7 +20,7 @@ body {
   min-height: 100vh;
   justify-content: center;
   align-items: center;
-  background-color: royalblue;
+  background-color: black;
 }
 
 main.container{
@@ -31,22 +31,24 @@ main.container{
   height: 90vh;
   max-height: 600px;
   background-color: lightgrey;
-  grid-template-rows: 1fr 2fr 2fr 1fr 1fr;
+  grid-template-rows: 1fr 2fr .5fr 2fr 1fr 1fr;
   grid-template-columns: 18% auto;
   grid-template-areas:
     "message message"
     "side upper"
+    "side rules"
     "side lower"
     "card-btn card-btn"
     "bet-btn bet-btn";
 }
 section{
-  border: 1px dashed red;
+  /* border: 1px dashed red; */
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
   padding: 5px 0;
+  background-color: olivedrab;
 
 }
 section#message--section{
@@ -57,7 +59,7 @@ section#message--section{
 }
 
 section#play-deck--section{
-  background-color: olivedrab;
+  /* background-color: olivedrab; */
   grid-area: side;
   flex-direction:  column;
   justify-content: space-evenly;
@@ -69,17 +71,21 @@ div#deck{
 
 section#play-upper--section{
   grid-area: upper;
-  background-color: olivedrab;
   flex-direction: column;
 }
+
+section#table-rules--section{
+  grid-area: rules;
+  flex-direction: column;
+}
+
 section#play-lower--section{
   grid-area: lower;
-  background-color: olivedrab;
   flex-direction: column;
 }
 
 section#card-btns--section{
-  background-color: darkgreen;
+  background-color: #555;
   grid-area: card-btn;
 }
 section#bet-btns--section{
@@ -101,9 +107,27 @@ section#play-deck--section > p{
   margin: 3px;
 }
 
-.table-text {
+#rule-container{
+  border: 1px solid white;
+  width: 90%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#blackjack-rule-text{
   color: yellow;
 }
+#other-rule-text {
+  color: whitesmoke;
+  margin-bottom: 0;
+}
+
+.table-text {
+  color: whitesmoke;
+}
+
 
 .card-container {
   display: flex;
