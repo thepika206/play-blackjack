@@ -21,6 +21,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: black;
+  color: white;
 }
 
 main.container{
@@ -66,10 +67,7 @@ section{
   grid-area: message;
   flex-direction: column;
   padding: 20px;
-}
-
-#message--section{
-
+  color: #444 ;
 }
 
 #play-deck--section{
@@ -104,10 +102,9 @@ div#deck{
 }
 
 #bet-btns--section{
-  background-color: lightgray;
+  background-color: #555;
   grid-area: bet-btn;
 }
-
 
 #play-deck--section p{
   align-self: flex-end;
@@ -124,9 +121,25 @@ div#deck{
   align-items: center;
   justify-content: center;
 }
+
+
+#headline-message {
+  color: #555;
+  transition: color 2s;
+}
+
+#headline-message.player {
+  color: green
+}
+
+#headline-message.dealer {
+  color: red
+}
+
 #blackjack-rule-text{
   color: yellow;
 }
+
 #other-rule-text {
   color: whitesmoke;
   margin-bottom: 0;
@@ -155,5 +168,4 @@ div#deck{
 .card.shadow {
   box-shadow: 7px 7px 7px 0 rgba(41, 41, 41, 0.95) !important;
 }
-
 

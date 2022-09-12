@@ -235,6 +235,9 @@ function renderMessage(){
 
   messageEl.textContent = message  
   headlineEl.textContent = headline
+  
+  headlineEl.removeAttribute('class')
+  headlineEl.classList.add(`${winner}`)
 }
 
 function getWinnerMessages(){
