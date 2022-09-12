@@ -16,3 +16,6 @@
 - Bootstrap
 - Git and GitHub
 - Netlify
+
+## Credits
+- Credit to Ben Manley for card design images and cardstarter.css.   github @ManliestBen
