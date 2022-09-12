@@ -154,7 +154,7 @@ function handleClickAnyPlay(bet){
   betAmount = bet
   bankAmount -= bet
   render()
-  setTimeout(()=>{initialDeal(bet)},2000)  //give user a change to see a loading message
+  setTimeout(()=>{initialDeal(bet)},1000)  //give user a change to see a loading message
 }
 
 function dealerTurn(){
@@ -209,6 +209,30 @@ function render() {
   renderDealerHand()
   renderPlayerHand()
   renderStats()
+  renderInGameButtons()
+  renderStartPlayButtons()
+}
+
+function renderStartPlayButtons(){
+  if (turn === null || turn === 'game-over') {
+    freePlayBtn.classList.remove('hidden')
+    minBetPlayBtn.classList.remove('hidden')
+    maxBetPlayBtn.classList.remove('hidden')
+  } else {
+    freePlayBtn.classList.add('hidden')
+    minBetPlayBtn.classList.add('hidden')
+    maxBetPlayBtn.classList.add('hidden')
+  }
+}
+
+function renderInGameButtons(){//! new function under construction
+  if (turn === 'player-turn'){
+    standBtn.classList.remove('hidden')
+    drawBtn.classList.remove('hidden')
+  } else {
+    standBtn.classList.add('hidden')
+    drawBtn.classList.add('hidden')
+  }
 }
 
 function renderStats() {

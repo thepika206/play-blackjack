@@ -157,6 +157,10 @@ div#deck{
   color: whitesmoke;
 }
 
+.hidden {
+  opacity: .30;
+  transition:all .5s
+}
 
 .card-container {
   display: flex;
