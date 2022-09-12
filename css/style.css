@@ -24,6 +24,12 @@ body {
   color: white;
 }
 
+footer {
+  background-color: black;
+  grid-area: footer;
+  padding-left: 10px;
+}
+
 main.container{
   padding: 0;
   display: grid;
@@ -32,7 +38,7 @@ main.container{
   height: 90vh;
   max-height: 600px;
   background-color: lightgrey;
-  grid-template-rows: 20% 1fr 2fr .5fr 2fr 1fr;
+  grid-template-rows: 20% 1fr 2fr .5fr 2fr 1fr .25fr;
   grid-template-columns: 18% auto;
   grid-template-areas:
   "message message"
@@ -40,7 +46,8 @@ main.container{
   "side upper"
   "side rules"
   "side lower"
-  "card-btn card-btn";
+  "card-btn card-btn"
+  "footer footer";
 }
 
 h2{
