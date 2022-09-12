@@ -31,15 +31,15 @@ main.container{
   height: 90vh;
   max-height: 600px;
   background-color: lightgrey;
-  grid-template-rows: 1fr 2fr .5fr 2fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 2fr .5fr 2fr 1fr;
   grid-template-columns: 18% auto;
   grid-template-areas:
   "message message"
+  "bet-btn bet-btn"
   "side upper"
   "side rules"
   "side lower"
-  "card-btn card-btn"
-  "bet-btn bet-btn";
+  "card-btn card-btn";
 }
 
 h2{
