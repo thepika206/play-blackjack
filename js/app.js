@@ -2,7 +2,7 @@
 // ----------------------------Constants----------------------------------------------
 
 // ----------------------------Variables (state)--------------------------------------
-//? need to initial deck back to this for each game
+
 let deck = [
   {id:'dA', value:1},
   {id:'dK', value:10},
@@ -186,10 +186,11 @@ function initialDeal(bet) {
   drawCard(playerHand, 'player')
   drawCard(dealerHand, 'dealer')
   drawCard(dealerHand, 'dealer')
-  winner = getNaturalWinner()
+  winner = getNaturalWinner() 
   if (winner) {
     isNatural = true
     turn = 'game-over' 
+    bankAmount += getPayout()  //!pay player if win
   } else {
     turn = 'player-turn'
   }
@@ -204,12 +205,13 @@ function dealerTurn(){
     render()
   }
   if (getHandValue(dealerHand)>21) {
-    winner = 'player' //dealer bust
+    winner = 'player' 
   } else {   
     winner = getClosest21()
     console.log(winner)
   }
   turn = 'game-over'
+  bankAmount += getPayout()  //! pay player if win
   render()
 }
 
@@ -224,8 +226,8 @@ function handleClickHit(handArr) {
   console.log('hit', playerHand[playerHand.length-1])
   let total = getHandValue(playerHand)
   if (total > 21){
-    winner = 'dealer'
-    turn = 'game-over'
+    winner = 'dealer' 
+    turn = 'game-over'  
   }
   render()
 }
@@ -294,7 +296,7 @@ function getWinnerMessages(){
   if (player > 21 ) return `You busted with ${player}`
   if (dealer > 21 ) return `Dealer busted with ${dealer}`
   // if (isNatural && winner) return `Natural Blackjack`
-  if (isNatural && winner === 'player') return `You drew a Blackjack - Bonus Payout!!`
+  if (isNatural && winner === 'player') return `You drew a Blackjack - Double Payout!!`
   if (isNatural && winner === 'dealer') return `Dealer drew a Blackjack`
   if (isNatural && winner === 'T') return 'You and the Dealer drew a Blackjack'
   if (winner === 'player') return `Your ${player} beat Dealer's ${dealer}`
@@ -349,11 +351,17 @@ function getHandValue(handArr){
 
 
 function getClosest21(){
+  let closest
   let player = getHandValue(playerHand)
   let dealer = getHandValue(dealerHand)
-  if (player > dealer) return 'player'
-  if (player < dealer) return 'dealer'
-  return 'T'
+  if (player > dealer){
+    closest = 'player'
+  } else if (player < dealer) {
+    closest = 'dealer'
+  } else {
+    closest = 'T'
+  }
+  return closest
 }
 
 function getNaturalWinner(){
@@ -379,17 +387,23 @@ function getTenCardCount(){
   },0)
 }
 
-function payWinnings(){
-  if (isNatural) {
-    playerBank += betAmount * 2.5 
+//! not done here
+function getPayout(){
+  let payout = 0
+  if (winner === 'T') {
+    payout = betAmount
+  } else if (winner === 'player' && isNatural) {
+    payout = betAmount * 3
+  } else if (winner === 'player') {
+    payout = betAmount * 2
   } else {
-    playerBank += betAmount * 2
+    payout = 0
   }
-  betAmount = 0
-  render()
+  console.log(payout, 'payout')
+  return payout
 }
 
-//! call this test in console to test a larger hand
+
 function testFillPlayerHand(){
 initialDeal()
 playerHand = [
