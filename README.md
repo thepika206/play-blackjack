@@ -2,8 +2,8 @@
 - By Patrick Cheung 2022
 
 ## Background
-- This is the Unit 1 project for General Assembly to demonstrate proficiency with combining HTML, CSS and Javascript to create a simple web game.
-- I chose to build Blackjack because it is a game that most every is familiar with, and although the rules seem simple at first glance, there were many details of game logic that made this enjoyable to model in code.  Soft and Hard values concerning Aces, Shuffling cards, Double Down.
+- This is the Unit 1 project for General Assembly where we were tasked to individually create a web game.  Other choices included connect four, battleship, digital pet, choose your own adventure, snake, tetris, war and others... 
+- I chose Blackjack as my game project because I've always enjoyed playing it in other video games, and it can be played with a little or a lot of free time.   I hoped to get creative with the game bonuses to make it more fun regardless of the player skill.
 
 ## Planning
 - planning this build was done in Whimsical.com  
