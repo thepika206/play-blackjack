@@ -7,7 +7,7 @@ html {
 *::before, /* All ::before pseudo-elements */
 *::after { /* All ::after pseudo-elements */
   /* height & width will now include border & padding by default
-     but can be over-ridden as needed */
+  but can be over-ridden as needed */
   box-sizing: inherit;
 }
 
@@ -34,63 +34,12 @@ main.container{
   grid-template-rows: 1fr 2fr .5fr 2fr 1fr 1fr;
   grid-template-columns: 18% auto;
   grid-template-areas:
-    "message message"
-    "side upper"
-    "side rules"
-    "side lower"
-    "card-btn card-btn"
-    "bet-btn bet-btn";
-}
-section{
-  /* border: 1px dashed red; */
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 5px 0;
-  background-color: olivedrab;
-
-}
-section#message--section{
-  background-color: white;
-  grid-area: message;
-  flex-direction: column;
-  padding: 20px;
-}
-
-section#play-deck--section{
-  /* background-color: olivedrab; */
-  grid-area: side;
-  flex-direction:  column;
-  justify-content: space-evenly;
-}
-
-div#deck{
-  margin:0
-}
-
-section#play-upper--section{
-  grid-area: upper;
-  flex-direction: column;
-}
-
-section#table-rules--section{
-  grid-area: rules;
-  flex-direction: column;
-}
-
-section#play-lower--section{
-  grid-area: lower;
-  flex-direction: column;
-}
-
-section#card-btns--section{
-  background-color: #555;
-  grid-area: card-btn;
-}
-section#bet-btns--section{
-  background-color: lightgray;
-  grid-area: bet-btn;
+  "message message"
+  "side upper"
+  "side rules"
+  "side lower"
+  "card-btn card-btn"
+  "bet-btn bet-btn";
 }
 
 h2{
@@ -102,8 +51,67 @@ h3{
   margin: 0;
 }
 
-section#play-deck--section > p{
+section{
+  /* border: 1px dashed red; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 5px 0;
+  background-color: olivedrab;
+
+}
+#message--section{
+  background-color: white;
+  grid-area: message;
+  flex-direction: column;
+  padding: 20px;
+}
+
+#message--section{
+
+}
+
+#play-deck--section{
+  /* background-color: olivedrab; */
+  grid-area: side;
+  flex-direction:  column;
+  justify-content: space-evenly;
+}
+
+div#deck{
+  margin:0
+}
+
+#play-upper--section{
+  grid-area: upper;
+  flex-direction: column;
+}
+
+#table-rules--section{
+  grid-area: rules;
+  flex-direction: column;
+}
+
+#play-lower--section{
+  grid-area: lower;
+  flex-direction: column;
+}
+
+#card-btns--section{
+  background-color: #555;
+  grid-area: card-btn;
+}
+
+#bet-btns--section{
+  background-color: lightgray;
+  grid-area: bet-btn;
+}
+
+
+#play-deck--section p{
   align-self: flex-end;
+  color: white;
   margin: 3px;
 }
 
@@ -124,7 +132,7 @@ section#play-deck--section > p{
   margin-bottom: 0;
 }
 
-.table-text {
+#player-text {
   color: whitesmoke;
 }
 
