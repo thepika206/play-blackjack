@@ -83,15 +83,15 @@ standBtn.addEventListener('click', function(){
 })
 
 freePlayBtn.addEventListener('click', function(){
-  console.log('new free game')
-  initHand()
-  initialDeal(0)
+  if (bankAmount>=0 && (turn === null || turn === 'game-over')){
+    initHand()
+    handleClickAnyPlay(0)
+  } 
 })
 minBetPlayBtn.addEventListener('click', function(){
-  initHand()
-  if (bankAmount>=100){
-    console.log('min bet game')
-    initialDeal(100)
+  if (bankAmount>=100 && (turn === null || turn === 'game-over')){
+    initHand()
+    handleClickAnyPlay(100)
   } 
 })
 
@@ -114,6 +114,7 @@ function initHand (){
   dealerHand = []
   winner = null
   isNatural = null
+  betAmount = 0
   if (deck.length < 25) initDeck()
   render()
 }
@@ -125,8 +126,8 @@ function initDeck (){
 function initialDeal(bet) {
   console.log('initialDeal, bet is', bet)
   turn = 'initial-deal'
-  betAmount = bet
-  bankAmount -= bet
+  // betAmount = bet
+  // bankAmount -= bet
   drawCard(playerHand, 'player')
   drawCard(playerHand, 'player')
   drawCard(dealerHand, 'dealer')
@@ -140,6 +141,14 @@ function initialDeal(bet) {
     turn = 'player-turn'
   }
   render()
+}
+
+function handleClickAnyPlay(bet){
+  turn = 'setup'
+  betAmount = bet
+  bankAmount -= bet
+  render()
+  setTimeout(()=>{initialDeal(bet)},2000)  //give user a change to see a loading message
 }
 
 function dealerTurn(){
@@ -219,6 +228,9 @@ function renderMessage(){
   if (turn === null){
     headline = 'Play Blackjack'
     message = bankAmount <=0 ? 'Oops! No Money - select Free Play' : 'To Start, select a Play option'
+  } else if (turn === 'setup'){
+    headline = 'New Game Starting'
+    message = 'please wait'
   } else if (turn === 'dealer-turn') {
     headline = 'Dealer Turn'
     message = `Your have: ${player} | Dealer hits on 16 or lower`
