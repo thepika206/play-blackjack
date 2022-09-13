@@ -279,18 +279,9 @@ function renderStartPlayButtons(){
 }
 
 function renderInGameButtons(){
-  if (turn === 'player-turn'){
-    standBtn.classList.remove('hidden')
-    drawBtn.classList.remove('hidden')
-  } else {
-    standBtn.classList.add('hidden')
-    drawBtn.classList.add('hidden')
-  }
-  if (specialHitAllowed()) {
-    specialHitBtn.classList.remove('hidden')
-  } else {
-    specialHitBtn.classList.add('hidden')
-  }  
+  turn === 'player-turn' ? standBtn.classList.remove('hidden') : standBtn.classList.add('hidden')
+  turn === 'player-turn' ? drawBtn.classList.remove('hidden') : drawBtn.classList.add('hidden')
+  specialHitAllowed() ? specialHitBtn.classList.remove('hidden') : specialHitBtn.classList.add('hidden')
 }
 
 function renderStats() {
