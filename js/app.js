@@ -109,8 +109,6 @@ maxBetPlayBtn.addEventListener('click', function(){
 })
 
 resetGameBtn.addEventListener('click', function(){
-  sfxDeal.volume = .20
-  sfxDeal.play()
   handleClickReset()
 })
 
@@ -172,7 +170,7 @@ function handleClickStand(){
 //this function is used dealing cards to the player and dealer
 function drawCard(handArr) {
   if (deck.length > 0) {
-    sfxDeal.volume = .20
+    sfxDeal.volume = .50
     sfxDeal.play()
     let randIdx = Math.floor(Math.random() * deck.length)
     let cardPicked = deck.splice(randIdx, 1)[0]
