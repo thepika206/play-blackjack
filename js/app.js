@@ -286,11 +286,7 @@ function renderInGameButtons(){
 
 function renderStats() {
   deckCountEl.textContent = deck.length
-  if (deck.length < 25) {
-    deckCountEl.classList.add('value-warning')
-  } else {
-    deckCountEl.classList.remove('value-warning')
-  }
+  deck.length < 25 ? deckCountEl.classList.add('value-warning') : deckCountEl.classList.remove('value-warning')
   hiLoCountEl.textContent = hiLoCount
   bankAmountEl.textContent = bankAmount
   betAmountEl.textContent = betAmount
@@ -332,12 +328,12 @@ function renderMessage(){
 
 function renderDealerHand(){
   dealerHandDiv.innerHTML = ''
-  if (turn === 'player-turn' && dealerHand.length === 2){
+  if (turn === 'player-turn' && dealerHand.length === 2){ //? the dealer down card
     let card = document.createElement('div')
     card.classList.add('card', 'medium', `${dealerHand[0].id}`)
     dealerHandDiv.appendChild(card)
     let downCard = document.createElement('div')
-    downCard.classList.add('card', 'medium', 'back-red') //? the dealer down card
+    downCard.classList.add('card', 'medium', 'back-red') 
     dealerHandDiv.appendChild(downCard)
   } else {
     for (let i=0; i<dealerHand.length;i++){
