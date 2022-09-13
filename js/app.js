@@ -260,6 +260,11 @@ function renderInGameButtons(){
 
 function renderStats() {
   deckCountEl.textContent = deck.length
+  if (deck.length < 25) {
+    deckCountEl.classList.add('value-warning')
+  } else {
+    deckCountEl.classList.remove('value-warning')
+  }
   tenCardCountEl.textContent = getTenCardCount()
   bankAmountEl.textContent = bankAmount
   betAmountEl.textContent = betAmount

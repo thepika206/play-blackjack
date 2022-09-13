@@ -167,6 +167,11 @@ div#deck{
   color: whitesmoke;
 }
 
+.value-warning {
+  background-color: red;
+  /* font-weight: 600; */
+}
+
 .hidden {
   opacity: .30;
   transition:all .5s
