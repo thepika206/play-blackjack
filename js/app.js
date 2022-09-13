@@ -102,22 +102,16 @@ standBtn.addEventListener('click', function(){
 })
 
 freePlayBtn.addEventListener('click', function(){
-  if (bankAmount>=0 && (turn === null || turn === 'game-over')){
-    initHand()
-    handleClickAnyPlay(0)
-  } 
+  if (bankAmount>=0 && (turn === null || turn === 'game-over')) handleClickAnyPlay(0)
+  render()
 })
 minBetPlayBtn.addEventListener('click', function(){
-  if (bankAmount>=minBet && (turn === null || turn === 'game-over')){
-    initHand()
-    handleClickAnyPlay(minBet)
-  } 
+  if (bankAmount>=minBet && (turn === null || turn === 'game-over'))handleClickAnyPlay(minBet)
+  render()
 })
 maxBetPlayBtn.addEventListener('click', function(){
-  if (bankAmount>=maxBet && (turn === null || turn === 'game-over')){
-    initHand()
-    handleClickAnyPlay(maxBet)
-  } 
+  if (bankAmount>=maxBet && (turn === null || turn === 'game-over'))handleClickAnyPlay(maxBet)
+  render()
 })
 
 resetGameBtn.addEventListener('click', function(){
@@ -129,12 +123,14 @@ init()
 
 function init(){
   bankAmount = 2000
+  turn = null
   initDeck()
   initHand(0)
+  render()
 }
 
 function initHand (){
-  turn = null
+  // turn = null
   playerHand = []
   dealerHand = []
   isSpecialDown = null
@@ -143,7 +139,7 @@ function initHand (){
   betAmount = 0
   payout = 0
   if (deck.length < 25) initDeck()
-  render()
+  // render()
 }
 function initDeck (){
   deck = JSON.parse(JSON.stringify(standardDeck)) //? deck is deep copy of the standard deck constant
@@ -158,6 +154,7 @@ function handleClickReset(){
 
 function handleClickAnyPlay(betBtnAmount){
   turn = 'setup'
+  initHand()
   betAmount = betBtnAmount
   bankAmount -= betBtnAmount
   render()
@@ -273,15 +270,12 @@ function render() {
 }
 
 function renderStartPlayButtons(){
-  if (turn === null || turn === 'game-over') {
-    freePlayBtn.classList.remove('hidden')
-    minBetPlayBtn.classList.remove('hidden')
-    maxBetPlayBtn.classList.remove('hidden')
-  } else {
-    freePlayBtn.classList.add('hidden')
-    minBetPlayBtn.classList.add('hidden')
-    maxBetPlayBtn.classList.add('hidden')
-  }
+  let startScreen = (turn === null || turn === 'game-over')
+  let affordMin = bankAmount >= minBet
+  let affordMax = bankAmount >= maxBet
+  startScreen ? freePlayBtn.classList.remove('hidden') : freePlayBtn.classList.add('hidden')
+  startScreen && affordMin ? minBetPlayBtn.classList.remove('hidden') : minBetPlayBtn.classList.add('hidden')
+  startScreen && affordMax ? maxBetPlayBtn.classList.remove('hidden') : maxBetPlayBtn.classList.add('hidden')
 }
 
 function renderInGameButtons(){
