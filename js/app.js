@@ -59,7 +59,7 @@ const minBet = 100
 const maxBet = 500
 const sfxDeal = new Audio('../audio/dealing-card2.wav')
 const sfxChChing = new Audio('../audio/ch-ching.wav')
-const specialDownFactor = 4
+const specialDownFactor = 3
 
 // ----------------------------Variables (state)--------------------------------------
 
@@ -453,5 +453,5 @@ function incrHiLoCount (cardVal){
 }
 
 function specialHitAllowed() {
-  return (turn === 'player-turn' && playerHand.length === 2 && (bankAmount > betAmount * specialDownFactor))
+  return (turn === 'player-turn' && playerHand.length === 2 && (bankAmount >= betAmount * specialDownFactor))
 }
