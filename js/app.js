@@ -389,13 +389,13 @@ function getWinnerMessages(){
   if (winner === 'T') return `Your ${player} equals Dealer's ${dealer}`
 }
 
-//? test function
+//? uncomment this function to test possible layout issues, just call it in the console
 // function testFillPlayerHand(){
-  // initialDeal()
-  // playerHand = [
-    //     {id:'d06', value:6},
-    //     {id:'d05', value:5},
-    //     {id:'d04', value:4},
+//   initialDeal()
+//   playerHand = [
+//     {id:'d06', value:6},
+//     {id:'d05', value:5},
+//     {id:'d04', value:4},
 //     {id:'d03', value:3},
 //     {id:'d02', value:2},
 //     {id:'hA', value:1},
