@@ -143,7 +143,6 @@ function handleClickAnyPlay(bet){
   bankAmount -= bet
   render()
   initialDeal(4)
-  // setTimeout(()=>{initialDeal(bet)},1000)  //give user a change to see a loading message
 }
 
 function handleClickHit(handArr) {
@@ -159,9 +158,7 @@ function handleClickHit(handArr) {
 function handleClickStand(){
   turn = 'dealer-turn'
   render()
-  setTimeout(() => {
-    dealerTurn()
-  }, 1500)
+  dealerTurn()
 }
 
 //* main game flow functions =================================//
@@ -209,19 +206,25 @@ function handleNaturalWin(){
 
 function dealerTurn(){
   if (turn !== 'dealer-turn') return
-  while (getHandValue(dealerHand) < 17){
-    drawCard(dealerHand)
-    render()
+  hitDealer()
+  function hitDealer() {
+    setTimeout(function (){
+      if (getHandValue(dealerHand) < 17) {
+        drawCard(dealerHand)
+        hitDealer()
+      } else{
+        if (getHandValue(dealerHand) > 21) {
+          winner = 'player' 
+        } else {   
+          winner = getClosest21()
+        }
+        turn = 'game-over'
+        bankAmount += getPayout()
+      }
+      render()
+    }, 1000)
   }
-  if (getHandValue(dealerHand)>21) {
-    winner = 'player' 
-  } else {   
-    winner = getClosest21()
-  }
-  turn = 'game-over'
-  bankAmount += getPayout()
-  render()
-}
+}  
 
 //* rendering functions =================================//
 function render() {
@@ -279,7 +282,7 @@ function renderMessage(){
     message = 'please wait'
   } else if (turn === 'dealer-turn') {
     headline = 'Dealer Turn'
-    message = `Your have: ${player} | Dealer hits on 16 or lower`
+    message = `Your have: ${player} | Dealer stands on 17 and above`
   } else if (turn === 'player-turn') {
     headline = 'Your Turn'
     message = `You have: ${player} | Dealer Up Card: ${dealerHand[0].value}`  
@@ -406,17 +409,3 @@ function getWinnerMessages(){
   if (winner === 'T') return `Your ${player} equals Dealer's ${dealer}`
 }
 
-//? uncomment this function to test possible layout issues, just call it in the console
-// function testFillPlayerHand(){
-//   initialDeal()
-//   playerHand = [
-//     {id:'d06', value:6},
-//     {id:'d05', value:5},
-//     {id:'d04', value:4},
-//     {id:'d03', value:3},
-//     {id:'d02', value:2},
-//     {id:'hA', value:1},
-//   ]
-// render()
-// console.log('end of testFillPlayerHand')
-// }    
