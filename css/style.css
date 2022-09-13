@@ -93,6 +93,7 @@ section{
   grid-area: side;
   flex-direction:  column;
   justify-content: space-evenly;
+  padding-left: 20px;
 }
 
 div#deck{

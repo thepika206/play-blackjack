@@ -73,6 +73,7 @@ let freePlayBtn = document.querySelector('#free-play-btn')
 let minBetPlayBtn = document.querySelector('#min-bet-play-btn')
 let maxBetPlayBtn = document.querySelector('#max-bet-play-btn')
 let deckCountEl = document.querySelector('#deck-count')
+let deckCountPBar = document.querySelector('#deck-count--progress')
 let hiLoCountEl = document.querySelector('#hi-lo-count')
 let resetGameBtn = document.querySelector('#reset-game-btn')
 let bankAmountEl = document.querySelector('#bank-amount')
@@ -276,6 +277,7 @@ function renderStats() {
   hiLoCountEl.textContent = hiLoCount
   bankAmountEl.textContent = bankAmount
   betAmountEl.textContent = betAmount
+  deckCountPBar.value = deck.length
 }
 
 function renderMessage(){
@@ -415,5 +417,3 @@ function incrHiLoCount (cardVal){
   if (cardVal > 1 && cardVal < 7) hiLoCount += 1
   if (cardVal === 1 || cardVal === 10) hiLoCount -= 1
 }
-
-$('.alert').alert()
