@@ -415,3 +415,5 @@ function incrHiLoCount (cardVal){
   if (cardVal > 1 && cardVal < 7) hiLoCount += 1
   if (cardVal === 1 || cardVal === 10) hiLoCount -= 1
 }
+
+$('.alert').alert()
