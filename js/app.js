@@ -57,6 +57,7 @@ const standardDeck = [
 ]
 const minBet = 100
 const maxBet = 500
+const sfxDeal = new Audio('../audio/dealing-card2.wav')
 // ----------------------------Variables (state)--------------------------------------
 
 
@@ -79,7 +80,9 @@ let betAmountEl = document.querySelector('#bet-amount')
 let playerTotalEl = document.querySelector('#player-text')
 // ----------------------------Event Listeners----------------------------------------
 drawBtn.addEventListener('click', function(){
-  if (turn === 'player-turn'){handleClickHit(playerHand)}
+  if (turn === 'player-turn'){
+    handleClickHit(playerHand)
+  }
 })
 
 standBtn.addEventListener('click', function(){
@@ -105,7 +108,11 @@ maxBetPlayBtn.addEventListener('click', function(){
   } 
 })
 
-resetGameBtn.addEventListener('click', handleClickReset)
+resetGameBtn.addEventListener('click', function(){
+  sfxDeal.volume = .20
+  sfxDeal.play()
+  handleClickReset()
+})
 
 // ----------------------------Functions----------------------------------------------
 init()
@@ -165,6 +172,8 @@ function handleClickStand(){
 //this function is used dealing cards to the player and dealer
 function drawCard(handArr) {
   if (deck.length > 0) {
+    sfxDeal.volume = .20
+    sfxDeal.play()
     let randIdx = Math.floor(Math.random() * deck.length)
     let cardPicked = deck.splice(randIdx, 1)[0]
     handArr.push(cardPicked)
