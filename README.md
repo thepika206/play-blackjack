@@ -1,4 +1,5 @@
-![Alt text](./game-image-1.png?raw=true "description")
+![Alt text](./game-image-1.png?raw=true "image captured from game")
+![Alt text](./game-image-2.png?raw=true "image captured from game")
 
 # Blackjack
 - By Patrick Cheung 2022
