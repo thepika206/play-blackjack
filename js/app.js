@@ -59,7 +59,7 @@ const minBet = 100
 const maxBet = 500
 const sfxDeal = new Audio('../audio/dealing-card2.wav')
 const sfxChChing = new Audio('../audio/ch-ching.wav')
-const specialDownFactor = 3
+const specialDownFactor = 3  //? this is the multiplier for the special Hit (doubledown)  feature.
 
 // ----------------------------Variables (state)--------------------------------------
 
@@ -328,7 +328,7 @@ function renderMessage(){
 
 function renderDealerHand(){
   dealerHandDiv.innerHTML = ''
-  if (turn === 'player-turn' && dealerHand.length === 2){ //? the dealer down card
+  if (turn === 'player-turn' && dealerHand.length === 2){ //? on player's turn the dealer has and up and down card
     let card = document.createElement('div')
     card.classList.add('card', 'medium', `${dealerHand[0].id}`)
     dealerHandDiv.appendChild(card)
