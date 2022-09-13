@@ -142,7 +142,8 @@ function handleClickAnyPlay(bet){
   betAmount = bet
   bankAmount -= bet
   render()
-  setTimeout(()=>{initialDeal(bet)},1000)  //give user a change to see a loading message
+  initialDeal(4)
+  // setTimeout(()=>{initialDeal(bet)},1000)  //give user a change to see a loading message
 }
 
 function handleClickHit(handArr) {
@@ -172,12 +173,29 @@ function drawCard(handArr) {
     handArr.push(cardPicked)
   }
 }
-function initialDeal() {
-  turn = 'initial-deal'
-  drawCard(playerHand, 'player')
-  drawCard(playerHand, 'player')
-  drawCard(dealerHand, 'dealer')
-  drawCard(dealerHand, 'dealer')
+function initialDeal(cardCount) {
+  // turn = 'player-turn'
+  let seat = 1
+  let i=0
+  loop()
+  function loop(){
+    setTimeout(()=>{
+      i += 1
+      drawCard(seat === 1 ? playerHand : dealerHand, )
+      seat *= -1
+      console.log('card', cardCount)
+      render()
+      if (i < cardCount) {
+        loop()
+      } else {
+        turn = 'initial-deal'
+        handleNaturalWin()
+      }
+    }, 500)
+  }
+}
+
+function handleNaturalWin(){
   winner = getNaturalWinner() 
   if (winner) {
     isNatural = true
@@ -280,7 +298,7 @@ function renderMessage(){
 
 function renderDealerHand(){
   dealerHandDiv.innerHTML = ''
-  if (turn === 'player-turn'){
+  if (turn === 'player-turn' && dealerHand.length === 2){
     //dealer's up card during player turn
     let card = document.createElement('div')
     card.classList.add('card', 'medium', `${dealerHand[0].id}`)
