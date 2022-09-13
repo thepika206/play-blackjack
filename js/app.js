@@ -174,7 +174,6 @@ function drawCard(handArr) {
   }
 }
 function initialDeal(cardCount) {
-  // turn = 'player-turn'
   let seat = 1
   let i=0
   loop()
