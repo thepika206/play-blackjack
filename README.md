@@ -1,5 +1,4 @@
 ![Alt text](./game-image-1.png?raw=true "image captured from game")
-![Alt text](./game-image-2.png?raw=true "image captured from game")
 
 # Blackjack
 - By Patrick Cheung 2022
@@ -8,14 +7,15 @@
 ## Game Summary
 - A game for one player based on the classic card game of 21
 - The object is to be closer to 21 than the dealer (controlled by the CPU) without going over
-- Includes Ace logic for 1 or 11
-- Includes deck stats for counting 10 cards
-- Includes betting mechanism
+- Ace logic for 1 or 11
+- deck stats for card counting using Hi-Lo running count
+- Two betting options
 - Includes a bonus payout for drawing natural 21
+- Special (doubledown) multiplier down
+- Mobile layout (deck stats hidden)
 
 ### Not in scope
 - split hand
-- double down
 - variable bet
 - insurance
 
@@ -39,3 +39,7 @@
 - card dealing click sound https://freesound.org/people/EminYILDIRIM/sounds/536108/
 - cash register opening sound https://freesound.org/people/hgernhardt/sounds/402651/
 <!-- - card shuffling sound https://freesound.org/people/SomeoneCool15/sounds/423767/  -->
+
+## Other images
+![Alt text](./game-image-2.png?raw=true "image captured from game")
+![Alt text](./game-flow.png?raw=true "image captured from game")
