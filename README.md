@@ -37,4 +37,5 @@
 - Credit to Ben Manley for card design images and cardstarter.css.   github @ManliestBen
 - Favicon created with favicon.io
 - card dealing click sound https://freesound.org/people/EminYILDIRIM/sounds/536108/
+- cash register opening sound https://freesound.org/people/hgernhardt/sounds/402651/
 <!-- - card shuffling sound https://freesound.org/people/SomeoneCool15/sounds/423767/  -->

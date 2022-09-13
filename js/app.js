@@ -58,6 +58,8 @@ const standardDeck = [
 const minBet = 100
 const maxBet = 500
 const sfxDeal = new Audio('../audio/dealing-card2.wav')
+const sfxChChing = new Audio('../audio/ch-ching.wav')
+
 // ----------------------------Variables (state)--------------------------------------
 
 
@@ -391,6 +393,8 @@ function getPayout(){
     payout = betAmount * 3
   } else if (winner === 'player') {
     payout = betAmount * 2
+    sfxChChing.volume = .20
+    sfxChChing.play()
   } else {
     payout = 0
   }
