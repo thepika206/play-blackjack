@@ -33,22 +33,28 @@ footer {
 main.container{
   padding: 0;
   display: grid;
-  min-width: 660px;
   width: 90%;
   max-width: 900px;
   height: 90vh;
-  max-height: 600px;
+  max-height: 700px;
   background-color: lightgrey;
-  grid-template-rows: 20% 1fr 2fr .5fr 2fr 1fr .25fr;
-  grid-template-columns: 18% auto;
+  grid-template-rows: 
+    20% 
+    1fr 
+    2fr 
+    .5fr 
+    2fr 
+    1fr 
+    .25fr;
+  grid-template-columns: 18% 40% auto;
   grid-template-areas:
-  "message message"
-  "bet-btn bet-btn"
-  "side upper"
-  "side rules"
-  "side lower"
-  "card-btn card-btn"
-  "footer footer";
+    "message message message"
+    "bet-btn bet-btn header"
+    "side upper upper"
+    "side rules rules"
+    "side lower lower"
+    "card-btn card-btn card-btn"
+    "footer footer footer";
 }
 
 h2{
@@ -69,6 +75,10 @@ section{
   padding: 5px 0;
   background-color: olivedrab;
 
+}
+#header--section{
+  grid-area: header;
+  background-color: #555;
 }
 #message--section{
   background-color: white;
@@ -181,3 +191,49 @@ div#deck{
   box-shadow: 7px 7px 7px 0 rgba(41, 41, 41, 0.95) !important;
 }
 
+@media only screen and (max-width: 768px) {
+  main.container{
+    /* color: red;  */
+    padding: 0;
+    min-width: none;
+    width: 100%;
+    height: 90vh;
+    grid-template-rows: 
+      1fr 
+      120px  
+      1fr 
+      3fr 
+      2fr 
+      3fr 
+      90px 
+      auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+    "header header"
+      "message message"
+      "bet-btn bet-btn"
+      "upper upper"
+      "rules rules"
+      "lower lower"
+      "card-btn card-btn"
+      "footer footer";
+  }
+  div.medium{
+    margin: 6px 3px;
+  }
+  h3{
+    font-size: 16px;
+  }
+  #play-deck--section{
+    display: none;
+  }
+
+  #game-message{
+    /* color: red; */
+    font-size: 18px ;
+  }
+  footer{
+    font-size: 10px;
+    /* display: none; */
+  }
+}
