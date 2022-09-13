@@ -61,7 +61,7 @@ const sfxDeal = new Audio('../audio/dealing-card2.wav')
 // ----------------------------Variables (state)--------------------------------------
 
 
-let deck, playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount, payout
+let deck, playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount, payout, hiLoCount
 // ----------------------------Cached Element references------------------------------
 let headlineEl = document.querySelector('#headline-message')
 let messageEl = document.querySelector('#game-message')
@@ -73,7 +73,7 @@ let freePlayBtn = document.querySelector('#free-play-btn')
 let minBetPlayBtn = document.querySelector('#min-bet-play-btn')
 let maxBetPlayBtn = document.querySelector('#max-bet-play-btn')
 let deckCountEl = document.querySelector('#deck-count')
-let tenCardCountEl = document.querySelector('#ten-card-count')
+let hiLoCountEl = document.querySelector('#hi-lo-count')
 let resetGameBtn = document.querySelector('#reset-game-btn')
 let bankAmountEl = document.querySelector('#bank-amount')
 let betAmountEl = document.querySelector('#bet-amount')
@@ -133,7 +133,8 @@ function initHand (){
   render()
 }
 function initDeck (){
-  deck = JSON.parse(JSON.stringify(standardDeck)) //? need a deep copy of the standard deck, standard deck should not change ever.
+  deck = JSON.parse(JSON.stringify(standardDeck)) //? deck is deep copy of the standard deck constant
+  hiLoCount = 0
 }
 
 //* click handling functions =================================//
@@ -167,7 +168,7 @@ function handleClickStand(){
 }
 
 //* main game flow functions =================================//
-//this function is used dealing cards to the player and dealer
+
 function drawCard(handArr) {
   if (deck.length > 0) {
     sfxDeal.volume = .50
@@ -175,6 +176,7 @@ function drawCard(handArr) {
     let randIdx = Math.floor(Math.random() * deck.length)
     let cardPicked = deck.splice(randIdx, 1)[0]
     handArr.push(cardPicked)
+    incrHiLoCount(cardPicked.value)
   }
 }
 function initialDeal(cardCount) {
@@ -186,7 +188,6 @@ function initialDeal(cardCount) {
       i += 1
       drawCard(seat === 1 ? playerHand : dealerHand, )
       seat *= -1
-      console.log('card', cardCount)
       render()
       if (i < cardCount) {
         loop()
@@ -272,7 +273,7 @@ function renderStats() {
   } else {
     deckCountEl.classList.remove('value-warning')
   }
-  tenCardCountEl.textContent = getTenCardCount()
+  hiLoCountEl.textContent = hiLoCount
   bankAmountEl.textContent = bankAmount
   betAmountEl.textContent = betAmount
 }
@@ -313,13 +314,11 @@ function renderMessage(){
 function renderDealerHand(){
   dealerHandDiv.innerHTML = ''
   if (turn === 'player-turn' && dealerHand.length === 2){
-    //dealer's up card during player turn
     let card = document.createElement('div')
     card.classList.add('card', 'medium', `${dealerHand[0].id}`)
     dealerHandDiv.appendChild(card)
-    //dealer's second card is face down during player turn
     let downCard = document.createElement('div')
-    downCard.classList.add('card', 'medium', 'back-red')
+    downCard.classList.add('card', 'medium', 'back-red') //? the dealer down card
     dealerHandDiv.appendChild(downCard)
   } else {
     for (let i=0; i<dealerHand.length;i++){
@@ -331,8 +330,6 @@ function renderDealerHand(){
 }
 
 function renderPlayerHand(){
-  //for each card in the playerHandArr, create dynamic html structure and append into the player hand el
-  //classList.add the card.id value
   playerHandDiv.innerHTML = ''
   for (let i=0; i<playerHand.length;i++){
     let card = document.createElement('div')
@@ -385,14 +382,6 @@ function getNaturalWinner(){
   }
 }
 
-//returns the amount of cards in the deck that have a game value of 10, since this changes player's odds
-function getTenCardCount(){
-  return deck.reduce(function(acc, el){
-    if (el.value === 10) acc += 1
-    return acc
-  },0)
-}
-
 function getPayout(){
   if (winner === 'T') {
     payout = betAmount
@@ -421,3 +410,8 @@ function getWinnerMessages(){
   if (winner === 'T') return `Your ${player} equals Dealer's ${dealer}`
 }
 
+
+function incrHiLoCount (cardVal){
+  if (cardVal > 1 && cardVal < 7) hiLoCount += 1
+  if (cardVal === 1 || cardVal === 10) hiLoCount -= 1
+}
