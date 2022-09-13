@@ -59,15 +59,17 @@ const minBet = 100
 const maxBet = 500
 const sfxDeal = new Audio('../audio/dealing-card2.wav')
 const sfxChChing = new Audio('../audio/ch-ching.wav')
+const specialDownFactor = 4
 
 // ----------------------------Variables (state)--------------------------------------
 
 
-let deck, playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount, payout, hiLoCount
+let deck, playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount, payout, hiLoCount, isSpecialDown
 // ----------------------------Cached Element references------------------------------
 let headlineEl = document.querySelector('#headline-message')
 let messageEl = document.querySelector('#game-message')
-let drawBtn = document.querySelector('#hit-btn')
+let specialHitBtn = document.querySelector('#special-hit-btn')
+let drawBtn = document.querySelector('#hit-btn') //!rename this later to hitBtn
 let standBtn = document.querySelector('#stand-btn')
 let playerHandDiv = document.querySelector('#player-hand')
 let dealerHandDiv = document.querySelector('#dealer-hand')
@@ -82,6 +84,13 @@ let bankAmountEl = document.querySelector('#bank-amount')
 let betAmountEl = document.querySelector('#bet-amount')
 let playerTotalEl = document.querySelector('#player-text')
 // ----------------------------Event Listeners----------------------------------------
+
+specialHitBtn.addEventListener('click', function(){
+  if (specialHitAllowed){
+    handleClickSpecialHit(playerHand)
+  }
+})
+
 drawBtn.addEventListener('click', function(){
   if (turn === 'player-turn'){
     handleClickHit(playerHand)
@@ -128,6 +137,7 @@ function initHand (){
   turn = null
   playerHand = []
   dealerHand = []
+  isSpecialDown = null
   winner = null
   isNatural = null
   betAmount = 0
@@ -146,14 +156,29 @@ function handleClickReset(){
   init()
 }
 
-function handleClickAnyPlay(bet){
+function handleClickAnyPlay(betBtnAmount){
   turn = 'setup'
-  betAmount = bet
-  bankAmount -= bet
+  betAmount = betBtnAmount
+  bankAmount -= betBtnAmount
   render()
   initialDeal(4)
 }
 
+
+function handleClickSpecialHit(handArr) {
+  isSpecialDown = true
+  drawCard(handArr)
+  betAmount *= specialDownFactor
+  bankAmount -= betAmount
+  let total = getHandValue(playerHand)
+  if (total > 21){
+    winner = 'dealer' 
+    turn = 'game-over'  
+    render()
+  } else {
+    handleClickStand()
+  }
+}
 function handleClickHit(handArr) {
   drawCard(handArr)
   let total = getHandValue(playerHand)
@@ -267,6 +292,11 @@ function renderInGameButtons(){
     standBtn.classList.add('hidden')
     drawBtn.classList.add('hidden')
   }
+  if (specialHitAllowed()) {
+    specialHitBtn.classList.remove('hidden')
+  } else {
+    specialHitBtn.classList.add('hidden')
+  }  
 }
 
 function renderStats() {
@@ -420,4 +450,8 @@ function getWinnerMessages(){
 function incrHiLoCount (cardVal){
   if (cardVal > 1 && cardVal < 7) hiLoCount += 1
   if (cardVal === 1 || cardVal === 10) hiLoCount -= 1
+}
+
+function specialHitAllowed() {
+  return (turn === 'player-turn' && playerHand.length === 2 && (bankAmount > betAmount * specialDownFactor))
 }
