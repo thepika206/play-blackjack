@@ -59,12 +59,12 @@ const minBet = 100
 const maxBet = 500
 const sfxDeal = new Audio('../audio/dealing-card2.wav')
 const sfxChChing = new Audio('../audio/ch-ching.wav')
-const specialDownFactor = 3  //? this is the multiplier for the special Hit (doubledown)  feature.
 
 // ----------------------------Variables (state)--------------------------------------
 
 
 let deck, playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount, payout, hiLoCount, isSpecialDown
+let specialDownFactor = 3  //? this is the multiplier for the special Hit (doubledown)  feature.
 // ----------------------------Cached Element references------------------------------
 let headlineEl = document.querySelector('#headline-message')
 let messageEl = document.querySelector('#game-message')
@@ -435,4 +435,23 @@ function incrHiLoCount (cardVal){
 
 function specialHitAllowed() {
   return (turn === 'player-turn' && playerHand.length === 2 && (bankAmount >= betAmount * specialDownFactor))
+}
+
+
+
+const konami = 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba'; 
+let keyPressLog = '';
+window.addEventListener("keydown", function(evt) {handleKeyPress(evt)})
+function handleKeyPress(evt){
+  keyPressLog = keyPressLog + evt.key
+  if (keyPressLog === konami){
+    //what happens next...
+    if (bankAmount>=maxBet && (turn === null || turn === 'game-over')){
+      messageEl.textContent ='konami code detected: 30,000 credits'
+      specialDownFactor = 6
+      bankAmount = 30000
+      specialHitBtn.textContent = 'Special'
+      handleClickAnyPlay(maxBet)
+    }
+  }
 }
