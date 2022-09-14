@@ -440,7 +440,7 @@ function handleKeyPress(evt){
   if (keyPressLog === konami){
     //what happens next...
     if (bankAmount>=maxBet && (turn === null || turn === 'game-over-turn')){
-      messageEl.textContent ='konami code detected: 30,000 credits'
+      alert('konami code detected: 30,000 credits, special down is X6 ')
       specialDownFactor = 6
       bankAmount = 30000
       specialHitBtn.textContent = 'Special'
