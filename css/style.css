@@ -46,7 +46,7 @@ main.container{
     2fr 
     1fr 
     .25fr;
-  grid-template-columns: 18% 40% auto;
+  grid-template-columns: 23% 30% auto;
   grid-template-areas:
     "message message message"
     "bet-btn bet-btn header"
@@ -166,6 +166,10 @@ div#deck{
 
 #player-text {
   color: whitesmoke;
+}
+
+#mute-sound-btn{
+  font-size: 11px;
 }
 
 .value-warning {
