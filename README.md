@@ -1,8 +1,11 @@
 ![Alt text](./game-image-1.png?raw=true "image captured from game")
 
-# Blackjack
-- By Patrick Cheung 2022
-- Deployed with Netlify  https://thepika206-play-blackjack.netlify.app/
+## Background
+- I created a Blackjack game as an individual project for a coding camp at General Assembly
+- Play it here https://thepika206-play-blackjack.netlify.app/
+- See my original design and planning here in Whimsical https://whimsical.com/blackjack-planning-HpVFNvKGdZD6gHu6N8P7yz# Blackjack
+- My favorite part of this project was designing the logic for the dual value of Aces
+
   
 ## Game Summary
 - A game for one player based on the classic card game of 21
@@ -20,11 +23,6 @@
 - variable bet
 - insurance
 
-## Background
-- This is an Individual Project created during General Assembly bootcamp. 
-- I chose Blackjack as my game project because I've always enjoyed playing it as a minigame within other video games such as Red Dead Redemption. It can be played with a little or a lot of free time.   
-- planning this build was done in Whimsical.com  
-  - https://whimsical.com/blackjack-planning-HpVFNvKGdZD6gHu6N8P7yz
 
 ## Technologies
 - JavaScript
@@ -32,14 +30,14 @@
 - CSS
 - Bootstrap
 - Git and GitHub
-- Netlify
+- Netlify (deployment and hosting)
 
 ## Credits
 - Credit to Ben Manley for card design images and cardstarter.css.   github @ManliestBen
 - Favicon created with favicon.io
 - card dealing click sound https://freesound.org/people/EminYILDIRIM/sounds/536108/
 - cash register opening sound https://freesound.org/people/hgernhardt/sounds/402651/
-<!-- - card shuffling sound https://freesound.org/people/SomeoneCool15/sounds/423767/  -->
+- Friends and family that helped with play testing
 
 ## Other images
 ![Alt text](./game-image-2.png?raw=true "image captured from game")
