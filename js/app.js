@@ -86,7 +86,7 @@ let playerTotalEl = document.querySelector('#player-text')
 // ----------------------------Event Listeners----------------------------------------
 
 specialHitBtn.addEventListener('click', function(){
-  if (specialHitAllowed){
+  if (specialHitAllowed() === true){
     handleClickSpecialHit(playerHand)
   }
 })
