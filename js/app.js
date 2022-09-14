@@ -1,7 +1,7 @@
 
 // ----------------------------Constants----------------------------------------------
 
-const standardDeck = [
+const standardCards = [
   {id:'dA', value:1},
   {id:'dK', value:10},
   {id:'dQ', value:10},
@@ -69,7 +69,7 @@ let specialDownFactor = 3  //? this is the multiplier for the special Hit (doubl
 let headlineEl = document.querySelector('#headline-message')
 let messageEl = document.querySelector('#game-message')
 let specialHitBtn = document.querySelector('#special-hit-btn')
-let drawBtn = document.querySelector('#hit-btn') //!rename this later to hitBtn
+let hitBtn = document.querySelector('#hit-btn')
 let standBtn = document.querySelector('#stand-btn')
 let playerHandDiv = document.querySelector('#player-hand')
 let dealerHandDiv = document.querySelector('#dealer-hand')
@@ -77,7 +77,7 @@ let freePlayBtn = document.querySelector('#free-play-btn')
 let minBetPlayBtn = document.querySelector('#min-bet-play-btn')
 let maxBetPlayBtn = document.querySelector('#max-bet-play-btn')
 let deckCountEl = document.querySelector('#deck-count')
-let deckCountPBar = document.querySelector('#deck-count--progress')
+let deckCountPBar = document.querySelector('#deck-count-progress')
 let hiLoCountEl = document.querySelector('#hi-lo-count')
 let resetGameBtn = document.querySelector('#reset-game-btn')
 let bankAmountEl = document.querySelector('#bank-amount')
@@ -91,7 +91,7 @@ specialHitBtn.addEventListener('click', function(){
   }
 })
 
-drawBtn.addEventListener('click', function(){
+hitBtn.addEventListener('click', function(){
   if (turn === 'player-turn'){
     handleClickHit(playerHand)
   }
@@ -102,15 +102,15 @@ standBtn.addEventListener('click', function(){
 })
 
 freePlayBtn.addEventListener('click', function(){
-  if (bankAmount>=0 && (turn === null || turn === 'game-over')) handleClickAnyPlay(0)
+  if (bankAmount>=0 && (turn === null || turn === 'game-over-turn')) handleClickAnyPlay(0)
   render()
 })
 minBetPlayBtn.addEventListener('click', function(){
-  if (bankAmount>=minBet && (turn === null || turn === 'game-over'))handleClickAnyPlay(minBet)
+  if (bankAmount>=minBet && (turn === null || turn === 'game-over-turn'))handleClickAnyPlay(minBet)
   render()
 })
 maxBetPlayBtn.addEventListener('click', function(){
-  if (bankAmount>=maxBet && (turn === null || turn === 'game-over'))handleClickAnyPlay(maxBet)
+  if (bankAmount>=maxBet && (turn === null || turn === 'game-over-turn'))handleClickAnyPlay(maxBet)
   render()
 })
 
@@ -142,7 +142,7 @@ function initHand (){
   // render()
 }
 function initDeck (){
-  deck = JSON.parse(JSON.stringify(standardDeck)) //? deck is deep copy of the standard deck constant
+  deck = JSON.parse(JSON.stringify(standardCards)) //? deck is deep copy of the standard deck constant
   hiLoCount = 0
 }
 
@@ -153,7 +153,7 @@ function handleClickReset(){
 }
 
 function handleClickAnyPlay(betBtnAmount){
-  turn = 'setup'
+  turn = 'setup-turn'
   initHand()
   betAmount = betBtnAmount
   bankAmount -= betBtnAmount
@@ -170,7 +170,7 @@ function handleClickSpecialHit(handArr) {
   let total = getHandValue(playerHand)
   if (total > 21){
     winner = 'dealer' 
-    turn = 'game-over'  
+    turn = 'game-over-turn'  
     render()
   } else {
     handleClickStand()
@@ -181,7 +181,7 @@ function handleClickHit(handArr) {
   let total = getHandValue(playerHand)
   if (total > 21){
     winner = 'dealer' 
-    turn = 'game-over'  
+    turn = 'game-over-turn'  
   }
   render()
 }
@@ -217,7 +217,7 @@ function initialDeal(cardCount) {
       if (i < cardCount) {
         loop()
       } else {
-        turn = 'initial-deal'
+        turn = 'initial-deal-turn'
         handleNaturalWin()
       }
     }, 500)
@@ -228,7 +228,7 @@ function handleNaturalWin(){
   winner = getNaturalWinner() 
   if (winner) {
     isNatural = true
-    turn = 'game-over' 
+    turn = 'game-over-turn' 
     bankAmount += getPayout()  
   } else {
     turn = 'player-turn'
@@ -251,7 +251,7 @@ function dealerTurn(){
         } else {   
           winner = getClosest21()
         }
-        turn = 'game-over'
+        turn = 'game-over-turn'
         bankAmount += getPayout()
       }
       render()
@@ -270,7 +270,7 @@ function render() {
 }
 
 function renderStartPlayButtons(){
-  let startScreen = (turn === null || turn === 'game-over')
+  let startScreen = (turn === null || turn === 'game-over-turn')
   let affordMin = bankAmount >= minBet
   let affordMax = bankAmount >= maxBet
   startScreen ? freePlayBtn.classList.remove('hidden') : freePlayBtn.classList.add('hidden')
@@ -280,7 +280,7 @@ function renderStartPlayButtons(){
 
 function renderInGameButtons(){
   turn === 'player-turn' ? standBtn.classList.remove('hidden') : standBtn.classList.add('hidden')
-  turn === 'player-turn' ? drawBtn.classList.remove('hidden') : drawBtn.classList.add('hidden')
+  turn === 'player-turn' ? hitBtn.classList.remove('hidden') : hitBtn.classList.add('hidden')
   specialHitAllowed() ? specialHitBtn.classList.remove('hidden') : specialHitBtn.classList.add('hidden')
 }
 
@@ -299,7 +299,7 @@ function renderMessage(){
   if (turn === null){
     headline = 'Play Blackjack'
     message = 'To Start, select a Play option'
-  } else if (turn === 'setup'){
+  } else if (turn === 'setup-turn'){
     headline = 'New Game Starting'
     message = 'please wait'
   } else if (turn === 'dealer-turn') {
@@ -308,7 +308,7 @@ function renderMessage(){
   } else if (turn === 'player-turn') {
     headline = 'Your Turn'
     message = `You have: ${playerTotal} | Dealer Up Card: ${dealerHand[0].value}`  
-  } else if (turn === 'game-over') {
+  } else if (turn === 'game-over-turn') {
     headline = winner === 'player' ? `You Won!! Bet was ${betAmount}` : 'Dealer Won'
     headline = winner === 'T' ? 'Tie Game - bet returned' : headline
     message = getWinnerMessages()
@@ -377,7 +377,7 @@ function getClosest21(){
 }
 
 function getNaturalWinner(){
-  if (turn !== 'initial-deal') return null
+  if (turn !== 'initial-deal-turn') return null
   let dealerNatural = getHandValue(dealerHand) === 21 ? true : false
   let playerNatural = getHandValue(playerHand) === 21 ? true : false
   if (!playerNatural && !dealerNatural){
@@ -439,7 +439,7 @@ function handleKeyPress(evt){
   keyPressLog = keyPressLog + evt.key
   if (keyPressLog === konami){
     //what happens next...
-    if (bankAmount>=maxBet && (turn === null || turn === 'game-over')){
+    if (bankAmount>=maxBet && (turn === null || turn === 'game-over-turn')){
       messageEl.textContent ='konami code detected: 30,000 credits'
       specialDownFactor = 6
       bankAmount = 30000
