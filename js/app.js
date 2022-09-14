@@ -220,7 +220,7 @@ function initialDeal(cardCount) {
         turn = 'initial-deal-turn'
         handleNaturalWin()
       }
-    }, 500)
+    }, 1000)
   }
 }
 
