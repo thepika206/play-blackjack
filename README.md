@@ -16,6 +16,7 @@
 
 ### Not in scope
 - split hand
+- suggested moves based on your current total and the dealer up card
 - variable bet
 - insurance
 
