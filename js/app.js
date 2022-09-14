@@ -59,6 +59,7 @@ const minBet = 100
 const maxBet = 500
 const sfxDeal = new Audio('../audio/dealing-card2.wav')
 const sfxChChing = new Audio('../audio/ch-ching.wav')
+const sfxFanFareF = new Audio('../audio/fanfare-f.flac')
 
 // ----------------------------Variables (state)--------------------------------------
 
@@ -87,7 +88,7 @@ let playerTotalEl = document.querySelector('#player-text')
 
 specialHitBtn.addEventListener('click', function(){
   if (specialHitAllowed() === true){
-    handleClickSpecialHit(playerHand)
+    handleClickSpecialHit(playerHand) //!test for sound
   }
 })
 
@@ -122,6 +123,7 @@ resetGameBtn.addEventListener('click', function(){
 init()
 
 function init(){
+  isMute = false
   bankAmount = 2000
   turn = null
   initDeck()
@@ -196,8 +198,7 @@ function handleClickStand(){
 
 function drawCard(handArr) {
   if (deck.length > 0) {
-    sfxDeal.volume = .50
-    sfxDeal.play()
+    playSound('deal')
     let randIdx = Math.floor(Math.random() * deck.length)
     let cardPicked = deck.splice(randIdx, 1)[0]
     handArr.push(cardPicked)
@@ -396,10 +397,10 @@ function getPayout(){
     payout = betAmount
   } else if (winner === 'player' && isNatural) {
     payout = betAmount * 3
+    playSound('natural')
   } else if (winner === 'player') {
     payout = betAmount * 2
-    sfxChChing.volume = .20
-    sfxChChing.play()
+    playSound('normal-win')
   } else {
     payout = 0
   }
@@ -430,6 +431,18 @@ function specialHitAllowed() {
   return (turn === 'player-turn' && playerHand.length === 2 && (bankAmount >= betAmount * specialDownFactor))
 }
 
+function playSound(sound){
+  if (sound === 'deal') {
+    sfxDeal.volume = .30
+    sfxDeal.play()
+  } else if (sound === 'natural') {
+    sfxFanFareF.volume = .10
+    sfxFanFareF.play()
+  } else if (sound === 'normal-win') {
+    sfxChChing.volume = .10
+    sfxChChing.play()
+  }
+}
 
 
 const konami = 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba'; 

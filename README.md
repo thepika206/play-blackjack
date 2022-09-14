@@ -35,9 +35,11 @@
 ## Credits
 - Credit to Ben Manley for card design images and cardstarter.css.   github @ManliestBen
 - Favicon created with favicon.io
-- card dealing click sound https://freesound.org/people/EminYILDIRIM/sounds/536108/
-- cash register opening sound https://freesound.org/people/hgernhardt/sounds/402651/
 - Friends and family that helped with play testing
+### Sound Credits
+  - card dealing click sound https://freesound.org/people/EminYILDIRIM/sounds/536108/
+  - cash register opening sound https://freesound.org/people/hgernhardt/sounds/402651/
+  - fanfare https://freesound.org/people/plasterbrain/sounds/397354/
 
 ## Other images
 ![Alt text](./game-image-2.png?raw=true "image captured from game")
