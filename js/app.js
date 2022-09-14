@@ -295,7 +295,7 @@ function renderStats() {
 
 function renderMessage(){
   let message, headline
-  let player = getHandValue(playerHand)
+  let playerTotal = getHandValue(playerHand)
   if (turn === null){
     headline = 'Play Blackjack'
     message = 'To Start, select a Play option'
@@ -304,10 +304,10 @@ function renderMessage(){
     message = 'please wait'
   } else if (turn === 'dealer-turn') {
     headline = 'Dealer Turn'
-    message = `Your have: ${player} | Dealer stands on 17 and above`
+    message = `Your have: ${playerTotal} | Dealer stands on 17 and above`
   } else if (turn === 'player-turn') {
     headline = 'Your Turn'
-    message = `You have: ${player} | Dealer Up Card: ${dealerHand[0].value}`  
+    message = `You have: ${playerTotal} | Dealer Up Card: ${dealerHand[0].value}`  
   } else if (turn === 'game-over') {
     headline = winner === 'player' ? `You Won!! Bet was ${betAmount}` : 'Dealer Won'
     headline = winner === 'T' ? 'Tie Game - bet returned' : headline
@@ -315,7 +315,7 @@ function renderMessage(){
   }
   messageEl.textContent = message  
   headlineEl.textContent = headline
-  playerTotalEl.textContent = `Player Hand: ${getHandValue(playerHand)}`
+  playerTotalEl.textContent = `Player Hand: ${playerTotal}`
   headlineEl.removeAttribute('class')
   headlineEl.classList.add(`${winner}`)
 }
