@@ -64,7 +64,7 @@ const sfxFanFareF = new Audio('../audio/fanfare-f.flac')
 // ----------------------------Variables (state)--------------------------------------
 
 
-let deck, playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount, payout, hiLoCount, isSpecialDown
+let deck, playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount, payout, hiLoCount, isSpecialDown, isMute
 let specialDownFactor = 3  //? this is the multiplier for the special Hit (doubledown)  feature.
 // ----------------------------Cached Element references------------------------------
 let headlineEl = document.querySelector('#headline-message')
@@ -84,6 +84,7 @@ let resetGameBtn = document.querySelector('#reset-game-btn')
 let bankAmountEl = document.querySelector('#bank-amount')
 let betAmountEl = document.querySelector('#bet-amount')
 let playerTotalEl = document.querySelector('#player-text')
+let muteBtn = document.querySelector('#mute-sound-btn')
 // ----------------------------Event Listeners----------------------------------------
 
 specialHitBtn.addEventListener('click', function(){
@@ -115,9 +116,14 @@ maxBetPlayBtn.addEventListener('click', function(){
   render()
 })
 
+muteBtn.addEventListener('click', function(){
+  handleClickMute()
+})
+
 resetGameBtn.addEventListener('click', function(){
   handleClickReset()
 })
+
 
 // ----------------------------Functions----------------------------------------------
 init()
@@ -194,6 +200,16 @@ function handleClickStand(){
   dealerTurn()
 }
 
+function handleClickMute(){
+  if (!isMute) {
+    isMute = true
+  } else {
+    isMute = false
+    console.log('unmute')
+  }
+  render()
+}
+
 //* main game flow functions =================================//
 
 function drawCard(handArr) {
@@ -256,7 +272,7 @@ function dealerTurn(){
         bankAmount += getPayout()
       }
       render()
-    }, 1000)
+    }, 800)
   }
 }  
 
@@ -268,6 +284,7 @@ function render() {
   renderStats()
   renderInGameButtons()
   renderStartPlayButtons()
+  renderMuteBtn()
 }
 
 function renderStartPlayButtons(){
@@ -292,6 +309,10 @@ function renderStats() {
   bankAmountEl.textContent = bankAmount
   betAmountEl.textContent = betAmount
   deckCountPBar.value = deck.length
+}
+
+function renderMuteBtn() {
+muteBtn.textContent = !isMute ? 'Mute Sound' : 'Unmute'
 }
 
 function renderMessage(){
@@ -432,11 +453,12 @@ function specialHitAllowed() {
 }
 
 function playSound(sound){
+  if (isMute === true ) return
   if (sound === 'deal') {
     sfxDeal.volume = .30
     sfxDeal.play()
   } else if (sound === 'natural') {
-    sfxFanFareF.volume = .10
+    sfxFanFareF.volume = .05
     sfxFanFareF.play()
   } else if (sound === 'normal-win') {
     sfxChChing.volume = .10
