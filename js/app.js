@@ -298,13 +298,7 @@ function renderMessage(){
   let player = getHandValue(playerHand)
   if (turn === null){
     headline = 'Play Blackjack'
-    if (bankAmount >= maxBet){
-      message = 'To Start, select a Play option'
-    } else if (bankAmount >= minBet) {
-      message = 'Select Bet 100 Play or Free Play'
-    } else {
-      message = 'Select Free Play only'
-    }
+    message = 'To Start, select a Play option'
   } else if (turn === 'setup'){
     headline = 'New Game Starting'
     message = 'please wait'
@@ -418,7 +412,6 @@ function getWinnerMessages(){
   let dealer = getHandValue(dealerHand)
   if (player > 21 ) return `You busted with ${player}`
   if (dealer > 21 ) return `Dealer busted with ${dealer}`
-  // if (isNatural && winner) return `Natural Blackjack`
   if (isNatural && winner === 'player') return `You drew a Blackjack - Double Payout!!`
   if (isNatural && winner === 'dealer') return `Dealer drew a Blackjack`
   if (isNatural && winner === 'T') return 'You and the Dealer drew a Blackjack'
