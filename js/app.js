@@ -135,7 +135,6 @@ resetGameBtn.addEventListener('click', function(){
 init()
 
 function init(){
-  // isMute = true
   bankAmount = 2000
   turn = null
   initStatMeters()
@@ -148,7 +147,6 @@ function initStatMeters() {
   deckCountMeter.setAttribute('low', 40) //? deck reshuffles at 25
   hiLoCountMeter.setAttribute('optimal', 2) //?beta, low count indicates player disadvantage
   hiLoCountMeter.setAttribute('low', -1)
-  // hiLoCountMeter.setAttribute('high', 1)
   hiLoCountMeter.setAttribute('min', -7)
   hiLoCountMeter.setAttribute('max', 7)
 }
@@ -418,8 +416,6 @@ function renderPlayerHand(){
 
 
 //* utility functions =================================//
-
-
 
 function getClosest21(){
   let closest
