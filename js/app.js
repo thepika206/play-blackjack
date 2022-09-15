@@ -66,7 +66,7 @@ const lowDeck = 40
 // ----------------------------Variables (state)--------------------------------------
 
 
-let deck, playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount, payout, hiLoCount, isSpecialDown
+let deck, playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount, payout, hiLoCount, isSpecialDown, playAgainTimeoutID
 let isMute = true
 let specialDownFactor = 3  //? this is the multiplier for the special Hit (doubledown) feature and can change with special code
 // ----------------------------Cached Element references------------------------------
@@ -175,6 +175,7 @@ function handleClickReset(){
 }
 
 function handleClickAnyPlay(betBtnAmount){
+  clearTimeout(playAgainTimeoutID)
   turn = 'setup-turn'
   initHand()
   betAmount = betBtnAmount
@@ -368,7 +369,7 @@ function renderMessage(){
   headlineEl.removeAttribute('class')
   headlineEl.classList.add(`${winner}`)
   if (turn === 'game-over-turn'){
-    setTimeout(() => {
+    playAgainTimeoutID = setTimeout(() => {
       headlineEl.removeAttribute('class')
       headlineEl.textContent = 'Play again?'
       messageEl.textContent = 'select a play option'
