@@ -17,12 +17,23 @@
 - Special (doubledown) multiplier down
 - Mobile layout (deck stats hidden)
 
-### Not in scope
-- split hand
-- suggested moves based on your current total and the dealer up card
-- variable bet
-- insurance
+### Ace Logic
+- Give Ace a basic value of 1, determine the basic value of the hand by adding all the cards
+- Only use the basic value of the hand is used for determining if over 21 (bust).
+- To get the hand total, if the hand contains SOME Ace and the basic value is 11 or less, add a one time 10 to the hand total.  
+  - prevents adding bonus except when it is advantageous to do so
+  - prevents adding bonus more than once (counting two aces each as 11's would bust the hand)
 
+### Card Counting HI-LO system (in Beta)
+- Hi-Lo system is a running count of the Hi (Ace and 10 cards) and Lo (2,3,4,5,6)
+- In this system the deck favors the dealer if it has more Lo cards and less Hi cards
+- https://www.youtube.com/watch?v=G_So72lFNIU
+
+### Not in scope - ICEBOX
+- Split hand
+- Practice Mode that suggests Hit or Stand moves based on your current total and the dealer up card.
+- Multiple Player mode
+- Dealer Insurance
 
 ## Technologies
 - JavaScript

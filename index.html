@@ -44,9 +44,11 @@
       <div id="deck" class="card medium back-red shadow"></div>
       <div id="deck-stats">
         <label for="deck-count-meter">Cards Left:</label>          
-        <meter id="deck-count-meter" optimum="52" min="0" max="52" value="52"></meter>
-        <label for="hi-lo-count">-10 Hi-Lo +10</label>          
-        <meter id="hi-lo-count" optimum="0" min="-10" max="10" value="0"></meter>
+        <span id="deck-count">52</span>
+        <meter id="deck-count-meter" low="" optimum="52" min="0" max="52" value="52"></meter>
+        <label for="hi-lo-count-meter">Hi-Lo (beta)</label>          
+        <span id="hi-lo-count">0</span>
+        <meter id="hi-lo-count-meter" low="" high="" optimum="0" min="" max="" value="0"></meter>
       </div>
       <button type="button" id="mute-sound-btn" class="btn btn-sm btn-secondary">Mute</button>
     </section>

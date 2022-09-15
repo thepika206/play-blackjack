@@ -60,6 +60,8 @@ const maxBet = 500
 const sfxDeal = new Audio('../audio/dealing-card2.wav')
 const sfxChChing = new Audio('../audio/ch-ching.wav')
 const sfxFanFareF = new Audio('../audio/fanfare-f.flac')
+const minDeck = 25
+const lowDeck = 40
 
 // ----------------------------Variables (state)--------------------------------------
 
@@ -77,8 +79,10 @@ let dealerHandDiv = document.querySelector('#dealer-hand')
 let freePlayBtn = document.querySelector('#free-play-btn')
 let minBetPlayBtn = document.querySelector('#min-bet-play-btn')
 let maxBetPlayBtn = document.querySelector('#max-bet-play-btn')
+let deckCountEl = document.querySelector('#deck-count')
 let deckCountMeter = document.querySelector('#deck-count-meter')
 let hiLoCountEl = document.querySelector('#hi-lo-count')
+let hiLoCountMeter = document.querySelector('#hi-lo-count-meter')
 let resetGameBtn = document.querySelector('#reset-game-btn')
 let bankAmountEl = document.querySelector('#bank-amount')
 let betAmountEl = document.querySelector('#bet-amount')
@@ -133,9 +137,19 @@ function init(){
   isMute = true
   bankAmount = 2000
   turn = null
+  initStatMeters()
   initDeck()
   initHand()
   render()
+}
+
+function initStatMeters() {
+  deckCountMeter.setAttribute('low', 40) //? deck reshuffles at 25
+  hiLoCountMeter.setAttribute('optimal', 2) //?beta, low count indicates player disadvantage
+  hiLoCountMeter.setAttribute('low', -1)
+  // hiLoCountMeter.setAttribute('high', 1)
+  hiLoCountMeter.setAttribute('min', -7)
+  hiLoCountMeter.setAttribute('max', 7)
 }
 
 function initHand (){
@@ -146,7 +160,7 @@ function initHand (){
   isNatural = null
   betAmount = 0
   payout = 0
-  if (deck.length < 25) initDeck()
+  if (deck.length < minDeck) initDeck()
 }
 function initDeck (){
   deck = JSON.parse(JSON.stringify(standardCards)) //? deck is deep copy of the standard deck constant
@@ -217,7 +231,7 @@ function drawCard(handArr) {
     let randIdx = Math.floor(Math.random() * deck.length)
     let cardPicked = deck.splice(randIdx, 1)[0]
     handArr.push(cardPicked)
-    incrHiLoCount(cardPicked.value)
+    setHiLoCount(cardPicked.value)
   }
 }
 function initialDeal(cardCount) {
@@ -302,9 +316,11 @@ function renderInGameButtons(){
 }
 
 function renderStats() {
-  hiLoCountEl.value = hiLoCount
   bankAmountEl.textContent = bankAmount
   betAmountEl.textContent = betAmount
+  hiLoCountEl.textContent = hiLoCount
+  hiLoCountMeter.value = hiLoCount
+  deckCountEl.textContent = deck.length
   deckCountMeter.value = deck.length
 }
 
@@ -453,9 +469,10 @@ function getWinnerMessages(){
 }
 
 
-function incrHiLoCount (cardVal){
+function setHiLoCount (cardVal){
   if (cardVal > 1 && cardVal < 7) hiLoCount += 1
   if (cardVal === 1 || cardVal === 10) hiLoCount -= 1
+  //? ignore 7,8,9 cards which have a neutral effect hiLoCount strategy
 }
 
 function specialHitAllowed() {
