@@ -13,9 +13,11 @@
 - Ace logic for 1 or 11
 - deck stats for card counting using Hi-Lo running count
 - Two betting options
-- Includes a bonus payout for drawing natural 21
-- Special (doubledown) multiplier down
 - Mobile layout (deck stats hidden)
+- Game differs from typical rules:
+  - Includes a bonus payout for drawing natural 21, 2 to 1 (higher than the typical 3 to 2)
+  - Special 3 triple down instead of a double down
+  - No splitting pairs
 
 ### Ace Logic
 - Give Ace a basic value of 1, determine the basic value of the hand by adding all the cards
