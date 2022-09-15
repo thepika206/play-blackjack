@@ -201,6 +201,7 @@ meter{
 
 .card {
   margin: 1vh;
+  cursor: default;
 }
 
 .card.outline {
