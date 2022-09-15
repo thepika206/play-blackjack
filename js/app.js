@@ -77,8 +77,7 @@ let dealerHandDiv = document.querySelector('#dealer-hand')
 let freePlayBtn = document.querySelector('#free-play-btn')
 let minBetPlayBtn = document.querySelector('#min-bet-play-btn')
 let maxBetPlayBtn = document.querySelector('#max-bet-play-btn')
-let deckCountEl = document.querySelector('#deck-count')
-let deckCountPBar = document.querySelector('#deck-count-progress')
+let deckCountMeter = document.querySelector('#deck-count-meter')
 let hiLoCountEl = document.querySelector('#hi-lo-count')
 let resetGameBtn = document.querySelector('#reset-game-btn')
 let bankAmountEl = document.querySelector('#bank-amount')
@@ -129,7 +128,7 @@ resetGameBtn.addEventListener('click', function(){
 init()
 
 function init(){
-  isMute = false
+  isMute = true
   bankAmount = 2000
   turn = null
   initDeck()
@@ -303,12 +302,10 @@ function renderInGameButtons(){
 }
 
 function renderStats() {
-  deckCountEl.textContent = deck.length
-  deck.length < 25 ? deckCountEl.classList.add('value-warning') : deckCountEl.classList.remove('value-warning')
   hiLoCountEl.textContent = hiLoCount
   bankAmountEl.textContent = bankAmount
   betAmountEl.textContent = betAmount
-  deckCountPBar.value = deck.length
+  deckCountMeter.value = deck.length
 }
 
 function renderMuteBtn() {

@@ -34,7 +34,7 @@ main.container{
   padding: 0;
   display: grid;
   width: 90%;
-  max-width: 900px;
+  max-width: 1000px;
   height: 90vh;
   max-height: 700px;
   background-color: lightgrey;
@@ -46,7 +46,7 @@ main.container{
     2fr 
     1fr 
     .25fr;
-  grid-template-columns: 23% 30% auto;
+  grid-template-columns: 20% 30% auto;
   grid-template-areas:
     "message message message"
     "bet-btn bet-btn header"
@@ -92,12 +92,18 @@ section{
   /* background-color: olivedrab; */
   grid-area: side;
   flex-direction:  column;
+  align-items: center;
   justify-content: space-evenly;
   padding-left: 20px;
 }
 
 div#deck{
   margin:0
+}
+div#deck-stats{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #play-upper--section{
@@ -172,9 +178,12 @@ div#deck{
   font-size: 11px;
 }
 
+meter{
+  width: 100px;
+}
+
 .value-warning {
-  background-color: red;
-  /* font-weight: 600; */
+  color: red;
 }
 
 .hidden {
@@ -201,7 +210,7 @@ div#deck{
   box-shadow: 7px 7px 7px 0 rgba(41, 41, 41, 0.95) !important;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 800px) {
   main.container{
     /* color: red;  */
     padding: 0;
