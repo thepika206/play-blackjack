@@ -67,9 +67,7 @@ h3{
 }
 
 section{
-  /* border: 1px dashed red; */
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
   padding: 5px 0;
@@ -89,11 +87,8 @@ section{
 }
 
 #play-deck--section{
-  /* background-color: olivedrab; */
   grid-area: side;
   flex-direction:  column;
-  align-items: center;
-  justify-content: space-evenly;
   padding-left: 20px;
 }
 
@@ -131,16 +126,16 @@ div#deck-stats{
   grid-area: bet-btn;
 }
 
-#play-deck--section p{
-  align-self: flex-end;
-  color: white;
-  margin: 3px;
-}
-
 #footer--section {
   font-size: 16px;
   grid-area: footer;
   background-color: black;
+}
+
+#play-deck--section p{
+  align-self: flex-end;
+  color: white;
+  margin: 3px;
 }
 
 #rule-container{
@@ -209,7 +204,6 @@ meter{
 }
 
 .card.outline {
-  /* border: 0.15em dashed #202d7a; */
   border: 0.15em dashed green;
 }
 
@@ -219,7 +213,6 @@ meter{
 
 @media only screen and (max-width: 800px) {
   main.container{
-    /* color: red;  */
     padding: 0;
     min-width: none;
     width: 100%;
@@ -255,12 +248,9 @@ meter{
   }
 
   #game-message{
-    /* color: red; */
     font-size: 18px ;
   }
   #footer--section {
     font-size: 10px;
-    /* grid-area: footer;
-    background-color: black; */
   }
 }
