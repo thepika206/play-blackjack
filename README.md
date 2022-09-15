@@ -1,4 +1,4 @@
-![Alt text](./game-image-1.png?raw=true "image captured from game")
+![Alt text](./images/screen-shots/game-image-1.png?raw=true "image captured from game")
 
 ## Background
 - I created a Blackjack game as an individual project for a coding camp at General Assembly
@@ -53,5 +53,5 @@
   - fanfare https://freesound.org/people/plasterbrain/sounds/397354/
 
 ## Other images
-![Alt text](./game-image-2.png?raw=true "image captured from game")
-![Alt text](./game-flow.png?raw=true "image captured from game")
+![Alt text](./images/screen-shots/game-image-2.png?raw=true "image captured from game")
+![Alt text](./images/screen-shots/game-flow.png?raw=true "image captured from game")
