@@ -88,7 +88,7 @@ let muteBtn = document.querySelector('#mute-sound-btn')
 
 specialHitBtn.addEventListener('click', function(){
   if (specialHitAllowed() === true){
-    handleClickSpecialHit(playerHand) //!test for sound
+    handleClickSpecialHit(playerHand)
   }
 })
 
@@ -106,10 +106,12 @@ freePlayBtn.addEventListener('click', function(){
   if (bankAmount>=0 && (turn === null || turn === 'game-over-turn')) handleClickAnyPlay(0)
   render()
 })
+
 minBetPlayBtn.addEventListener('click', function(){
   if (bankAmount>=minBet && (turn === null || turn === 'game-over-turn'))handleClickAnyPlay(minBet)
   render()
 })
+
 maxBetPlayBtn.addEventListener('click', function(){
   if (bankAmount>=maxBet && (turn === null || turn === 'game-over-turn'))handleClickAnyPlay(maxBet)
   render()
@@ -132,12 +134,11 @@ function init(){
   bankAmount = 2000
   turn = null
   initDeck()
-  initHand(0)
+  initHand()
   render()
 }
 
 function initHand (){
-  // turn = null
   playerHand = []
   dealerHand = []
   isSpecialDown = null
@@ -146,7 +147,6 @@ function initHand (){
   betAmount = 0
   payout = 0
   if (deck.length < 25) initDeck()
-  // render()
 }
 function initDeck (){
   deck = JSON.parse(JSON.stringify(standardCards)) //? deck is deep copy of the standard deck constant
@@ -309,7 +309,7 @@ function renderStats() {
 }
 
 function renderMuteBtn() {
-muteBtn.textContent = !isMute ? 'Mute Sound' : 'Unmute'
+  muteBtn.textContent = !isMute ? 'Mute Sound' : 'Unmute'
 }
 
 function renderMessage(){
