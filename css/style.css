@@ -209,8 +209,8 @@ meter{
 }
 
 .card.outline {
-  border: 0.15em dashed #202d7a;
-  border: 0.15em dashed white;
+  /* border: 0.15em dashed #202d7a; */
+  border: 0.15em dashed green;
 }
 
 .card.shadow {
