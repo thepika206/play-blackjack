@@ -189,7 +189,7 @@ meter{
 
 .hidden {
   opacity: .30;
-  transition:all .5s
+  transition:opacity .5s
 }
 
 .card-container {
