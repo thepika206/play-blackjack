@@ -254,6 +254,18 @@ function initialDeal(cardCount) {
   }
 }
 
+/* hand containing any Aces with a basic value of less than 12 should count an extra 10 to the total.  Otherwise only use the basic value */  
+function getHandValue(handArr){
+  let hasAce = false
+  let baseTotal = 0 
+  for (let i=0;i<handArr.length; i++){
+    baseTotal += handArr[i].value
+    hasAce = handArr[i].value === 1 ? true : hasAce
+  } 
+  total = hasAce && baseTotal < 12 ? baseTotal + 10 : baseTotal 
+  return total
+}
+
 function handleNaturalWin(){
   winner = getNaturalWinner() 
   if (winner) {
@@ -397,17 +409,6 @@ function renderPlayerHand(){
 
 //* utility functions =================================//
 
-/* hand containing any Aces with a basic value of less than 12 should count an extra 10 to the total.  Otherwise only use the basic value */  
-function getHandValue(handArr){
-  let hasAce = false
-  let baseTotal = 0 
-  for (let i=0;i<handArr.length; i++){
-    baseTotal += handArr[i].value
-    hasAce = handArr[i].value === 1 ? true : hasAce
-  } 
-  total = hasAce && baseTotal < 12 ? baseTotal + 10 : baseTotal 
-  return total
-}
 
 
 function getClosest21(){
