@@ -317,7 +317,7 @@ function renderMessage(){
   let playerTotal = getHandValue(playerHand)
   if (turn === null){
     headline = 'Play Blackjack'
-    message = 'To Start, select a Play option'
+    message = 'select a play option'
   } else if (turn === 'setup-turn'){
     headline = 'New Game Starting'
     message = 'please wait'
@@ -326,7 +326,7 @@ function renderMessage(){
     message = `Your have: ${playerTotal} | Dealer stands on 17 and above`
   } else if (turn === 'player-turn') {
     headline = 'Your Turn'
-    message = `You have: ${playerTotal} | Dealer Up Card: ${dealerHand[0].value}`  
+    message = `You have: ${playerTotal} | Dealer up card: ${dealerHand[0].value}`  
   } else if (turn === 'game-over-turn') {
     headline = winner === 'player' ? `You Won!! Bet was ${betAmount}` : 'Dealer Won'
     headline = winner === 'T' ? 'Tie Game - bet returned' : headline
