@@ -220,6 +220,7 @@ function handleClickMute(){
     isMute = false
     console.log('unmute')
   }
+  playSound('deal')
   render()
 }
 
