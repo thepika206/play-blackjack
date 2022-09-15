@@ -302,7 +302,7 @@ function renderInGameButtons(){
 }
 
 function renderStats() {
-  hiLoCountEl.textContent = hiLoCount
+  hiLoCountEl.value = hiLoCount
   bankAmountEl.textContent = bankAmount
   betAmountEl.textContent = betAmount
   deckCountMeter.value = deck.length
