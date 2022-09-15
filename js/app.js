@@ -341,7 +341,12 @@ function renderMessage(){
 
 function renderDealerHand(){
   dealerHandDiv.innerHTML = ''
-  if (turn === 'player-turn' && dealerHand.length === 2){ //? on player's turn the dealer has and up and down card
+  if(dealerHand.length === 0) {
+    dealerHandDiv.innerHTML = ''
+    let card = document.createElement('div')
+    card.classList.add('card', 'medium', `outline`)
+    dealerHandDiv.appendChild(card)
+  } else if (turn === 'player-turn' && dealerHand.length === 2){
     let card = document.createElement('div')
     card.classList.add('card', 'medium', `${dealerHand[0].id}`)
     dealerHandDiv.appendChild(card)
@@ -359,12 +364,20 @@ function renderDealerHand(){
 
 function renderPlayerHand(){
   playerHandDiv.innerHTML = ''
-  for (let i=0; i<playerHand.length;i++){
+  if(playerHand.length === 0) {
+    playerHandDiv.innerHTML = ''
     let card = document.createElement('div')
-    card.classList.add('card', 'medium', `${playerHand[i].id}`)
+    card.classList.add('card', 'medium', `outline`)
     playerHandDiv.appendChild(card)
+  } else {
+    for (let i=0; i<playerHand.length;i++){
+      let card = document.createElement('div')
+      card.classList.add('card', 'medium', `${playerHand[i].id}`)
+      playerHandDiv.appendChild(card)
+    }
   }
 }
+
 
 //* utility functions =================================//
 
