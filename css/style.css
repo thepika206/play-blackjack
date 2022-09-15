@@ -138,7 +138,7 @@ div#deck-stats{
 }
 
 #footer--section {
-  font-size: 10px;
+  font-size: 16px;
   grid-area: footer;
   background-color: black;
 }
@@ -260,7 +260,7 @@ meter{
   }
   #footer--section {
     font-size: 10px;
-    grid-area: footer;
-    background-color: black;
+    /* grid-area: footer;
+    background-color: black; */
   }
 }
