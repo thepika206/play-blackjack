@@ -188,8 +188,9 @@ meter{
 }
 
 .hidden {
-  opacity: .30;
-  transition:opacity .5s
+  opacity: 0;
+  transition:opacity .5s;
+  cursor: default;
 }
 
 .card-container {
