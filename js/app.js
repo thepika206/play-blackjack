@@ -66,8 +66,9 @@ const lowDeck = 40
 // ----------------------------Variables (state)--------------------------------------
 
 
-let deck, playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount, payout, hiLoCount, isSpecialDown, isMute
-let specialDownFactor = 3  //? this is the multiplier for the special Hit (doubledown)  feature.
+let deck, playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount, payout, hiLoCount, isSpecialDown
+let isMute = true
+let specialDownFactor = 3  //? this is the multiplier for the special Hit (doubledown) feature and can change with special code
 // ----------------------------Cached Element references------------------------------
 let headlineEl = document.querySelector('#headline-message')
 let messageEl = document.querySelector('#game-message')
@@ -134,7 +135,7 @@ resetGameBtn.addEventListener('click', function(){
 init()
 
 function init(){
-  isMute = true
+  // isMute = true
   bankAmount = 2000
   turn = null
   initStatMeters()
