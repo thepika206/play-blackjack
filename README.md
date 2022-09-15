@@ -7,21 +7,20 @@
 
   
 # Game Summary
-- A game for one player based on the classic card game of 21
-- The object is to be closer to 21 than the computer dealer without going over 21.
+- A game for one player with modififications of the classic rules https://bicyclecards.com/how-to-play/blackjack/
 - Two betting options and free play if you run out of money
+- Fun 2 to 1 payout for natural 21 (typical is 3 to 2).
+- Fun 3 triple down button instead of a double down
+- No splitting pairs (out of scope)
 - Mobile friendly design
-### My game differs from common Blackjack rules:
-- Bonus payout for natural 21, increased 2 to 1 (typical 3 to 2) to improve the player advantage.
-- Special 3 triple down instead of a double down to improve the player advance.  A secret code can increase this further...
-- No splitting pairs
 
 # Technologies Used
 - JavaScript
 - HTML (including the Meter element and Audio)
-- CSS
-- Bootstrap (buttons)
-- Git and GitHub
+- CSS (including grid and flex)
+- external Card styling CSS template, see Credits section
+- external Bootstrap CSS framework
+- GitHub
 - Netlify (deployment and hosting)
 
 # Key Logic
@@ -46,7 +45,6 @@
 - Dealer Insurance
 
 # Credits
-- Basic rules of Blackjack -Bicycle https://bicyclecards.com/how-to-play/blackjack/
 - Card design images and cardstarter.css -Ben Manley   github @ManliestBen
 - Favicon -favicon.io
 ### Sound Credits
