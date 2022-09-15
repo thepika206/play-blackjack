@@ -366,6 +366,13 @@ function renderMessage(){
   playerTotalEl.textContent = `Player Hand: ${playerTotal}`
   headlineEl.removeAttribute('class')
   headlineEl.classList.add(`${winner}`)
+  if (turn === 'game-over-turn'){
+    setTimeout(() => {
+      headlineEl.removeAttribute('class')
+      headlineEl.textContent = 'Play again?'
+      messageEl.textContent = 'select a play option'
+    }, 4000);
+  }
 }
 
 function renderDealerHand(){
