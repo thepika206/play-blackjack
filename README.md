@@ -1,5 +1,13 @@
 ![the game main view](./images/screen-shots/game-image-1.png?raw=true "a image captured from the game")
-
+# Game Summary
+- The game is based on the classic card game. See [classic rules referenced from Bicycle.com](https://bicyclecards.com/how-to-play/blackjack/)
+- There are two betting options and free play if out of money
+- For Fun, the natural 21 payout is 2 to 1 (typical is 3 to 2)
+- For Fun, there is a 3 triple down option instead of a double down
+- No splitting pairs - see [icebox](#extras-and-future-features)
+- [Includes mobile layout](#mobile-game)
+<br>
+<br>
 # Background
 - I created a [ Blackjack game ](https://thepika206-play-blackjack.netlify.app/)as an individual project at General Assembly
 - A surprise challenge was to slow down the draw for dealer so that each card would render and pause.
@@ -17,20 +25,12 @@
 <br>
 <br>
 
-# Game Summary
-- The game makes modififications of the [classic rules referenced from Bicycle.com](https://bicyclecards.com/how-to-play/blackjack/)
-- There are two betting options and free play if out of money
-- For Fun, the natural 21 payout is 2 to 1 (typical is 3 to 2).
-- For Fun, there is a 3 triple down option instead of a double down
-- No splitting pairs (out of scope)
-- [Includes mobile layout](#mobile-game)
-<br>
-<br>
+
 
 
 # Key Logic
 ## Representing the game value of cards and rendering them on screen
-Below is a sample of how the deck is modeled, a player's hand or the dealer's hand is very similar.  Notice that Aces have a value of 1.  See [Getting value of the hand](#getting-the-value-of-the-hand).
+Below is a sample of how the deck is modeled, a player's hand or the dealer's hand is very similar.  Notice that Aces have a value of 1.  -see [Getting value of the hand](#getting-the-value-of-the-hand).
 > let deck = [{id:'dA', value:1},
   {id:'dK', value:10},
   {id:'dQ', value:10},
@@ -58,7 +58,7 @@ The core function to return the appropriate value of a hand works like this:
 
 # Extras and Future Features
 ## Card Counting HI-LO system
-- *Beta feature*, definitely not calibrated yet for a 1 deck game.
+- *Beta feature*, needs more testing
 - Hi-Lo system is a running count of the Hi (Ace and 10 cards) and Lo (2,3,4,5,6)
 - In this system the deck favors the dealer if it has more Lo cards and less Hi cards
 ## Not in scope - ICEBOX
