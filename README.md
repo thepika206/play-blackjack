@@ -1,16 +1,18 @@
 ![the game main view](./images/screen-shots/game-image-1.png?raw=true "a image captured from the game")
 # Game Summary
 - The game is based on the classic card game. See [classic rules referenced from Bicycle.com](https://bicyclecards.com/how-to-play/blackjack/)
-- There are two betting options and free play if out of money
-- For Fun, the natural 21 payout is 2 to 1 (typical is 3 to 2)
-- For Fun, there is a 3 triple down option instead of a double down
-- No splitting pairs - see [icebox](#extras-and-future-features)
 - [Includes mobile layout](#mobile-game)
+- Single deck of cards
+- Two betting options
+- Bonus natural Blackjack payout (2 to 1 which is higher than typical)
+- 3 triple down option instead of a double down
+- Sound effects
+- Running card count (Hi Lo system)
 <br>
 <br>
 # Background
 - I created a [ Blackjack game ](https://thepika206-play-blackjack.netlify.app/)as an individual project at General Assembly
-- A surprise challenge was to slow down the draw for dealer so that each card would render and pause.
+- I am really proud of how I used CSS grid to manage a desktop and mobile view.
 <br>
 <br>
   
@@ -24,8 +26,6 @@
 - Netlify (deployment and hosting)
 <br>
 <br>
-
-
 
 
 # Key Logic
