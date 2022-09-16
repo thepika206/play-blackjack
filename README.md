@@ -1,5 +1,7 @@
 ![the game main view](./images/screen-shots/game-image-1.png?raw=true "a image captured from the game")
+
 # Game Summary
+Here's a link to play my <a href="https://thepika206-play-blackjack.netlify.app/" target="_blank">Blackjack</a> game
 - The game is based on the classic card game. See [classic rules referenced from Bicycle.com](https://bicyclecards.com/how-to-play/blackjack/)
 - [Includes mobile layout](#mobile-game)
 - Single deck of cards
@@ -10,8 +12,8 @@
 - Running card count (Hi Lo system)
 
 # Background
-- I created a [ Blackjack game ](https://thepika206-play-blackjack.netlify.app/)as an individual project at General Assembly
-- I am really proud of how I used CSS grid to manage a desktop and mobile view.
+- This was an individual project at General Assembly
+- I used CSS grid to manage a desktop and mobile view and learned a lot about state management.
 
   
 # Technologies Used
