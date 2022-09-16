@@ -371,7 +371,7 @@ function renderMessage(){
       headlineEl.removeAttribute('class')
       headlineEl.textContent = 'Play again?'
       messageEl.textContent = 'select a play option'
-    }, 4000);
+    }, 7000);
   }
 }
 
