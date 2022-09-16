@@ -8,13 +8,11 @@
 - 3 triple down option instead of a double down
 - Sound effects
 - Running card count (Hi Lo system)
-<br>
-<br>
+
 # Background
 - I created a [ Blackjack game ](https://thepika206-play-blackjack.netlify.app/)as an individual project at General Assembly
 - I am really proud of how I used CSS grid to manage a desktop and mobile view.
-<br>
-<br>
+
   
 # Technologies Used
 - JavaScript
@@ -24,8 +22,6 @@
 - external Bootstrap CSS framework
 - GitHub
 - Netlify (deployment and hosting)
-<br>
-<br>
 
 
 # Key Logic
@@ -53,8 +49,6 @@ The core function to return the appropriate value of a hand works like this:
   - Ace-2-Ace --> (4 + 10 bonus)
   - Ace-2-Ace-King --> (14 + 0 bonus)
   - Ace-2-Ace-King-Jack --> (24 + 0 bonus) BUSTED!
-<br>
-<br>
 
 # Extras and Future Features
 ## Card Counting HI-LO system
@@ -66,8 +60,6 @@ The core function to return the appropriate value of a hand works like this:
 - Practice Mode that suggests Hit or Stand moves based on your current total and the dealer up card.
 - Multiple Player mode
 - Dealer Insurance
-<br>
-<br>
 
 # Credits
 - Card design images and cardstarter.css -Ben Manley   github @ManliestBen
@@ -77,8 +69,6 @@ The core function to return the appropriate value of a hand works like this:
   - [card dealing click sound from freesound.org](https://freesound.org/people/EminYILDIRIM/sounds/536108/)
   - [cash register opening sound from freesound.org](https://freesound.org/people/hgernhardt/sounds/402651/)
   - [fanfare sound from freesound.org](https://freesound.org/people/plasterbrain/sounds/397354/)
-<br>
-<br>
 
 # Mobile Game
 ![the game main view on a mobile](./images/screen-shots/game-image-2.png?raw=true "image captured from game")
