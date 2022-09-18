@@ -60,7 +60,7 @@ const maxBet = 500
 const sfxDeal = new Audio('../audio/dealing-card2.wav')
 const sfxChChing = new Audio('../audio/ch-ching.wav')
 const sfxFanFareF = new Audio('../audio/fanfare-f.flac')
-const sfxOnFireTrack = new Audio('../audio/melody-loop-110-bpm.mp3')
+// const sfxOnFireTrack = new Audio('../audio/melody-loop-110-bpm.mp3') //? may want this music track later
 const minDeck = 25
 const lowDeck = 40
 
@@ -68,7 +68,7 @@ const lowDeck = 40
 
 
 let deck, playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount, payout, hiLoCount, isSpecialDown, playAgainTimeoutID
-let isMute = true
+let isMute = false
 let specialDownFactor = 3  //? this is the multiplier for the special Hit (doubledown) feature and can change with special code
 // ----------------------------Cached Element references------------------------------
 let headlineEl = document.querySelector('#headline-message')
@@ -458,7 +458,10 @@ function getPayout(){
     payout = betAmount
   } else if (winner === 'player' && isNatural) {
     payout = betAmount * 3
-    playSound('natural')
+    playSound('major-win')
+  } else if (winner === 'player' && isSpecialDown) {
+    payout = betAmount * 2
+    playSound('major-win')
   } else if (winner === 'player') {
     payout = betAmount * 2
     playSound('normal-win')
@@ -473,11 +476,11 @@ function getWinnerMessages(){
   let player = getHandValue(playerHand)
   let dealer = getHandValue(dealerHand)
   if (player > 21 ) return `You busted with ${player}`
-  if (dealer > 21 ) return `Dealer busted with ${dealer}`
+  if (dealer > 21 && !isSpecialDown ) return `Dealer busted with ${dealer}`
   if (isNatural && winner === 'player') return `You drew a Natural Blackjack`
   if (isNatural && winner === 'dealer') return `Dealer drew a Natural Blackjack`
   if (isNatural && winner === 'T') return 'You and the Dealer drew a Natural Blackjack'
-  if (winner === 'player' && isSpecialDown) return `Congratulations! ${specialDownFactor} X Winner`
+  if (winner === 'player' && isSpecialDown) return `Congratulations on the ${specialDownFactor} X win`
   if (winner === 'player') return `Your ${player} beat Dealer's ${dealer}`
   if (winner === 'dealer') return `Your ${player} lost to Dealer's ${dealer}`
   if (winner === 'T') return `Your ${player} equals Dealer's ${dealer}`
@@ -499,15 +502,12 @@ function playSound(sound){
   if (sound === 'deal') {
     sfxDeal.volume = .30
     sfxDeal.play()
-  } else if (sound === 'natural') {
+  } else if (sound === 'major-win') {
     sfxFanFareF.volume = .05
     sfxFanFareF.play()
   } else if (sound === 'normal-win') {
     sfxChChing.volume = .10
     sfxChChing.play()
-  } else if (sound === 'special-hit-win') {
-    sfxOnFireTrack.volume = .10
-    sfxOnFireTrack.play()
   }
 }
 
