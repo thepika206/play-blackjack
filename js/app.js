@@ -144,7 +144,7 @@ function init(){
   render()
 }
 
-function initStatMeters() {
+function initStatMeters(){
   deckCountMeter.setAttribute('low', 40) //? deck reshuffles at 25
   hiLoCountMeter.setAttribute('optimal', 2) //?beta, low count indicates player disadvantage
   hiLoCountMeter.setAttribute('low', -1)
@@ -152,7 +152,7 @@ function initStatMeters() {
   hiLoCountMeter.setAttribute('max', 7)
 }
 
-function initHand (){
+function initHand(){
   playerHand = []
   dealerHand = []
   isSpecialDown = null
@@ -162,7 +162,7 @@ function initHand (){
   payout = 0
   if (deck.length < minDeck) initDeck()
 }
-function initDeck (){
+function initDeck(){
   deck = JSON.parse(JSON.stringify(standardCards)) //? deck is deep copy of the standard deck constant
   hiLoCount = 0
 }
@@ -181,9 +181,8 @@ function handleClickAnyPlay(betBtnAmount){
 }
 
 
-function handleClickSpecialHit(handArr) {
+function handleClickSpecialHit(handArr){
   isSpecialDown = true
-  console.log('wait for the special action')
   betAmount *= specialDownFactor
   bankAmount -= betAmount
   render()
@@ -199,7 +198,7 @@ function handleClickSpecialHit(handArr) {
     }
   }, 2000);
 }
-function handleClickHit(handArr) {
+function handleClickHit(handArr){
   drawCard(handArr)
   let total = getHandValue(playerHand)
   if (total > 21){
@@ -230,7 +229,7 @@ function handleClickMute(){
 
 //* main game flow functions =================================//
 
-function drawCard(handArr) {
+function drawCard(handArr){
   if (deck.length > 0) {
     playSound('deal')
     let randIdx = Math.floor(Math.random() * deck.length)
@@ -307,7 +306,7 @@ function dealerTurn(){
 }  
 
 //* rendering functions =================================//
-function render() {
+function render(){
   renderMessage()
   renderDealerHand()
   renderPlayerHand()
@@ -341,7 +340,7 @@ function renderStats() {
   deckCountMeter.value = deck.length
 }
 
-function renderMuteBtn() {
+function renderMuteBtn(){
   muteBtn.textContent = !isMute ? 'Mute Sound' : 'Unmute'
 }
 
@@ -487,13 +486,13 @@ function getWinnerMessages(){
 }
 
 
-function setHiLoCount (cardVal){
+function setHiLoCount(cardVal){
   if (cardVal > 1 && cardVal < 7) hiLoCount += 1
   if (cardVal === 1 || cardVal === 10) hiLoCount -= 1
   //? ignore 7,8,9 cards which have a neutral effect hiLoCount strategy
 }
 
-function specialHitAllowed() {
+function specialHitAllowed(){
   return (turn === 'player-turn' && playerHand.length === 2 && (bankAmount >= betAmount * specialDownFactor) && !isSpecialDown)
 }
 
