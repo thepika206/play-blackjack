@@ -60,6 +60,7 @@ const maxBet = 500
 const sfxDeal = new Audio('../audio/dealing-card2.wav')
 const sfxChChing = new Audio('../audio/ch-ching.wav')
 const sfxFanFareF = new Audio('../audio/fanfare-f.flac')
+const sfxOnFireTrack = new Audio('../audio/melody-loop-110-bpm.mp3')
 const minDeck = 25
 const lowDeck = 40
 
@@ -360,10 +361,10 @@ function renderMessage(){
     headline = 'Your Turn'
     message = `You have: ${playerTotal} | Dealer up card: ${dealerHand[0].value}`  
   } else if (turn === 'player-turn' && isSpecialDown) {
-    headline = `${specialDownFactor} X Down, One Card Coming`
+    headline = `${specialDownFactor} X Down, Draw One Card...`
     message = `You have: ${playerTotal} | Dealer up card: ${dealerHand[0].value}`  
   } else if (turn === 'game-over-turn') {
-    headline = winner === 'player' ? `You Won!! Bet was ${betAmount}` : 'Dealer Won'
+    headline = winner === 'player' ? `You Won ${betAmount}!` : 'Dealer Won'
     headline = winner === 'T' ? 'Tie Game - bet returned' : headline
     message = getWinnerMessages()
   }
@@ -473,9 +474,10 @@ function getWinnerMessages(){
   let dealer = getHandValue(dealerHand)
   if (player > 21 ) return `You busted with ${player}`
   if (dealer > 21 ) return `Dealer busted with ${dealer}`
-  if (isNatural && winner === 'player') return `You drew a Blackjack - Double Payout!!`
-  if (isNatural && winner === 'dealer') return `Dealer drew a Blackjack`
-  if (isNatural && winner === 'T') return 'You and the Dealer drew a Blackjack'
+  if (isNatural && winner === 'player') return `You drew a Natural Blackjack`
+  if (isNatural && winner === 'dealer') return `Dealer drew a Natural Blackjack`
+  if (isNatural && winner === 'T') return 'You and the Dealer drew a Natural Blackjack'
+  if (winner === 'player' && isSpecialDown) return `Congratulations! ${specialDownFactor} X Winner`
   if (winner === 'player') return `Your ${player} beat Dealer's ${dealer}`
   if (winner === 'dealer') return `Your ${player} lost to Dealer's ${dealer}`
   if (winner === 'T') return `Your ${player} equals Dealer's ${dealer}`
@@ -503,6 +505,9 @@ function playSound(sound){
   } else if (sound === 'normal-win') {
     sfxChChing.volume = .10
     sfxChChing.play()
+  } else if (sound === 'special-hit-win') {
+    sfxOnFireTrack.volume = .10
+    sfxOnFireTrack.play()
   }
 }
 

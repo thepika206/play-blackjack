@@ -36,6 +36,7 @@ Here's a link to play my <a href="https://thepika206-play-blackjack.netlify.app/
   - [card dealing click sound from freesound.org](https://freesound.org/people/EminYILDIRIM/sounds/536108/)
   - [cash register opening sound from freesound.org](https://freesound.org/people/hgernhardt/sounds/402651/)
   - [fanfare sound from freesound.org](https://freesound.org/people/plasterbrain/sounds/397354/)
+  - [tropical dance music from freesound.org](https://freesound.org/people/DaveJf/sounds/640493/)
 
 # Mobile Game
 ![the game main view on a mobile](./images/screen-shots/game-image-2.png?raw=true "image captured from game")
