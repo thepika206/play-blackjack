@@ -182,17 +182,21 @@ function handleClickAnyPlay(betBtnAmount){
 
 function handleClickSpecialHit(handArr) {
   isSpecialDown = true
-  drawCard(handArr)
+  console.log('wait for the special action')
   betAmount *= specialDownFactor
   bankAmount -= betAmount
-  let total = getHandValue(playerHand)
-  if (total > 21){
-    winner = 'dealer' 
-    turn = 'game-over-turn'  
-    render()
-  } else {
-    handleClickStand()
-  }
+  render()
+  setTimeout(() => {
+    drawCard(handArr)
+    let total = getHandValue(playerHand)
+    if (total > 21){
+      winner = 'dealer' 
+      turn = 'game-over-turn'  
+      render()
+    } else {
+      handleClickStand()
+    }
+  }, 2000);
 }
 function handleClickHit(handArr) {
   drawCard(handArr)
@@ -207,7 +211,9 @@ function handleClickHit(handArr) {
 function handleClickStand(){
   turn = 'dealer-turn'
   render()
-  dealerTurn()
+  setTimeout(() => {
+    dealerTurn()
+  }, 1000);
 }
 
 function handleClickMute(){
@@ -350,8 +356,11 @@ function renderMessage(){
   } else if (turn === 'dealer-turn') {
     headline = 'Dealer Turn'
     message = `Your have: ${playerTotal} | Dealer stands on 17 and above`
-  } else if (turn === 'player-turn') {
+  } else if (turn === 'player-turn' && !isSpecialDown) {
     headline = 'Your Turn'
+    message = `You have: ${playerTotal} | Dealer up card: ${dealerHand[0].value}`  
+  } else if (turn === 'player-turn' && isSpecialDown) {
+    headline = `${specialDownFactor} X Down, One Card Coming`
     message = `You have: ${playerTotal} | Dealer up card: ${dealerHand[0].value}`  
   } else if (turn === 'game-over-turn') {
     headline = winner === 'player' ? `You Won!! Bet was ${betAmount}` : 'Dealer Won'
@@ -480,7 +489,7 @@ function setHiLoCount (cardVal){
 }
 
 function specialHitAllowed() {
-  return (turn === 'player-turn' && playerHand.length === 2 && (bankAmount >= betAmount * specialDownFactor))
+  return (turn === 'player-turn' && playerHand.length === 2 && (bankAmount >= betAmount * specialDownFactor) && !isSpecialDown)
 }
 
 function playSound(sound){
