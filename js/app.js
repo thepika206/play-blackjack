@@ -127,7 +127,7 @@ muteBtn.addEventListener('click', function(){
 })
 
 resetGameBtn.addEventListener('click', function(){
-  handleClickReset()
+  init()
 })
 
 
@@ -168,9 +168,6 @@ function initDeck (){
 
 //* click handling functions =================================//
 
-function handleClickReset(){
-  init()
-}
 
 function handleClickAnyPlay(betBtnAmount){
   clearTimeout(playAgainTimeoutID)
