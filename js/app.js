@@ -55,19 +55,21 @@ const standardCards = [
   {id:'s03', value:3},
   {id:'s02', value:2},
 ]
+const deckBoot = 6 //the number of standard decks to draw from
 const minBet = 100
 const maxBet = 500
 const sfxDeal = new Audio('../audio/dealing-card2.wav')
 const sfxChChing = new Audio('../audio/ch-ching.wav')
 const sfxFanFareF = new Audio('../audio/fanfare-f.flac')
 // const sfxOnFireTrack = new Audio('../audio/melody-loop-110-bpm.mp3') //? may want this music track later
-const minDeck = 25
-const lowDeck = 40
+const minDeck = 52
+const lowDeck = 104
 
 // ----------------------------Variables (state)--------------------------------------
 
 
-let deck, playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount, payout, hiLoCount, isSpecialDown, playAgainTimeoutID
+let deck = []
+let playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount, payout, hiLoCount, isSpecialDown, playAgainTimeoutID
 let isMute = false
 let specialDownFactor = 3  //? this is the multiplier for the special Hit (doubledown) feature and can change with special code
 // ----------------------------Cached Element references------------------------------
@@ -145,7 +147,7 @@ function init(){
 }
 
 function initStatMeters(){
-  deckCountMeter.setAttribute('low', 40) //? deck reshuffles at 25
+  deckCountMeter.setAttribute('low', lowDeck) //? deck reshuffles at 25
   hiLoCountMeter.setAttribute('optimal', 2) //?beta, low count indicates player disadvantage
   hiLoCountMeter.setAttribute('low', -1)
   hiLoCountMeter.setAttribute('min', -7)
@@ -163,7 +165,12 @@ function initHand(){
   if (deck.length < minDeck) initDeck()
 }
 function initDeck(){
-  deck = JSON.parse(JSON.stringify(standardCards)) //? deck is deep copy of the standard deck constant
+  for (let i=0; i<deckBoot; i++){//create a "boot" containing deckBoot number of decks
+    console.log('add deck')
+    newDeck = structuredClone(standardCards) //? deck is deep copy of the standard deck constant using structured clone
+    deck = [...deck, ...newDeck]
+  }
+  console.log(deck)
   hiLoCount = 0
 }
 
