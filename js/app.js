@@ -166,11 +166,11 @@ function initHand(){
 }
 function initDeck(){
   for (let i=0; i<deckBoot; i++){//create a "boot" containing deckBoot number of decks
-    console.log('add deck')
+    // console.log('add deck')
     newDeck = structuredClone(standardCards) //? deck is deep copy of the standard deck constant using structured clone
     deck = [...deck, ...newDeck]
   }
-  console.log(deck)
+  // console.log(deck)
   hiLoCount = 0
 }
 
@@ -370,7 +370,7 @@ function renderMessage(){
     headline = `${specialDownFactor} X Down, Draw One Card...`
     message = `You have: ${playerTotal} | Dealer up card: ${dealerHand[0].value}`  
   } else if (turn === 'game-over-turn') {
-    headline = winner === 'player' ? `You Won ${betAmount}!` : 'Dealer Won'
+    headline = winner === 'player' ? `You Won ${payout}!` : 'Dealer Won'
     headline = winner === 'T' ? 'Tie Game - bet returned' : headline
     message = getWinnerMessages()
   }

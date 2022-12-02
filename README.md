@@ -8,9 +8,12 @@ Here's a link to play my <a href="https://thepika206-play-blackjack.netlify.app/
 - Aces may count as 1 or 11, facecards count as 10
 - [Includes mobile layout](#mobile-game)
 - Includes betting options
+- 6 Deck boot
+- 3 to 2 payout for natural 21
+- Double down action
 
 # Background
-- This was my individual project created at General Assembly
+- This was my individual project created at General Assembly, post graduation I continued to improve it. 
 
   
 # Technologies Used
@@ -20,7 +23,6 @@ Here's a link to play my <a href="https://thepika206-play-blackjack.netlify.app/
 - external Bootstrap CSS framework and card styling library
 
 # Icebox
-- Multiple decks
 - More betting options
 - Musical Sound track
 - Additional game achievements and celebrations
