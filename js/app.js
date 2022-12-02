@@ -71,7 +71,7 @@ const lowDeck = 104
 let deck = []
 let playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount, payout, hiLoCount, isSpecialDown, playAgainTimeoutID
 let isMute = false
-let specialDownFactor = 3  //? this is the multiplier for the special Hit (doubledown) feature and can change with special code
+let specialDownFactor = 2  //? this is the multiplier for the special Hit (doubledown) feature and can change with special code
 // ----------------------------Cached Element references------------------------------
 let headlineEl = document.querySelector('#headline-message')
 let messageEl = document.querySelector('#game-message')
