@@ -463,7 +463,7 @@ function getPayout(){
   if (winner === 'T') {
     payout = betAmount
   } else if (winner === 'player' && isNatural) {
-    payout = betAmount * 3
+    payout = betAmount * 2.5
     playSound('major-win')
   } else if (winner === 'player' && isSpecialDown) {
     payout = betAmount * 2
