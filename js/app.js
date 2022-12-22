@@ -327,18 +327,15 @@ function renderStartPlayButtons(){
   let startScreen = (turn === null || turn === 'game-over-turn')
   let affordMin = bankAmount >= minBet
   let affordMax = bankAmount >= maxBet
-  // startScreen ? freePlayBtn.classList.remove('hidden') : freePlayBtn.classList.add('hidden')
-  // startScreen && affordMin ? minBetPlayBtn.classList.remove('hidden') : minBetPlayBtn.classList.add('hidden')
-  // startScreen && affordMax ? maxBetPlayBtn.classList.remove('hidden') : maxBetPlayBtn.classList.add('hidden')
   freePlayBtn.style.visibility = startScreen ? 'visible' : 'hidden'
   minBetPlayBtn.style.visibility = startScreen && affordMin ? 'visible' : 'hidden'
   maxBetPlayBtn.style.visibility = startScreen && affordMax ? 'visible' : 'hidden'
 }
 
 function renderInGameButtons(){
-  turn === 'player-turn' ? standBtn.classList.remove('hidden') : standBtn.classList.add('hidden')
-  turn === 'player-turn' ? hitBtn.classList.remove('hidden') : hitBtn.classList.add('hidden')
-  specialHitAllowed() ? specialHitBtn.classList.remove('hidden') : specialHitBtn.classList.add('hidden')
+  standBtn.style.visibility = turn === 'player-turn' ? 'visible' : 'hidden'
+  hitBtn.style.visibility = turn === 'player-turn' ? 'visible' : 'hidden'
+  specialHitBtn.style.visibility = specialHitAllowed() ? 'visible' : 'hidden'
 }
 
 function renderStats() {
