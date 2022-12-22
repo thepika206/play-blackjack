@@ -327,9 +327,12 @@ function renderStartPlayButtons(){
   let startScreen = (turn === null || turn === 'game-over-turn')
   let affordMin = bankAmount >= minBet
   let affordMax = bankAmount >= maxBet
-  startScreen ? freePlayBtn.classList.remove('hidden') : freePlayBtn.classList.add('hidden')
-  startScreen && affordMin ? minBetPlayBtn.classList.remove('hidden') : minBetPlayBtn.classList.add('hidden')
-  startScreen && affordMax ? maxBetPlayBtn.classList.remove('hidden') : maxBetPlayBtn.classList.add('hidden')
+  // startScreen ? freePlayBtn.classList.remove('hidden') : freePlayBtn.classList.add('hidden')
+  // startScreen && affordMin ? minBetPlayBtn.classList.remove('hidden') : minBetPlayBtn.classList.add('hidden')
+  // startScreen && affordMax ? maxBetPlayBtn.classList.remove('hidden') : maxBetPlayBtn.classList.add('hidden')
+  freePlayBtn.style.visibility = startScreen ? 'visible' : 'hidden'
+  minBetPlayBtn.style.visibility = startScreen && affordMin ? 'visible' : 'hidden'
+  maxBetPlayBtn.style.visibility = startScreen && affordMax ? 'visible' : 'hidden'
 }
 
 function renderInGameButtons(){
