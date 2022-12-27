@@ -20,6 +20,7 @@ let deck = []
 let playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount, payout, hiLoCount, isSpecialDown, playAgainTimeoutID
 let isMute = false
 let specialDownFactor = 2  //? this is the multiplier for the special Hit (doubledown) feature and can change with special code
+let hideHints = false
 // ----------------------------Cached Element references------------------------------
 let headlineEl = document.querySelector('#headline-message')
 let messageEl = document.querySelector('#game-message')
@@ -42,6 +43,7 @@ let playerTotalEl = document.querySelector('#player-text')
 let muteBtn = document.querySelector('#mute-sound-btn')
 let strategyHintEl = document.querySelector('#strategy-hint')
 let strategyHintTextEl = document.querySelector('#strategy-hint-text')
+let hideHintsBtn = document.querySelector('#hide-hints-btn')
 // ----------------------------Event Listeners----------------------------------------
 
 specialHitBtn.addEventListener('click', function(){
@@ -77,6 +79,10 @@ maxBetPlayBtn.addEventListener('click', function(){
 
 muteBtn.addEventListener('click', function(){
   handleClickMute()
+})
+
+hideHintsBtn.addEventListener('click', function(){
+  handleClickHideHints()
 })
 
 resetGameBtn.addEventListener('click', function(){
@@ -182,6 +188,17 @@ function handleClickMute(){
     console.log('unmute')
   }
   playSound('deal')
+  render()
+}
+
+function handleClickHideHints(){
+  if (!hideHints){
+    hideHintsBtn.innerText = 'Show Hints'
+    hideHints = true
+  } else {
+    hideHintsBtn.innerText = 'Hide Hints'
+    hideHints = false
+  }
   render()
 }
 
@@ -380,7 +397,7 @@ function renderPlayerHand(){
 }
 
 function renderRecommendedMove(){
-  if (turn !== 'player-turn'){
+  if ( hideHints || turn !== 'player-turn'){
     strategyHintEl.style.visibility = `hidden`
     strategyHintTextEl.style.visibility = `hidden`
     return

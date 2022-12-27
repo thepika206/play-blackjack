@@ -179,8 +179,9 @@ div#deck-stats{
   color: whitesmoke;
 }
 
-#mute-sound-btn{
+#mute-sound-btn, #hide-hints-btn{
   font-size: 11px;
+  width: 90%;
 }
 
 #strategy-hint {
