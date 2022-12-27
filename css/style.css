@@ -182,8 +182,8 @@ div#deck-stats{
   font-size: 11px;
 }
 
-#strategy-hint-header {
-  margin-top: 5px;
+#strategy-hint {
+  margin-top: 10px;
 }
 
 meter{

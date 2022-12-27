@@ -41,6 +41,7 @@ let betAmountEl = document.querySelector('#bet-amount')
 let playerTotalEl = document.querySelector('#player-text')
 let muteBtn = document.querySelector('#mute-sound-btn')
 let strategyHintEl = document.querySelector('#strategy-hint')
+let strategyHintTextEl = document.querySelector('#strategy-hint-text')
 // ----------------------------Event Listeners----------------------------------------
 
 specialHitBtn.addEventListener('click', function(){
@@ -112,7 +113,7 @@ function initHand(){
   betAmount = 0
   payout = 0
   if (deck.length < minDeck) initDeck()
-  strategyHintEl.innerText = 'Hint:'
+  strategyHintTextEl.innerText = ''
 }
 function initDeck(){
   for (let i=0; i<deckBoot; i++){//create a "boot" containing deckBoot number of decks
@@ -380,11 +381,12 @@ function renderPlayerHand(){
 
 function renderRecommendedMove(){
   if (turn !== 'player-turn'){
-    strategyHintEl.innerText = `Hint: `
     strategyHintEl.style.visibility = `hidden`
+    strategyHintTextEl.style.visibility = `hidden`
     return
   } else {
     strategyHintEl.style.visibility = `visible`
+    strategyHintTextEl.style.visibility = `visible`
     let hint
     let dealerCardValue = dealerHand[0].value
     let hasAce = handHasAce(playerHand)
@@ -392,7 +394,8 @@ function renderRecommendedMove(){
     let dealerCardStr = dealerCardValue === 1 ? 'A' : `${dealerCardValue}`
     // console.log(strategy[`${playerTotal}-${hasAce}-${dealerCardStr}`])
     hint = strategy[`${playerTotal}-${hasAce}-${dealerCardStr}`]
-    strategyHintEl.innerText = `Hint: ${hint}`
+    console.log(hint)
+    strategyHintTextEl.innerText = hint
     return
   }
 }
