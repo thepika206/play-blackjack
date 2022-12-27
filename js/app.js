@@ -1,60 +1,7 @@
 
 // ----------------------------Constants----------------------------------------------
 
-const standardCards = [
-  {id:'dA', value:1},
-  {id:'dK', value:10},
-  {id:'dQ', value:10},
-  {id:'dJ', value:10},
-  {id:'d10', value:10},
-  {id:'d09', value:9},
-  {id:'d08', value:8},
-  {id:'d07', value:7},
-  {id:'d06', value:6},
-  {id:'d05', value:5},
-  {id:'d04', value:4},
-  {id:'d03', value:3},
-  {id:'d02', value:2},
-  {id:'hA', value:1},
-  {id:'hK', value:10},
-  {id:'hQ', value:10},
-  {id:'hJ', value:10},
-  {id:'h10', value:10},
-  {id:'h09', value:9},
-  {id:'h08', value:8},
-  {id:'h07', value:7},
-  {id:'h06', value:6},
-  {id:'h05', value:5},
-  {id:'h04', value:4},
-  {id:'h03', value:3},
-  {id:'h02', value:2},
-  {id:'cA', value:1},
-  {id:'cK', value:10},
-  {id:'cQ', value:10},
-  {id:'cJ', value:10},
-  {id:'c10', value:10},
-  {id:'c09', value:9},
-  {id:'c08', value:8},
-  {id:'c07', value:7},
-  {id:'c06', value:6},
-  {id:'c05', value:5},
-  {id:'c04', value:4},
-  {id:'c03', value:3},
-  {id:'c02', value:2},
-  {id:'sA', value:1},
-  {id:'sK', value:10},
-  {id:'sQ', value:10},
-  {id:'sJ', value:10},
-  {id:'s10', value:10},
-  {id:'s09', value:9},
-  {id:'s08', value:8},
-  {id:'s07', value:7},
-  {id:'s06', value:6},
-  {id:'s05', value:5},
-  {id:'s04', value:4},
-  {id:'s03', value:3},
-  {id:'s02', value:2},
-]
+
 const deckBoot = 6 //the number of standard decks to draw from
 const minBet = 100
 const maxBet = 500
@@ -431,6 +378,25 @@ function renderPlayerHand(){
   }
 }
 
+function renderRecommendedMove(){
+  if (turn !== 'player-turn'){
+    strategyHintEl.innerText = `Hint: `
+    strategyHintEl.style.visibility = `hidden`
+    return
+  } else {
+    strategyHintEl.style.visibility = `visible`
+    let hint
+    let dealerCardValue = dealerHand[0].value
+    let hasAce = handHasAce(playerHand)
+    let playerTotal = getHandValue(playerHand)
+    let dealerCardStr = dealerCardValue === 1 ? 'A' : `${dealerCardValue}`
+    // console.log(strategy[`${playerTotal}-${hasAce}-${dealerCardStr}`])
+    hint = strategy[`${playerTotal}-${hasAce}-${dealerCardStr}`]
+    strategyHintEl.innerText = `Hint: ${hint}`
+    return
+  }
+}
+
 
 //* utility functions =================================//
 
@@ -547,24 +513,7 @@ function handHasAce(handArr){
   return solution
 } 
 
-function renderRecommendedMove(){
-  if (turn !== 'player-turn'){
-    strategyHintEl.innerText = `Hint: `
-    strategyHintEl.style.visibility = `hidden`
-    return
-  } else {
-    strategyHintEl.style.visibility = `visible`
-    let hint
-    let dealerCardValue = dealerHand[0].value
-    let hasAce = handHasAce(playerHand)
-    let playerTotal = getHandValue(playerHand)
-    let dealerCardStr = dealerCardValue === 1 ? 'A' : `${dealerCardValue}`
-    // console.log(strategy[`${playerTotal}-${hasAce}-${dealerCardStr}`])
-    hint = strategy[`${playerTotal}-${hasAce}-${dealerCardStr}`]
-    strategyHintEl.innerText = `Hint: ${hint}`
-    return
-  }
-}
+
 
 
 
