@@ -20,7 +20,7 @@ let deck = []
 let playerHand, dealerHand, turn, winner, isNatural, bankAmount, betAmount, payout, hiLoCount, isSpecialDown, playAgainTimeoutID
 let isMute = false
 let specialDownFactor = 2  //? this is the multiplier for the special Hit (doubledown) feature and can change with special code
-let hideHints = false
+let showHint = false
 // ----------------------------Cached Element references------------------------------
 let headlineEl = document.querySelector('#headline-message')
 let messageEl = document.querySelector('#game-message')
@@ -43,7 +43,7 @@ let playerTotalEl = document.querySelector('#player-text')
 let muteBtn = document.querySelector('#mute-sound-btn')
 let strategyHintEl = document.querySelector('#strategy-hint')
 let strategyHintTextEl = document.querySelector('#strategy-hint-text')
-let hideHintsBtn = document.querySelector('#hide-hints-btn')
+let showHintBtn = document.querySelector('#show-hint-btn')
 // ----------------------------Event Listeners----------------------------------------
 
 specialHitBtn.addEventListener('click', function(){
@@ -81,8 +81,8 @@ muteBtn.addEventListener('click', function(){
   handleClickMute()
 })
 
-hideHintsBtn.addEventListener('click', function(){
-  handleClickHideHints()
+showHintBtn.addEventListener('click', function(){
+  handleClickShowHint()
 })
 
 resetGameBtn.addEventListener('click', function(){
@@ -118,6 +118,7 @@ function initHand(){
   isNatural = null
   betAmount = 0
   payout = 0
+  showHint = false
   if (deck.length < minDeck) initDeck()
   strategyHintTextEl.innerText = ''
 }
@@ -163,6 +164,7 @@ function handleClickSpecialHit(handArr){
   }, 2000);
 }
 function handleClickHit(handArr){
+  showHint = false
   drawCard(handArr)
   let total = getHandValue(playerHand)
   if (total > 21){
@@ -191,14 +193,8 @@ function handleClickMute(){
   render()
 }
 
-function handleClickHideHints(){
-  if (!hideHints){
-    hideHintsBtn.innerText = 'Show Hints'
-    hideHints = true
-  } else {
-    hideHintsBtn.innerText = 'Hide Hints'
-    hideHints = false
-  }
+function handleClickShowHint(){
+  showHint = true
   render()
 }
 
@@ -397,11 +393,17 @@ function renderPlayerHand(){
 }
 
 function renderRecommendedMove(){
-  if ( hideHints || turn !== 'player-turn'){
+  if ( turn !== 'player-turn'){
     strategyHintEl.style.visibility = `hidden`
     strategyHintTextEl.style.visibility = `hidden`
+    showHintBtn.style.visibility = 'hidden'
     return
+  } else if ( turn === 'player-turn' && !showHint){
+    showHintBtn.style.visibility = 'visible'
+    strategyHintEl.style.visibility = `hidden`
+    strategyHintTextEl.style.visibility = `hidden`  
   } else {
+    showHintBtn.style.visibility = 'hidden'
     strategyHintEl.style.visibility = `visible`
     strategyHintTextEl.style.visibility = `visible`
     let hint
