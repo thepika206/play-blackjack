@@ -11,6 +11,7 @@ Here's a link to play my <a href="https://thepika206-play-blackjack.netlify.app/
 - 6 Deck boot
 - 3 to 2 payout for natural 21
 - Double down action
+- Strategy Hints
 
 # Background
 - This was my individual project created at General Assembly, post graduation I continued to improve it. 
