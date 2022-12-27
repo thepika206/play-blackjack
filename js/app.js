@@ -411,6 +411,9 @@ function renderRecommendedMove(){
     let dealerCardStr = dealerCardValue === 1 ? 'A' : `${dealerCardValue}`
     // console.log(strategy[`${playerTotal}-${hasAce}-${dealerCardStr}`])
     hint = strategy[`${playerTotal}-${hasAce}-${dealerCardStr}`]
+    if (hint === 'Double Down' && specialHitAllowed() === false){
+      hint = 'Hit'
+    }
     console.log(hint)
     strategyHintTextEl.innerText = hint
     return
@@ -537,8 +540,9 @@ function handHasAce(handArr){
 
 
 
-// let examplehand =
-// [
-//   {id:'dA', value:1},
-//   {id:'d04', value:4},
-// ]
+let examplehand =
+[
+  {id:'d02', value:2},
+  {id:'d04', value:4},
+  {id:'d04', value:4},
+]
