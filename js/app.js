@@ -565,7 +565,8 @@ function renderRecommendedMove(){
   
 }
 
-//playerTotal-hasAce-dealerCard
+// Strategy guide according to https://www.blackjackclassroom.com/blackjack-basic-strategy-charts without split hand options 
+//'playerTotal'-'hasAceBoolean'-'dealerCard'
 const strategy = {
   '21-false-2' : 'stand',//playerTotal (21-17) strategy is the same
   '21-false-3' : 'stand',
@@ -747,7 +748,7 @@ const strategy = {
   '4-false-9'  : 'hit',
   '4-false-10' : 'hit',
   '4-false-A'  : 'hit',
-  '21-true-2' : 'stand',//playerTotal (21-17) strategy is the same
+  '21-true-2' : 'stand',
   '21-true-3' : 'stand',
   '21-true-4' : 'stand',
   '21-true-5' : 'stand',
@@ -757,7 +758,7 @@ const strategy = {
   '21-true-9' : 'stand',
   '21-true-10': 'stand',
   '21-true-A' : 'stand',
-  '20-true-2' : 'stand',//playerTotal (21-17) strategy is the same
+  '20-true-2' : 'stand',
   '20-true-3' : 'stand',
   '20-true-4' : 'stand',
   '20-true-5' : 'stand',
@@ -767,7 +768,7 @@ const strategy = {
   '20-true-9' : 'stand',
   '20-true-10': 'stand',
   '20-true-A' : 'stand',
-  '19-true-2' : 'stand',//playerTotal (21-17) strategy is the same
+  '19-true-2' : 'stand',//A-8
   '19-true-3' : 'stand',
   '19-true-4' : 'stand',
   '19-true-5' : 'stand',
@@ -777,5 +778,80 @@ const strategy = {
   '19-true-9' : 'stand',
   '19-true-10': 'stand',
   '19-true-A' : 'stand',
+  '18-true-2' : 'stand',//A-7
+  '18-true-3' : 'double',
+  '18-true-4' : 'double',
+  '18-true-5' : 'double',
+  '18-true-6' : 'double',
+  '18-true-7' : 'stand',
+  '18-true-8' : 'stand',
+  '18-true-9' : 'hit',
+  '18-true-10': 'hit',
+  '18-true-A' : 'hit',
+  '17-true-2' : 'hit',//A-6
+  '17-true-3' : 'double',
+  '17-true-4' : 'double',
+  '17-true-5' : 'double',
+  '17-true-6' : 'double',
+  '17-true-7' : 'hit',
+  '17-true-8' : 'hit',
+  '17-true-9' : 'hit',
+  '17-true-10': 'hit',
+  '17-true-A' : 'hit',
+  '16-true-2' : 'hit',//A-5
+  '16-true-3' : 'hit',
+  '16-true-4' : 'double',
+  '16-true-5' : 'double',
+  '16-true-6' : 'double',
+  '16-true-7' : 'hit',
+  '16-true-8' : 'hit',
+  '16-true-9' : 'hit',
+  '16-true-10': 'hit',
+  '16-true-A' : 'hit',
+  '15-true-2' : 'hit',//A-4
+  '15-true-3' : 'hit',
+  '15-true-4' : 'double',
+  '15-true-5' : 'double',
+  '15-true-6' : 'double',
+  '15-true-7' : 'hit',
+  '15-true-8' : 'hit',
+  '15-true-9' : 'hit',
+  '15-true-10': 'hit',
+  '15-true-A' : 'hit',
+  '14-true-2' : 'hit',//A-3
+  '14-true-3' : 'hit',
+  '14-true-4' : 'hit',
+  '14-true-5' : 'double',
+  '14-true-6' : 'double',
+  '14-true-7' : 'hit',
+  '14-true-8' : 'hit',
+  '14-true-9' : 'hit',
+  '14-true-10': 'hit',
+  '14-true-A' : 'hit',
+  '13-true-2' : 'hit',//A-2
+  '13-true-3' : 'hit',
+  '13-true-4' : 'hit',
+  '13-true-5' : 'double',
+  '13-true-6' : 'double',
+  '13-true-7' : 'hit',
+  '13-true-8' : 'hit',
+  '13-true-9' : 'hit',
+  '13-true-10': 'hit',
+  '13-true-A' : 'hit',
+  '12-true-2' : 'hit',//A-A
+  '12-true-3' : 'hit',
+  '12-true-4' : 'hit',
+  '12-true-5' : 'double',
+  '12-true-6' : 'double',
+  '12-true-7' : 'hit',
+  '12-true-8' : 'hit',
+  '12-true-9' : 'hit',
+  '12-true-10': 'hit',
+  '12-true-A' : 'hit',
 }
 
+let examplehand =
+[
+  {id:'dA', value:1},
+  {id:'d04', value:4},
+]
