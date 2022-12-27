@@ -34,6 +34,7 @@ Here's a link to play my <a href="https://thepika206-play-blackjack.netlify.app/
 - Card design images and cardstarter.css -Ben Manley   github @ManliestBen
 - Favicon created with - [favicon.io](https://favicon.io/)
 - Hi Lo Counting [Blackjack Expert Explains How Card Counting Works | WIRED](https://www.youtube.com/watch?v=G_So72lFNIU)
+- Strategy hints based on the basic strategy chart at [Blackjack Classroom](https://www.blackjackclassroom.com/blackjack-basic-strategy-charts)
 ### Sound Credits
   - [card dealing click sound from freesound.org](https://freesound.org/people/EminYILDIRIM/sounds/536108/)
   - [cash register opening sound from freesound.org](https://freesound.org/people/hgernhardt/sounds/402651/)
