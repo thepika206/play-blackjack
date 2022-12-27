@@ -123,6 +123,7 @@ div#deck-stats{
   grid-area: card-btn;
   flex-direction: column;
   padding-top: 10px;
+  justify-content: center;
 }
 
 #bet-btns--section{
@@ -179,8 +180,9 @@ div#deck-stats{
   color: whitesmoke;
 }
 
-#mute-sound-btn, #hide-hints-btn{
-  font-size: 11px;
+#mute-sound-btn, #show-hint-btn{
+  font-size: 10px;
+
   /* width: 90%; */
 }
 
@@ -214,6 +216,11 @@ meter{
   width: 100%;
   justify-content: space-evenly;
   align-items: center;
+}
+
+.card-btns{
+  margin-top: 10px;
+  height: 40px;
 }
 
 .card {
