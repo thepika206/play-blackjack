@@ -122,6 +122,7 @@ div#deck-stats{
   background-color: #555;
   grid-area: card-btn;
   flex-direction: column;
+  padding-top: 10px;
 }
 
 #bet-btns--section{
