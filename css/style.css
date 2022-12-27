@@ -181,7 +181,7 @@ div#deck-stats{
 
 #mute-sound-btn, #hide-hints-btn{
   font-size: 11px;
-  width: 90%;
+  /* width: 90%; */
 }
 
 #strategy-hint {
