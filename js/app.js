@@ -92,6 +92,7 @@ let bankAmountEl = document.querySelector('#bank-amount')
 let betAmountEl = document.querySelector('#bet-amount')
 let playerTotalEl = document.querySelector('#player-text')
 let muteBtn = document.querySelector('#mute-sound-btn')
+let strategyHintEl = document.querySelector('#strategy-hint')
 // ----------------------------Event Listeners----------------------------------------
 
 specialHitBtn.addEventListener('click', function(){
@@ -163,6 +164,7 @@ function initHand(){
   betAmount = 0
   payout = 0
   if (deck.length < minDeck) initDeck()
+  strategyHintEl.innerText = 'Hint:'
 }
 function initDeck(){
   for (let i=0; i<deckBoot; i++){//create a "boot" containing deckBoot number of decks
@@ -321,9 +323,7 @@ function render(){
   renderInGameButtons()
   renderStartPlayButtons()
   renderMuteBtn()
-  if (turn === 'player-turn'){
-    renderRecommendedMove(getHandValue(playerHand),hasAce(playerHand),dealerHand[0].value)
-  }
+  renderRecommendedMove()
 }
 
 function renderStartPlayButtons(){
@@ -538,23 +538,29 @@ function handleKeyPress(evt){
   }
 }
 
-function hasAce(handArr){
-  let handHasAce = false
+function handHasAce(handArr){
+  let solution = false
   handArr.forEach(card => {
-    hasAce = card.value === 1 ? true : hasAce
+    solution = card.value === 1 ? true : solution
   })
-  return handHasAce
+  return solution
 } 
 
-function renderRecommendedMove(playerTotal, hasAce, dealerCardValue){
-  // let hasAceStr = hasAce(handArr)
-  // let playerTotal = getHandValue(playerHand)
-  let dealerCardStr = dealerCardValue === 1 ? 'A' : `${dealerCardValue}`
-  console.log(`${playerTotal}-${hasAce}-${dealerCardStr}`)
-  
-  console.log(strategy[`${playerTotal}-${hasAce}-${dealerCardStr}`])
-  return strategy[`${playerTotal}-${hasAce}-${dealerCardStr}`]
-  
+function renderRecommendedMove(){
+  if (turn !== 'player-turn'){
+    strategyHintEl.innerText = `Hint: `
+    return
+  } else {
+    let hint
+    let dealerCardValue = dealerHand[0].value
+    let hasAce = handHasAce(playerHand)
+    let playerTotal = getHandValue(playerHand)
+    let dealerCardStr = dealerCardValue === 1 ? 'A' : `${dealerCardValue}`
+    // console.log(strategy[`${playerTotal}-${hasAce}-${dealerCardStr}`])
+    hint = strategy[`${playerTotal}-${hasAce}-${dealerCardStr}`]
+    strategyHintEl.innerText = `Hint: ${hint}`
+    return
+  }
   
   
 }
